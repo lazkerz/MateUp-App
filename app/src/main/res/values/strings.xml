@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Apps_Magang</string>
+    <string name="welcome_greeting">Selamat datang.</string>
+    <string name="welcomeback_greeting">Selamat datang kembali.</string>
+    <string name="sign_in">Masuk</string>
+    <string name="sign_up">Daftar</string>
+</resources>

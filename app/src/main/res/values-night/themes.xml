@@ -1,0 +1,155 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Apps_Magang" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/primary</item>
+    </style>
+
+    <style name="MonaLight12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mona_sans_light</item>
+    </style>
+
+    <style name="MonaRegular12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mona_sans_regular</item>
+    </style>
+
+    <style name="MonaRegular14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mona_sans_regular</item>
+    </style>
+
+    <style name="MonaRegular16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/mona_sans_regular</item>
+    </style>
+
+    <style name="MonaRegular18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/mona_sans_regular</item>
+    </style>
+
+    <style name="MonaRegular20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/mona_sans_regular</item>
+    </style>
+
+    <style name="MonaMedium10">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/mona_sans_medium</item>
+    </style>
+
+    <style name="MonaMedium12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mona_sans_medium</item>
+    </style>
+
+    <style name="MonaMedium14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mona_sans_medium</item>
+    </style>
+
+    <style name="MonaMedium16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/mona_sans_medium</item>
+    </style>
+
+    <style name="MonaMedium20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/mona_sans_medium</item>
+    </style>
+
+    <style name="MonaSemiBold12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaSemiBold14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaSemiBold16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaSemiBold18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaSemiBold20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaSemiBold24">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/mona_sans_semibold</item>
+    </style>
+
+    <style name="MonaBold10">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <style name="MonaBold12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <style name="MonaBold14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <style name="MonaBold16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <style name="MonaBold20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <style name="MonaBold24">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/mona_sans_bold</item>
+    </style>
+
+    <!--    <style name="bottomNavbar">-->
+    <!--        <item name="android:textSize">12sp</item>-->
+    <!--        <item name="fontFamily">@font/mona_sans_medium</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="TabStyle" parent="TextAppearance.Design.Tab">-->
+    <!--        <item name="android:fontFamily">@font/mona_sans_semibold</item>-->
+    <!--        <item name="android:textSize">14sp</item>-->
+    <!--        <item name="textAllCaps">false</item>-->
+    <!--    </style>-->
+
+    <style name="circleImg">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Custom.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <!-- Customize your error text appearance -->
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <!-- Customize your error color -->
+        <item name="errorTextColor">@color/primary</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+</resources>
