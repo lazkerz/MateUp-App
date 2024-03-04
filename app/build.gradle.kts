@@ -62,4 +62,16 @@ dependencies {
     kapt("io.realm:realm-annotations-processor:10.9.0")
     implementation("io.realm:realm-android-library:10.9.0")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //chucker
+    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+    // OkHttp
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+
 }

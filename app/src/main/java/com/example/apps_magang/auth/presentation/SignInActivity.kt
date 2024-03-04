@@ -11,9 +11,8 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.example.apps_magang.MainActivity
 import com.example.apps_magang.R
-import com.example.apps_magang.auth.model.UserModel
+import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.dashboard.presentation.DashboardFragment

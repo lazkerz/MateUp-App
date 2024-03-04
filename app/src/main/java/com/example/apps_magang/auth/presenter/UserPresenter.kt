@@ -1,28 +1,26 @@
 package com.example.apps_magang.auth.presenter
 
 import android.content.Context
-import android.text.TextUtils
-import com.example.apps_magang.auth.model.UserModel
+import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.utils.LoginManager
 import com.example.apps_magang.utils.ResultState
 import io.realm.Realm
-import io.realm.RealmList
 import io.realm.kotlin.createObject
-import java.util.Collections
 
 class UserPresenter(
     private val view : user_view,
     private val context: Context
 ) {
 
-    fun addUser(name: String, username: String, password: String, callback: (Boolean) -> Unit) {
+    fun addUser(name: String, username: String, password: String, skinType: String, callback: (Boolean) -> Unit) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransactionAsync({ backgroundRealm ->
             val user = backgroundRealm.createObject<UserModel>() // Objek baru UserModel akan otomatis mendapatkan ID
             user.name = name
             user.username = username
             user.password = password
+            user.skinType = skinType
         }, {
             // Transaksi berhasil, tutup realm dan panggil callback dengan true
             realm.close()
@@ -34,7 +32,6 @@ class UserPresenter(
             callback(false)
         })
     }
-
 
 
     fun getUser(): UserModel? {
@@ -56,6 +53,27 @@ class UserPresenter(
         realm.close()
         return userModel
     }
+
+    fun editUser(id: String, name: String, username: String, password: String, skinType: String, callback: (Boolean) -> Unit) {
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransactionAsync({ backgroundRealm ->
+            val user = backgroundRealm.where(UserModel::class.java).equalTo("id", id).findFirst()
+            user?.name = name
+            user?.username = username
+            user?.password = password
+            user?.skinType = skinType
+        }, {
+            // Transaksi berhasil, tutup realm dan panggil callback dengan true
+            realm.close()
+            callback(true)
+        }, { error ->
+            // Terjadi kesalahan, cetak stack trace, tutup realm, dan panggil callback dengan false
+            error.printStackTrace()
+            realm.close()
+            callback(false)
+        })
+    }
+
 
 
     fun login(username: String, password: String, callback: (Boolean) -> Unit) {

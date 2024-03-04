@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
-import com.example.apps_magang.auth.model.UserModel
+import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.presentation.SignInActivity
 import com.example.apps_magang.auth.view.user_view
