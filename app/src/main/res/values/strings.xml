@@ -13,7 +13,9 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Introduce Yourself</string>
     <string name="sign_Up">Sign Up</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_Fragment_dashboard">DashboardFragment</string>
+    <string name="title_Fragment_inrgedients">IngredientsFragment</string>
+    <string name="title_Fragment_Product">ProductFragment</string>
     <string name="title_ingredients">Ingredients</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_product">product</string>

@@ -1,15 +1,17 @@
 package com.example.apps_magang
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.apps_magang.auth.model.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
-import com.example.apps_magang.auth.presentation.SignInActivity
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.utils.ResultState
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), user_view {
 
@@ -23,15 +25,20 @@ class MainActivity : AppCompatActivity(), user_view {
             this,
             this )
 
-        val logout = findViewById<ImageView>(R.id.ic_out)
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
 
-        logout.setOnClickListener {
-            presenter.logout()
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
-            finish() // Optional: Menutup aktivitas saat ini setelah logout
-        }
-
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.navHost)!!
+                .findNavController()
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_dashboard,
+                R.id.navigation_ingredients,
+                R.id.navigation_product
+            )
+        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun displayUser(result: ResultState<UserModel>) {
