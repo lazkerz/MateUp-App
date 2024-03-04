@@ -3,44 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.apps_magang.dashboard.presentation.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_dashboard" >
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_notifications"
-            app:destination="@id/navigation_notifications" />
-    </fragment>
+    app:startDestination="@+id/navigation_dashboard">
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.apps_magang.ingredients.presentation.DashboardFragment"
+        android:name="com.example.apps_magang.dashboard.presentation.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_ingredients" >
+        tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
-            app:destination="@id/navigation_notifications" />
+            android:id="@+id/action_navigation_home_to_navigation_ingredients"
+            app:destination="@id/navigation_ingredients" />
         <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_navigation_home_to_navigation_product"
+            app:destination="@id/navigation_product" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.apps_magang.ui.product.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_ingredients"
+        android:name="com.example.apps_magang.ingredients.presentation.IngredientsFragment"
+        android:label="@string/title_ingredients"
+        tools:layout="@layout/fragment_ingredients" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_product"
+            app:destination="@id/navigation_product" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_product"
+        android:name="com.example.apps_magang.product.presentation.ProductFragment"
+        android:label="@string/title_product"
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
         <action
-            android:id="@+id/action_navigation_notifications_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_navigation_notifications_to_navigation_ingredients"
+            app:destination="@id/navigation_ingredients" />
     </fragment>
 </navigation>
