@@ -7,18 +7,20 @@ plugins {
 }
 
 android {
-    namespace = "com.example.apps_magang"
-    compileSdk = 34
+        namespace = "com.example.apps_magang"
+        compileSdk = 34
 
-    defaultConfig {
-        applicationId = "com.example.apps_magang"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        defaultConfig {
+            applicationId = "com.example.apps_magang"
+            minSdk = 24
+            targetSdk = 33
+            versionCode = 1
+            versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+            buildConfigField("String", "API_BASE_URL",  "https://makeup-api.herokuapp.com/" )
+        }
 
     buildTypes {
         release {

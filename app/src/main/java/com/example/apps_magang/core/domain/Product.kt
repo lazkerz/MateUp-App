@@ -1,4 +1,4 @@
-package com.example.apps_magang.auth.model.domain
+package com.example.apps_magang.core.domain
 
 import io.realm.RealmList
 import io.realm.RealmObject
