@@ -1,4 +1,4 @@
-package com.example.apps_magang.utils
+package com.example.apps_magang.core.utils
 
 sealed class ResultState<out R> private constructor() {
     data class Success<out T>(val data: T) : ResultState<T>()

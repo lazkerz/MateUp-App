@@ -3,14 +3,13 @@ package com.example.apps_magang.auth.presenter
 import android.content.Context
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.view.user_view
-import com.example.apps_magang.utils.LoginManager
-import com.example.apps_magang.utils.ResultState
+import com.example.apps_magang.core.utils.LoginManager
+import com.example.apps_magang.core.utils.ResultState
 import io.realm.Realm
 import io.realm.kotlin.createObject
 
 class UserPresenter(
     private val view : user_view,
-    private val context: Context
 ) {
 
     fun addUser(name: String, username: String, password: String, skinType: String, callback: (Boolean) -> Unit) {
@@ -74,8 +73,6 @@ class UserPresenter(
         })
     }
 
-
-
     fun login(username: String, password: String, callback: (Boolean) -> Unit) {
         val realm = Realm.getDefaultInstance()
         val userModel = realm.where(UserModel::class.java)
@@ -91,9 +88,7 @@ class UserPresenter(
     }
 
     fun logout() {
-        // Di sini Anda dapat melakukan proses logout yang diperlukan, seperti menghapus data sesi, menghentikan sesi, membersihkan cache, dll.
-        // Misalnya, jika Anda menggunakan shared preferences untuk menyimpan status login:
-        LoginManager.saveLogin(context, false)
+        LoginManager.saveLogin(false)
     }
 
 }

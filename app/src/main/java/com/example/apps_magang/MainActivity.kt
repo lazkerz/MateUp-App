@@ -9,7 +9,9 @@ import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.presentation.SignInActivity
 import com.example.apps_magang.auth.view.user_view
-import com.example.apps_magang.utils.ResultState
+import com.example.apps_magang.core.utils.RealmManager
+import com.example.apps_magang.core.utils.ResultState
+import io.realm.Realm
 
 class MainActivity : AppCompatActivity(), user_view {
 
@@ -19,9 +21,11 @@ class MainActivity : AppCompatActivity(), user_view {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Realm.init(this)
+        RealmManager.initRealm()
+
         presenter = UserPresenter(
-            this,
-            this )
+            this)
 
         val logout = findViewById<ImageView>(R.id.ic_out)
 

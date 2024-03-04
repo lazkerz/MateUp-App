@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.apps_magang.auth.presentation.SignInActivity
-import com.example.apps_magang.utils.LoginManager
+import com.example.apps_magang.core.utils.LoginManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

@@ -19,7 +19,6 @@ class ApiConfig private constructor() {
                 .alwaysReadResponseBody(false)
                 .build()
 
-
             val retrofit = Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

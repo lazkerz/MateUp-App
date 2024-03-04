@@ -13,8 +13,8 @@ import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
-import com.example.apps_magang.utils.RealmManager
-import com.example.apps_magang.utils.ResultState
+import com.example.apps_magang.core.utils.RealmManager
+import com.example.apps_magang.core.utils.ResultState
 import io.realm.Realm
 
 class SignUpActivity : AppCompatActivity(), user_view {
@@ -29,8 +29,7 @@ class SignUpActivity : AppCompatActivity(), user_view {
         RealmManager.initRealm()
 
         presenter = UserPresenter(
-            this,
-            this )
+            this)
 
         val Name= findViewById<EditText>(R.id.authNameEditText)
         val Usn= findViewById<EditText>(R.id.authUserNameEditText)

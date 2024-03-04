@@ -1,4 +1,4 @@
-package com.example.apps_magang.utils
+package com.example.apps_magang.core.utils
 
 import io.realm.Realm
 import io.realm.RealmConfiguration

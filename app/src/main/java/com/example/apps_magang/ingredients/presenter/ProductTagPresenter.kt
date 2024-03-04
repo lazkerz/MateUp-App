@@ -3,7 +3,7 @@ package com.example.apps_magang.ingredients.presentation.presenter
 import android.util.Log
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.view.ProductView
-import com.example.apps_magang.utils.ResultState
+import com.example.apps_magang.core.utils.ResultState
 import com.example.mateup.data.remote.ApiServiceProductTags
 import io.realm.Realm
 import io.realm.RealmList
