@@ -10,13 +10,27 @@
     tools:context=".auth.presentation.SignInActivity">
 
     <TextView
-        android:id="@+id/tv_greeting_sign_in"
-        style="@style/MonaSemiBold24"
+        android:id="@+id/tv_sign_in"
+        style="@style/MonaSemiBold20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/sign_in"
         android:textColor="@color/black"
-        android:text="@string/welcome_greeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_greeting_sign_in"
+        style="@style/MonaRegular18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="@string/signIn_greeting"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -69,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_input_field"
-            android:hint="Email Address"
+            android:hint="Username"
             android:inputType="textEmailAddress"
             android:paddingVertical="16dp"
             android:paddingStart="14dp"
@@ -111,7 +113,32 @@
             android:paddingVertical="16dp"
             android:paddingStart="14dp"
             android:paddingEnd="0dp"
-            android:textColorHint="@color/light_grey"/>
+            android:textColorHint="@color/light_grey" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_skinType"
+        style="@style/MonaMedium14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/mona_sans_medium"
+        android:text="Skin Type"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authPasswordTextLayout" />
+
+    <Spinner
+        android:id="@+id/spActivity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:popupBackground="@color/Primary10"
+        android:background="@drawable/stroke_input_field"
+        android:entries="@array/collection_activity"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_skinType"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

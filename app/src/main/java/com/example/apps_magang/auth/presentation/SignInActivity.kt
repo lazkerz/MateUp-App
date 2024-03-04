@@ -16,6 +16,7 @@ import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
+import com.example.apps_magang.dashboard.presentation.DashboardFragment
 import com.example.apps_magang.utils.LoginManager
 import com.example.apps_magang.utils.RealmManager
 import com.example.apps_magang.utils.ResultState
@@ -69,7 +70,7 @@ class SignInActivity : AppCompatActivity(), user_view {
             presenter.login(username, password) { isSuccess ->
                 if (isSuccess) {
                     // Jika login berhasil, arahkan ke MainActivity
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, DashboardFragment::class.java))
                     // Simpan status login
                     LoginManager.saveLogin(this, true)
                     finish()
