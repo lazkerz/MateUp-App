@@ -9,17 +9,16 @@ interface ApiServiceProductTags {
         @GET("api/v1/products.json")
         fun getProductTags(
                 @Query("product_tags") product_tags: String,
-        ): Call<Product>
+        ): Call<List<Product>>
 }
 
 interface ApiServicePersonalized {
         @GET("api/v1/products.json")
         fun getPersonalized(
                 @Query("product_tags") product_tags: String,
-                @Query("product_tags") product_tags2: String,
                 @Query("category") product_category: String,
                 @Query("product_type") product_type: String,
-        ): Call<Product>
+        ): Call<List<Product>>
 }
 
 interface ApiServiceProductType {
@@ -27,5 +26,5 @@ interface ApiServiceProductType {
         fun getProductType(
                 @Query("product_type") product_type: String,
                 @Query("category") product_category: String,
-        ): Call<Product>
+        ): Call<List<Product>>
 }

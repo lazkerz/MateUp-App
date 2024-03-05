@@ -43,7 +43,7 @@ class SignUpActivity : AppCompatActivity(), user_view {
             val name = Name.text.toString()
             val username = Usn.text.toString()
             val password = Password.text.toString()
-            val skinType = SkinType.toString()
+            val skinType = SkinType.selectedItem.toString()
 
             val userModel = UserModel()
             if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
