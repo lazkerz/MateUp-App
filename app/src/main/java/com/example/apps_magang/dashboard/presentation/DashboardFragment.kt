@@ -174,30 +174,29 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
-
-//    override fun displayProductFromRealm(result: ResultState<List<Product>>) {
-//        when (result) {
-//            is ResultState.Success -> {
-//                // Tampilkan data dari Realm
-//                val productRealm = result.data
-//                for (products in productRealm) {
-//                    when (products.productType) {
-//                        "eyeshadow" -> eyeshadowAdapter.addData(products)
-//                        "foundation" -> foundationAdapter.addData(products)
-//                        "lipstick" -> lipstickAdapter.addData(products)
-//                        "blush" -> blushAdapter.addData(products)
-//                    }
-//                }
-//            }
-//            is ResultState.Error -> {
-//                // Handle jika terjadi error saat mengambil data dari Realm
-//                val errorMessage = result.error
-//                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-//            }
-//            is ResultState.Loading -> {
-//                // Handle loading state
-//                Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+    override fun displayProductFromRealm(result: ResultState<List<Product>>) {
+        when (result) {
+            is ResultState.Success -> {
+                // Tampilkan data dari Realm
+                val productRealm = result.data
+                for (products in productRealm) {
+                    when (products.productType) {
+                        "eyeshadow" -> eyeshadowAdapter.addData(products)
+                        "foundation" -> foundationAdapter.addData(products)
+                        "lipstick" -> lipstickAdapter.addData(products)
+                        "blush" -> blushAdapter.addData(products)
+                    }
+                }
+            }
+            is ResultState.Error -> {
+                // Handle jika terjadi error saat mengambil data dari Realm
+                val errorMessage = result.error
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+            is ResultState.Loading -> {
+                // Handle loading state
+                Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

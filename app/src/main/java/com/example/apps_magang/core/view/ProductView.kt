@@ -5,5 +5,4 @@ import com.example.apps_magang.core.utils.ResultState
 
 interface ProductView {
     fun displayProduct(result: ResultState<List<Product>>)
-//    fun displayProductFromRealm(result: ResultState<List<Product>>)
 }
