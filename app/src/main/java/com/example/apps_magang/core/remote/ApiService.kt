@@ -1,6 +1,6 @@
 package com.example.mateup.data.remote
 
-import com.example.mateup.data.model.Product
+import com.example.apps_magang.core.domain.Product
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

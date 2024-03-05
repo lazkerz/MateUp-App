@@ -26,15 +26,15 @@ class MainActivity : AppCompatActivity(), user_view {
 
         presenter = UserPresenter(
             this)
-
-        val logout = findViewById<ImageView>(R.id.ic_out)
-
-        logout.setOnClickListener {
-            presenter.logout()
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
-            finish() // Optional: Menutup aktivitas saat ini setelah logout
-        }
+//
+//        val logout = findViewById<ImageView>(R.id.ic_out)
+//
+//        logout.setOnClickListener {
+//            presenter.logout()
+//            val intent = Intent(this, SignInActivity::class.java)
+//            startActivity(intent)
+//            finish() // Optional: Menutup aktivitas saat ini setelah logout
+//        }
 
     }
 

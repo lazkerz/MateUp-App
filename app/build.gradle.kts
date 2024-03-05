@@ -19,7 +19,7 @@ android {
 
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-            buildConfigField("String", "API_BASE_URL",  "https://makeup-api.herokuapp.com/" )
+//            buildConfigField("String", "API_BASE_URL",  "https://makeup-api.herokuapp.com/" )
         }
 
     buildTypes {
@@ -74,6 +74,11 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
     // OkHttp
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")
 
 
 }
