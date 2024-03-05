@@ -18,7 +18,10 @@ import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.view.ProductView
+import com.example.apps_magang.dashboard.adapter.BlushAdapter
 import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
+import com.example.apps_magang.dashboard.adapter.FoundationAdapter
+import com.example.apps_magang.dashboard.adapter.LipstickAdapter
 import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
@@ -29,30 +32,14 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private lateinit var presenter: PersonalizedPresenter
     private lateinit var presenterUser: UserPresenter
     private lateinit var eyeshadowAdapter: EyeshadowAdapter
+    private lateinit var foundationAdapter: FoundationAdapter
+    private lateinit var lipstickAdapter: LipstickAdapter
+    private lateinit var blushAdapter: BlushAdapter
 
-    // Inisialisasi view dapat dilakukan di dalam onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-
-        // Inisialisasi view di sini
-        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
-        val rv = view.findViewById<RecyclerView>(R.id.rv_eyeshadow)
-        val rv2 = view.findViewById<RecyclerView>(R.id.rv_lipstick)
-        val rv3 = view.findViewById<RecyclerView>(R.id.rv_foundation)
-        val rv4 = view.findViewById<RecyclerView>(R.id.rv_mascara)
-
-        val layoutManager = LinearLayoutManager(requireContext())
-        rv.layoutManager = layoutManager
-
-        // Inisialisasi adapter dan set ke RecyclerView
-        eyeshadowAdapter = EyeshadowAdapter(requireContext())
-        rv.adapter = eyeshadowAdapter
-
-        return view
-    }
+    private lateinit var rvEyeshadow: RecyclerView
+    private lateinit var rvLipstick: RecyclerView
+    private lateinit var rvFoundation: RecyclerView
+    private lateinit var rvBlush: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +96,37 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+
+        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
+        rvEyeshadow = view.findViewById(R.id.rv_eyeshadow)
+        rvLipstick = view.findViewById(R.id.rv_lipstick)
+        rvFoundation = view.findViewById(R.id.rv_foundation)
+        rvBlush = view.findViewById(R.id.rv_mascara)
+
+        // Inisialisasi adapter dan set ke RecyclerView
+        eyeshadowAdapter = EyeshadowAdapter(requireContext())
+        lipstickAdapter = LipstickAdapter(requireContext())
+        foundationAdapter = FoundationAdapter(requireContext())
+        blushAdapter = BlushAdapter(requireContext())
+
+        initRecyclerView(eyeshadowAdapter, rvEyeshadow)
+        initRecyclerView(lipstickAdapter, rvLipstick)
+        initRecyclerView(foundationAdapter, rvFoundation)
+        initRecyclerView(blushAdapter, rvBlush)
+
+        return view
+    }
+
+    private fun initRecyclerView(adapter: RecyclerView.Adapter<*>, recyclerView: RecyclerView) {
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+    }
+
     override fun displayProduct(result: ResultState<List<Product>>) {
         when (result) {
             is ResultState.Success -> {
@@ -117,9 +135,9 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 for (product in productData) {
                     when (product.productType) {
                         "eyeshadow" -> eyeshadowAdapter.addData(product)
-//                        "foundation" -> foundationAdapter.addData(product)
-//                        "lipstick" -> lipstickAdapter.addData(product)
-//                        "blush" -> blushAdapter.addData(product)
+                        "foundation" -> foundationAdapter.addData(product)
+                        "lipstick" -> lipstickAdapter.addData(product)
+                        "blush" -> blushAdapter.addData(product)
                     }
                 }
             }
@@ -134,6 +152,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
+
 
 
     override fun displayUser(result: ResultState<UserModel>) {
