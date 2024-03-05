@@ -19,7 +19,7 @@ class ApiConfig private constructor() {
                 .alwaysReadResponseBody(false)
                 .build()
 
-//            val API_BASE_URL = "https://makeup-api.herokuapp.com/"
+            val API_BASE_URL = "https://makeup-api.herokuapp.com/"
 
             val retrofit = Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
