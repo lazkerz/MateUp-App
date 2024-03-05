@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.apps_magang.auth.presentation.SignInActivity
-import com.example.apps_magang.utils.LoginManager
+import com.example.apps_magang.core.utils.LoginManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
         splashScope.launch {
             delay(1000) // Tampilkan splash screen selama 1 detik
 
-            val isLoggedIn = LoginManager.isLoggedIn(this@SplashActivity)
+            val isLoggedIn = LoginManager.isLoggedIn()
             val user = if (isLoggedIn) {
                 MainActivity::class.java
             } else {

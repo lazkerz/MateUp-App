@@ -7,18 +7,18 @@ plugins {
 }
 
 android {
-    namespace = "com.example.apps_magang"
-    compileSdk = 34
+        namespace = "com.example.apps_magang"
+        compileSdk = 34
 
-    defaultConfig {
-        applicationId = "com.example.apps_magang"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        defaultConfig {
+            applicationId = "com.example.apps_magang"
+            minSdk = 24
+            targetSdk = 33
+            versionCode = 1
+            versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
 
     buildTypes {
         release {
@@ -62,4 +62,21 @@ dependencies {
     kapt("io.realm:realm-annotations-processor:10.9.0")
     implementation("io.realm:realm-android-library:10.9.0")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //chucker
+    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+    // OkHttp
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+// Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")
+
+
 }

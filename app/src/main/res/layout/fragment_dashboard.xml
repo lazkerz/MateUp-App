@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/tv_greeting_dashboard"
-        style="@style/MonaSemiBold20"
+        style="@style/MonaSemiBold18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -48,7 +48,7 @@
 
     <TextView
         android:id="@+id/tv_info_dashboard"
-        style="@style/MonaRegular16"
+        style="@style/MonaRegular14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -70,16 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_carousel"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
+            <LinearLayout
             android:id="@+id/dotsIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +83,7 @@
 
             <TextView
                 android:id="@+id/tv_recommendation"
-                style="@style/MonaSemiBold16"
+                style="@style/MonaSemiBold14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -104,7 +95,7 @@
 
             <TextView
                 android:id="@+id/tv_eyeshadow"
-                style="@style/MonaRegular16"
+                style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -127,7 +118,7 @@
 
             <TextView
                 android:id="@+id/tv_foundation"
-                style="@style/MonaRegular16"
+                style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -150,7 +141,7 @@
 
             <TextView
                 android:id="@+id/tv_lipstick"
-                style="@style/MonaRegular16"
+                style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -173,7 +164,7 @@
 
             <TextView
                 android:id="@+id/tv_mascara"
-                style="@style/MonaRegular16"
+                style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -196,4 +187,10 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_carousel"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        tools:layout_editor_absoluteX="40dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

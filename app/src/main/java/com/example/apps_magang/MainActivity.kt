@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.apps_magang.auth.model.UserModel
+import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
-import com.example.apps_magang.utils.ResultState
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.apps_magang.core.utils.RealmManager
+import com.example.apps_magang.core.utils.ResultState
+import io.realm.Realm
 
 class MainActivity : AppCompatActivity(), user_view {
 
@@ -21,9 +22,11 @@ class MainActivity : AppCompatActivity(), user_view {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Realm.init(this)
+        RealmManager.initRealm()
+
         presenter = UserPresenter(
-            this,
-            this )
+            this)
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
 

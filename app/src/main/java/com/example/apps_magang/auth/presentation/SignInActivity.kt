@@ -14,13 +14,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.apps_magang.MainActivity
 import com.example.apps_magang.R
-import com.example.apps_magang.auth.model.UserModel
+import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.dashboard.presentation.DashboardFragment
-import com.example.apps_magang.utils.LoginManager
-import com.example.apps_magang.utils.RealmManager
-import com.example.apps_magang.utils.ResultState
+import com.example.apps_magang.core.utils.LoginManager
+import com.example.apps_magang.core.utils.RealmManager
+import com.example.apps_magang.core.utils.ResultState
 import com.google.android.material.textfield.TextInputLayout
 import io.realm.Realm
 
@@ -35,8 +35,7 @@ class SignInActivity : AppCompatActivity(), user_view {
         RealmManager.initRealm()
 
         presenter = UserPresenter(
-            this,
-            this )
+            this)
 
         val Usn= findViewById<EditText>(R.id.authUserNameEditText)
         val Password = findViewById<EditText>(R.id.authPasswordEditText)
@@ -74,7 +73,7 @@ class SignInActivity : AppCompatActivity(), user_view {
                     // Jika login berhasil, arahkan ke MainActivity
                     startActivity(Intent(this, MainActivity::class.java))
                     // Simpan status login
-                    LoginManager.saveLogin(this, true)
+                    LoginManager.saveLogin(true)
                     finish()
                 } else {
                     // Jika login gagal, tampilkan pesan kesalahan
