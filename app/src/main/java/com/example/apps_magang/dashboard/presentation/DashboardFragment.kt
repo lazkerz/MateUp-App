@@ -83,10 +83,10 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                         presenter.getProductPersonalized("Oil free",  "powder", "blush")
                     }
                     "Dry" -> {
-                        presenter.getProductPersonalized("canadian", "liquid", "foundation")
-                        presenter.getProductPersonalized("canadian",  "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("canadian",  "lipstick", "lipstick")
-                        presenter.getProductPersonalized("canadian", "powder", "blush")
+                        presenter.getProductPersonalized("certclean", "liquid", "foundation")
+                        presenter.getProductPersonalized("certcleam",  "pallete", "eyeshadow")
+                        presenter.getProductPersonalized("certcleam",  "lipstick", "lipstick")
+                        presenter.getProductPersonalized("certcleam", "powder", "blush")
                     }
                     else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
                 }
@@ -172,7 +172,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
-
     override fun displayProductFromRealm(result: ResultState<List<Product>>) {
         when (result) {
             is ResultState.Success -> {
