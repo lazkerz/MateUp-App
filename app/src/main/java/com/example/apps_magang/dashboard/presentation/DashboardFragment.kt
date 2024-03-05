@@ -51,8 +51,10 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         eyeshadowAdapter = EyeshadowAdapter(requireContext())
         rv.adapter = eyeshadowAdapter
 
+
         return view
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
