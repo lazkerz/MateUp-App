@@ -16,7 +16,6 @@ interface ApiServicePersonalized {
         @GET("api/v1/products.json")
         fun getPersonalized(
                 @Query("product_tags") product_tags: String,
-                @Query("product_tags") product_tags2: String,
                 @Query("category") product_category: String,
                 @Query("product_type") product_type: String,
         ): Call<List<Product>>

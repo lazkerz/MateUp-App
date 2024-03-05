@@ -43,21 +43,6 @@ class EyeshadowAdapter (
 
         holder.tvProduct.text = item?.name ?: ""
 
-//        val symbol = null
-//        if (symbol != null) {
-//            val image = symbol?.imageLink
-//            Log.d("MarketCapAdapter", "Symbol LOGOURL: $image")
-//
-//            if (!image.isNullOrEmpty()) {
-//                Log.d("MarketCapAdapter", "Trying to load image from URL: $image")
-//                holder.imgRecommendation.setImageFromUrl(context, image)
-//                Log.d("MarketCapAdapter", "Image URL: $image")
-//            } else {
-//                Log.d("MarketCapAdapter", "Image URL is empty or null.")
-//            }
-//        } else {
-//            Log.d("MarketCapAdapter", "Symbol is null.")
-//        }
 
         Glide.with(context)
             .load(item.imageLink)
@@ -69,6 +54,11 @@ class EyeshadowAdapter (
     fun updateData(newList: List<Product>) {
         list.clear()
         list.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    fun addData(product: Product) {
+        list.add(product)
         notifyDataSetChanged()
     }
 

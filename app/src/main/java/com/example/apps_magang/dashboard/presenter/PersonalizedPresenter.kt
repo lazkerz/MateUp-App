@@ -18,12 +18,11 @@ class PersonalizedPresenter (
 ){
     fun getProductPersonalized(
         tags: String,
-        tags2: String,
         productCategory: String,
         productType: String,
     ) {
         try {
-            val call = apiPersonalized.getPersonalized(tags, tags2, productCategory, productType)
+            val call = apiPersonalized.getPersonalized(tags, productCategory, productType)
 
             call.enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {

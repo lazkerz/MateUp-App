@@ -71,28 +71,28 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             if (data != null){
                 when (data.skinType) {
                     "Sensitive" -> {
-                        presenter.getProductPersonalized("alcohol free", "Canadian", "liquid", "foundation")
-                        presenter.getProductPersonalized("alcohol free", "Canadian", "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("alcohol free", "Canadian", "lipstick", "lipstick")
-                        presenter.getProductPersonalized("alcohol free", "Canadian", "powder", "blush")
+                        presenter.getProductPersonalized("alcohol free", "liquid", "foundation")
+                        presenter.getProductPersonalized("alcohol free",  "pallete", "eyeshadow")
+                        presenter.getProductPersonalized("alcohol free",  "lipstick", "lipstick")
+                        presenter.getProductPersonalized("alcohol free",  "powder", "blush")
                     }
                     "Normal" -> {
-                        presenter.getProductPersonalized("Normal", "Canadian", "liquid", "foundation")
-                        presenter.getProductPersonalized("Normal", "Canadian", "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("Normal", "Canadian", "lipstick", "lipstick")
-                        presenter.getProductPersonalized("Normal", "Canadian", "powder", "blush")
+                        presenter.getProductPersonalized("Normal",  "liquid", "foundation")
+                        presenter.getProductPersonalized("Normal",  "pallete", "eyeshadow")
+                        presenter.getProductPersonalized("Normal",  "lipstick", "lipstick")
+                        presenter.getProductPersonalized("Normal",  "powder", "blush")
                     }
                     "Oily" -> {
-                        presenter.getProductPersonalized("Oil free", "no talc", "liquid", "foundation")
-                        presenter.getProductPersonalized("Oil free", "no talc", "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("Oil free", "no talc", "lipstick", "lipstick")
-                        presenter.getProductPersonalized("Oil free", "no talc", "powder", "blush")
+                        presenter.getProductPersonalized("Oil free",  "liquid", "foundation")
+                        presenter.getProductPersonalized("Oil free",  "pallete", "eyeshadow")
+                        presenter.getProductPersonalized("Oil free", "lipstick", "lipstick")
+                        presenter.getProductPersonalized("Oil free",  "powder", "blush")
                     }
                     "Dry" -> {
-                        presenter.getProductPersonalized("certclean", "cruelty free", "liquid", "foundation")
-                        presenter.getProductPersonalized("certclean", "no talc", "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("certclean", "chemical free", "lipstick", "lipstick")
-                        presenter.getProductPersonalized("certclean", "Canadian", "powder", "blush")
+                        presenter.getProductPersonalized("canadian", "liquid", "foundation")
+                        presenter.getProductPersonalized("canadian",  "pallete", "eyeshadow")
+                        presenter.getProductPersonalized("canadian",  "lipstick", "lipstick")
+                        presenter.getProductPersonalized("canadian", "powder", "blush")
                     }
                     else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
                 }
@@ -114,7 +114,14 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
                 val productData = result.data
-                eyeshadowAdapter.updateData(productData)
+                for (product in productData) {
+                    when (product.productType) {
+                        "eyeshadow" -> eyeshadowAdapter.addData(product)
+//                        "foundation" -> foundationAdapter.addData(product)
+//                        "lipstick" -> lipstickAdapter.addData(product)
+//                        "blush" -> blushAdapter.addData(product)
+                    }
+                }
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
