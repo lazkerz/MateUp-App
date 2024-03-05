@@ -75,7 +75,7 @@ dependencies {
     // OkHttp
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    // Glide
+// Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")

@@ -19,16 +19,33 @@
 <!--        app:contentInsetStartWithNavigation="0dp"-->
 <!--        app:contentInsetEndWithActions="0dp">-->
 
-<!--        &lt;!&ndash; Ikon kembali di sebelah kiri &ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash; Ikon kembali di sebelah kiri &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/ic_back"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:src="@drawable/ic_back"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:padding="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:clickable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:focusable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_gravity="start" />&ndash;&gt;-->
+
+<!--        &lt;!&ndash; Spacer untuk menjaga jarak antara ikon kembali dan ikon keluar &ndash;&gt;-->
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_gravity="start" />-->
+
+<!--        &lt;!&ndash; Ikon keluar di sebelah kanan &ndash;&gt;-->
 <!--        <ImageView-->
-<!--            android:id="@+id/ic_back"-->
+<!--            android:id="@+id/ic_out"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_back"-->
+<!--            android:src="@drawable/ic_out"-->
 <!--            android:padding="8dp"-->
 <!--            android:clickable="true"-->
 <!--            android:focusable="true"-->
-<!--            android:layout_gravity="start" />-->
+<!--            android:layout_gravity="end" />-->
 
 <!--         Spacer untuk menjaga jarak antara ikon kembali dan ikon keluar -->
 <!--        <View-->
@@ -50,17 +67,37 @@
 <!--    </androidx.appcompat.widget.Toolbar>-->
 
 
-    <TextView
-        android:id="@+id/tv_greeting_dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dashboard"
-        style="@style/MonaSemiBold24"
+<!--    <TextView-->
+<!--        android:id="@+id/tv_greeting_dashboard"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Dashboard"-->
+<!--        style="@style/MonaSemiBold24"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <fragment
+        android:id="@+id/navHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/white"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemIconTint="@drawable/icon_tint_selector"
+        app:itemTextColor="@drawable/icon_tint_selector"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:menu="@menu/bottom_nav_menu"
+        tools:ignore="VisualLintBottomNav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

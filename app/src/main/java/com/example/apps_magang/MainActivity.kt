@@ -1,14 +1,15 @@
 package com.example.apps_magang
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
-import com.example.apps_magang.auth.presentation.SignInActivity
 import com.example.apps_magang.auth.view.user_view
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import io.realm.Realm
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity(), user_view {
 
         presenter = UserPresenter(
             this)
+
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
 //
 //        val logout = findViewById<ImageView>(R.id.ic_out)
 //
@@ -36,6 +39,18 @@ class MainActivity : AppCompatActivity(), user_view {
 //            finish() // Optional: Menutup aktivitas saat ini setelah logout
 //        }
 
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.navHost)!!
+                .findNavController()
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_dashboard,
+                R.id.navigation_ingredients,
+                R.id.navigation_product
+            )
+        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun displayUser(result: ResultState<UserModel>) {

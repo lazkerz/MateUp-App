@@ -9,8 +9,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import com.example.apps_magang.MainActivity
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
@@ -42,6 +44,7 @@ class SignInActivity : AppCompatActivity(), user_view {
 
         findViewById<TextView>(R.id.tv_name).visibility = View.GONE
         findViewById<EditText>(R.id.authNameEditText).visibility = View.GONE
+        findViewById<Spinner>(R.id.spActivity).visibility = View.GONE
 
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
 
@@ -68,7 +71,7 @@ class SignInActivity : AppCompatActivity(), user_view {
             presenter.login(username, password) { isSuccess ->
                 if (isSuccess) {
                     // Jika login berhasil, arahkan ke MainActivity
-                    startActivity(Intent(this, DashboardFragment::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     // Simpan status login
                     LoginManager.saveLogin(true)
                     finish()
