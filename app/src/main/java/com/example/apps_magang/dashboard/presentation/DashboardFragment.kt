@@ -19,8 +19,10 @@ import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
+import com.example.apps_magang.dashboard.adapter.BlushAdapter
 import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
 import com.example.apps_magang.dashboard.adapter.FoundationAdapter
+import com.example.apps_magang.dashboard.adapter.LipstickAdapter
 import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
@@ -30,43 +32,27 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
     private lateinit var presenter: PersonalizedPresenter
     private lateinit var presenterUser: UserPresenter
+
     private lateinit var eyeshadowAdapter: EyeshadowAdapter
     private lateinit var foundationAdapter: FoundationAdapter
+    private lateinit var lipstickAdapter: LipstickAdapter
+    private lateinit var blushAdapter: BlushAdapter
 
-    // Inisialisasi view dapat dilakukan di dalam onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-
-        // Inisialisasi view di sini
-        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
-        val rv = view.findViewById<RecyclerView>(R.id.rv_eyeshadow)
-        val rv2 = view.findViewById<RecyclerView>(R.id.rv_lipstick)
-        val rv3 = view.findViewById<RecyclerView>(R.id.rv_foundation)
-        val rv4 = view.findViewById<RecyclerView>(R.id.rv_blush)
-
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        rv.layoutManager = layoutManager
-        eyeshadowAdapter = EyeshadowAdapter(requireContext())
-        rv.adapter = eyeshadowAdapter
-        rv.addItemDecoration(SpacesItemDecoration(6))
-
-        rv3.layoutManager = layoutManager
-        foundationAdapter = FoundationAdapter(requireContext())
-        rv3.adapter = foundationAdapter
-        rv3.addItemDecoration(SpacesItemDecoration(6))
-
-        return view
-    }
-
+    private lateinit var rvEyeshadow: RecyclerView
+    private lateinit var rvLipstick: RecyclerView
+    private lateinit var rvFoundation: RecyclerView
+    private lateinit var rvBlush: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Realm.init(requireContext())
         RealmManager.initRealm()
+
+        // Inisialisasi adapter dan set ke RecyclerView
+        eyeshadowAdapter = EyeshadowAdapter(requireContext())
+        lipstickAdapter = LipstickAdapter(requireContext())
+        foundationAdapter = FoundationAdapter(requireContext())
+        blushAdapter = BlushAdapter(requireContext())
 
         val apiServicePersonalized =
             ApiConfig.getApiService(requireContext(), "productBy") as? ApiServicePersonalized
@@ -115,6 +101,33 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 Toast.LENGTH_SHORT
             ).show()
         }
+
+        presenter.getProductFromRealm()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+
+        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
+        rvEyeshadow = view.findViewById(R.id.rv_eyeshadow)
+        rvLipstick = view.findViewById(R.id.rv_lipstick)
+        rvFoundation = view.findViewById(R.id.rv_foundation)
+        rvBlush = view.findViewById(R.id.rv_blush)
+
+        initRecyclerView(eyeshadowAdapter, rvEyeshadow)
+        initRecyclerView(lipstickAdapter, rvLipstick)
+        initRecyclerView(foundationAdapter, rvFoundation)
+        initRecyclerView(blushAdapter, rvBlush)
+
+        return view
+    }
+
+    private fun initRecyclerView(adapter: RecyclerView.Adapter<*>, recyclerView: RecyclerView) {
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
@@ -126,8 +139,8 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                     when (product.productType) {
                         "eyeshadow" -> eyeshadowAdapter.addData(product)
                         "foundation" -> foundationAdapter.addData(product)
-//                        "lipstick" -> lipstickAdapter.addData(product)
-//                        "blush" -> blushAdapter.addData(product)
+                        "lipstick" -> lipstickAdapter.addData(product)
+                        "blush" -> blushAdapter.addData(product)
                     }
                 }
             }
@@ -142,7 +155,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
-
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
             is ResultState.Success -> {
@@ -151,6 +163,32 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
+                val errorMessage = result.error
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+            is ResultState.Loading -> {
+                // Handle loading state
+                Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun displayProductFromRealm(result: ResultState<List<Product>>) {
+        when (result) {
+            is ResultState.Success -> {
+                // Tampilkan data dari Realm
+                val productRealm = result.data
+                for (products in productRealm) {
+                    when (products.productType) {
+                        "eyeshadow" -> eyeshadowAdapter.addData(products)
+                        "foundation" -> foundationAdapter.addData(products)
+                        "lipstick" -> lipstickAdapter.addData(products)
+                        "blush" -> blushAdapter.addData(products)
+                    }
+                }
+            }
+            is ResultState.Error -> {
+                // Handle jika terjadi error saat mengambil data dari Realm
                 val errorMessage = result.error
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }

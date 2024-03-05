@@ -10,16 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
-<<<<<<< HEAD
-=======
 import com.example.apps_magang.core.utils.fromJson
 import com.example.apps_magang.core.utils.setImageFromUrl
 import io.realm.RealmList
->>>>>>> 86562fb4c0495f9921151e579db8eec7ec05633b
 
-class FoundationAdapter (
+class BlushAdapter (
     private val context: Context
-) : RecyclerView.Adapter<FoundationAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<BlushAdapter.ViewHolder>() {
 
     private val list: MutableList<Product> = mutableListOf()
 
