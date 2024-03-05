@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.utils.fromJson
@@ -14,9 +15,10 @@ import com.example.apps_magang.core.utils.setImageFromUrl
 import io.realm.RealmList
 
 class EyeshadowAdapter (
-    private val context: Context,
-private val list: RealmList<Product>
+    private val context: Context
 ) : RecyclerView.Adapter<EyeshadowAdapter.ViewHolder>() {
+
+    private val list: MutableList<Product> = mutableListOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
@@ -57,14 +59,14 @@ private val list: RealmList<Product>
 //            Log.d("MarketCapAdapter", "Symbol is null.")
 //        }
 
-        val imageUrls: List<String> = fromJson(item?.imageLink!!)
-
-        if (imageUrls.isNotEmpty()) {
-            holder.imgRecommendation.setImageFromUrl(context, imageUrls[0])
-        }
+        Glide.with(context)
+            .load(item.imageLink)
+            .placeholder(R.drawable.image_loading_placeholder)
+            .error(R.drawable.image_load_error)
+            .into(holder.imgRecommendation)
     }
 
-    fun updateData(newList: RealmList<Product>) {
+    fun updateData(newList: List<Product>) {
         list.clear()
         list.addAll(newList)
         notifyDataSetChanged()
