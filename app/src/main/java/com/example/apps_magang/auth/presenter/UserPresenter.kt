@@ -1,6 +1,7 @@
 package com.example.apps_magang.auth.presenter
 
 import android.content.Context
+import android.util.Log
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.utils.LoginManager
@@ -13,6 +14,9 @@ class UserPresenter(
 ) {
 
     fun addUser(name: String, username: String, password: String, skinType: String, callback: (Boolean) -> Unit) {
+        // Menampilkan nilai skinType sebelum menyimpannya
+        Log.d("AddUser", "Skin Type to be saved: $skinType")
+
         val realm = Realm.getDefaultInstance()
         realm.executeTransactionAsync({ backgroundRealm ->
             val user = backgroundRealm.createObject<UserModel>() // Objek baru UserModel akan otomatis mendapatkan ID
@@ -44,6 +48,7 @@ class UserPresenter(
             null
         }
         if (userModel != null) {
+            Log.d("UserModel", "User skinType: ${userModel.skinType}")
             view.displayUser(ResultState.Success(userModel))
         } else {
             view.displayUser(ResultState.Error("No data in Realm"))
@@ -52,6 +57,7 @@ class UserPresenter(
         realm.close()
         return userModel
     }
+
 
     fun editUser(id: String, name: String, username: String, password: String, skinType: String, callback: (Boolean) -> Unit) {
         val realm = Realm.getDefaultInstance()

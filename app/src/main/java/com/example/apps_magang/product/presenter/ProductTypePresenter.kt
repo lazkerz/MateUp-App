@@ -23,24 +23,24 @@ class ProductTypePresenter (
         try {
             val call = apiTypeProduct.getProductType(productType, productCategory)
 
-            call.enqueue(object : Callback<Product> {
-                override fun onResponse(
-                    call: Call<Product>,
-                    response: Response<Product>
-                ) {
+            call.enqueue(object : Callback<List<Product>> {
+                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                     if (response.isSuccessful) {
-                        val product = response.body()
-                        if (product != null) {
-                            saveProductTypeToRealm(product)
+                        val products = response.body()
+                        products?.let {
+                            for (product in products) {
+                                saveProductTypeToRealm(product)
+                            }
                         }
-                        view.displayProduct(ResultState.Success(listOf()))
+                        view.displayProduct(ResultState.Success(products as List<Product>))
                         Log.d("Product", "Response: $response")
                     } else {
                         Log.e("Product", "Error: ${response.message()}")
                         view.displayProduct(ResultState.Error(response.message()))
                     }
                 }
-                override fun onFailure(call: Call<Product>, t: Throwable) {
+
+                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                     Log.e("Product", "Error: ${t.message}")
                     view.displayProduct(ResultState.Error(t.message.toString()))
                 }
