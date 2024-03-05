@@ -118,6 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_eyeshadow"
@@ -141,6 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_foundation"
@@ -164,6 +166,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_lipstick"
@@ -183,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rv_lipstick"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_mascara"
+                android:id="@+id/rv_blush"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"

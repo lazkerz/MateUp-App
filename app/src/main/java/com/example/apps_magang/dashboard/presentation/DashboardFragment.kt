@@ -17,8 +17,10 @@ import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
+import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
 import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
+import com.example.apps_magang.dashboard.adapter.FoundationAdapter
 import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
@@ -29,6 +31,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private lateinit var presenter: PersonalizedPresenter
     private lateinit var presenterUser: UserPresenter
     private lateinit var eyeshadowAdapter: EyeshadowAdapter
+    private lateinit var foundationAdapter: FoundationAdapter
 
     // Inisialisasi view dapat dilakukan di dalam onCreateView
     override fun onCreateView(
@@ -42,19 +45,22 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         val rv = view.findViewById<RecyclerView>(R.id.rv_eyeshadow)
         val rv2 = view.findViewById<RecyclerView>(R.id.rv_lipstick)
         val rv3 = view.findViewById<RecyclerView>(R.id.rv_foundation)
-        val rv4 = view.findViewById<RecyclerView>(R.id.rv_mascara)
+        val rv4 = view.findViewById<RecyclerView>(R.id.rv_blush)
 
-        val layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
         rv.layoutManager = layoutManager
-
-        // Inisialisasi adapter dan set ke RecyclerView
         eyeshadowAdapter = EyeshadowAdapter(requireContext())
         rv.adapter = eyeshadowAdapter
+        rv.addItemDecoration(SpacesItemDecoration(6))
 
+        rv3.layoutManager = layoutManager
+        foundationAdapter = FoundationAdapter(requireContext())
+        rv3.adapter = foundationAdapter
+        rv3.addItemDecoration(SpacesItemDecoration(6))
 
         return view
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,7 +125,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 for (product in productData) {
                     when (product.productType) {
                         "eyeshadow" -> eyeshadowAdapter.addData(product)
-//                        "foundation" -> foundationAdapter.addData(product)
+                        "foundation" -> foundationAdapter.addData(product)
 //                        "lipstick" -> lipstickAdapter.addData(product)
 //                        "blush" -> blushAdapter.addData(product)
                     }
@@ -136,7 +142,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
-
 
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
