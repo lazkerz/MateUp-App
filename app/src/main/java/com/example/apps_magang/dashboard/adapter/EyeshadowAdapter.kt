@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
-import com.example.apps_magang.core.utils.fromJson
-import com.example.apps_magang.core.utils.setImageFromUrl
-import io.realm.RealmList
 
 class EyeshadowAdapter (
     private val context: Context
@@ -27,7 +24,7 @@ class EyeshadowAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(
-            R.layout.item_recommendation,
+            R.layout.eyeshadow_recommendation,
             parent,
             false
         )
