@@ -36,6 +36,7 @@
             android:background="@drawable/stroke_input_field"
             android:hint="Name"
             android:inputType="text"
+            android:textColor="@color/black"
             android:paddingVertical="16dp"
             android:paddingStart="14dp"
             android:paddingEnd="0dp"
@@ -76,6 +77,7 @@
             android:paddingVertical="16dp"
             android:paddingStart="14dp"
             android:paddingEnd="0dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/light_grey" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,6 +115,7 @@
             android:paddingVertical="16dp"
             android:paddingStart="14dp"
             android:paddingEnd="0dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/light_grey" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,6 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
+        style="@style/MonaRegular12"
         android:popupBackground="@color/Primary10"
         android:background="@drawable/stroke_input_field"
         android:entries="@array/collection_activity"

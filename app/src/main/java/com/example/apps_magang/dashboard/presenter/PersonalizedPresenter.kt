@@ -82,9 +82,9 @@ class PersonalizedPresenter (
             val items = RealmList<Product>().apply {
                 addAll(realm.copyFromRealm(result))
             }
-            view.displayProductFromRealm(ResultState.Success(items))
+            view.displayProduct(ResultState.Success(items))
         } else {
-            view.displayProductFromRealm(ResultState.Error("No data in Realm"))
+            view.displayProduct(ResultState.Error("No data in Realm"))
         }
 
         realm.close()

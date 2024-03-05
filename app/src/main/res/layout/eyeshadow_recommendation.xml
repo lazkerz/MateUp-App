@@ -2,11 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="130dp"
+    android:layout_height="200dp"
     android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true"
+    app:strokeColor="@color/Primary10"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +17,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_img"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:elevation="30dp"
@@ -33,23 +34,37 @@
                 android:layout_height="80dp"
                 android:contentDescription="@string/name_product"
                 android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/img_product2"
                 tools:ignore="ImageContrastCheck" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/tvProduct"
+            android:id="@+id/tvBrand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            style="@style/MonaRegular14"
-            android:text="@string/eyeshadow_product"
-            android:textAlignment="textStart"
+            android:layout_marginTop="20dp"
+            style="@style/MonaSemiBold12"
+            android:text="Brand Name"
             android:textColor="@color/black"
+            android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_img" />
+
+        <TextView
+            android:id="@+id/tvProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            style="@style/MonaRegular12"
+            android:text="@string/eyeshadow_product"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

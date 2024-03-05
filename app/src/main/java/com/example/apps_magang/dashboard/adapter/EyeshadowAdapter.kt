@@ -19,6 +19,7 @@ class EyeshadowAdapter (
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
+        var tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
         var imgRecommendation: ImageView = itemView.findViewById(R.id.imgRecommendation)
     }
 
@@ -39,6 +40,7 @@ class EyeshadowAdapter (
         val item = list[position]
 
         holder.tvProduct.text = item?.name ?: ""
+        holder.tvBrand.text = item?.name ?: ""
 
 
         Glide.with(context)

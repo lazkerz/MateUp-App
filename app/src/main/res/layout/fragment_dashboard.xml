@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/Primary30"
     tools:context=".dashboard.presentation.DashboardFragment">
 
@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="15dp"
         android:gravity="center"
         android:text="@string/dashboard_greeting"
@@ -51,7 +52,7 @@
         style="@style/MonaRegular14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:text="@string/dashboard_info"
         android:textColor="@color/white"
@@ -60,11 +61,14 @@
 
     <ScrollView
         android:id="@+id/sc_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="140dp"
         android:background="@drawable/background_dashboard"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info_dashboard">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info_dashboard"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -79,50 +83,51 @@
                 tools:layout_editor_absoluteX="40dp" />
 
             <LinearLayout
-            android:id="@+id/dotsIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vp_carousel" />
+                android:id="@+id/dotsIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vp_carousel" />
 
             <TextView
                 android:id="@+id/tv_recommendation"
                 style="@style/MonaSemiBold14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/recommendation"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dotsIndicator"/>
+                app:layout_constraintTop_toBottomOf="@id/dotsIndicator" />
 
             <TextView
                 android:id="@+id/tv_eyeshadow"
                 style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/eyeshadow_product"
                 android:textColor="@color/Primary_50"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_recommendation"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_recommendation" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_eyeshadow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_eyeshadow"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
                 tools:listitem="@layout/eyeshadow_recommendation" />
 
             <TextView
@@ -130,71 +135,75 @@
                 style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/foundation_product"
                 android:textColor="@color/Primary_50"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_eyeshadow"/>
+                app:layout_constraintTop_toBottomOf="@id/rv_eyeshadow" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_foundation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_foundation"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                tools:listitem="@layout/foundation_recommendation" />
+                tools:listitem="@layout/eyeshadow_recommendation" />
 
             <TextView
                 android:id="@+id/tv_lipstick"
                 style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/lipstik_product"
                 android:textColor="@color/Primary_50"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_foundation"/>
+                app:layout_constraintTop_toBottomOf="@id/rv_foundation" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_lipstick"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_lipstick"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                tools:listitem="@layout/lipstick_recommendation" />
+                tools:listitem="@layout/eyeshadow_recommendation" />
 
             <TextView
                 android:id="@+id/tv_mascara"
                 style="@style/MonaRegular12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/blush_product"
                 android:textColor="@color/Primary_50"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_lipstick"/>
+                app:layout_constraintTop_toBottomOf="@id/rv_lipstick" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_blush"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_mascara"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                tools:listitem="@layout/blush_recommendation" />
+                tools:listitem="@layout/eyeshadow_recommendation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
