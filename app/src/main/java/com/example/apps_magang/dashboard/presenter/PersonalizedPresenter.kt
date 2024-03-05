@@ -74,13 +74,13 @@ class PersonalizedPresenter (
         return realm.where(Product::class.java).equalTo("product.id", uniqueId).findFirst()
     }
 
-    fun retrieveDataFromRealm() {
+    fun getProductFromRealm() {
         val realm = Realm.getDefaultInstance()
         val result = realm.where(Product::class.java).findAll()
 
         if (result.isNotEmpty()) {
             val items = RealmList<Product>().apply {
-                Collections.addAll(realm.copyFromRealm(result))
+                addAll(realm.copyFromRealm(result))
             }
             view.displayProduct(ResultState.Success(items))
         } else {
@@ -89,5 +89,6 @@ class PersonalizedPresenter (
 
         realm.close()
     }
+
 
 }
