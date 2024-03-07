@@ -40,7 +40,7 @@ class LipstickFragment : Fragment(), ProductView {
 
         apiServiceProduct?.let {
             presenter = ProductTypePresenter(it, this)
-            presenter.getProductType("lipstick")
+            presenter.getProductType("lipstick", "lip_gloss")
             presenter.retrieveProductTypeFromRealm()
         } ?: Log.e("LipstickFragment", "Failed to initialize ApiServiceProduct")
     }

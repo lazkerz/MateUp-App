@@ -18,9 +18,10 @@ class ProductTypePresenter (
 ){
     fun getProductType(
         productType: String,
+        category: String,
     ) {
         try {
-            val call = apiTypeProduct.getProductType(productType)
+            val call = apiTypeProduct.getProductType(productType, category)
 
             call.enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {

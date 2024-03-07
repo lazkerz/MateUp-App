@@ -40,7 +40,7 @@ class BaseFragment : Fragment(), ProductView {
 
         apiServiceProduct?.let {
             presenter = ProductTypePresenter(it, this)
-            presenter.getProductType("foundation")
+            presenter.getProductType("foundation", "cream")
             presenter.retrieveProductTypeFromRealm()
         } ?: Log.e("BaseFragment", "Failed to initialize ApiServiceProduct")
     }
