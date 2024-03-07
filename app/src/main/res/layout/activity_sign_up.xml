@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/ic_back"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginTop="6dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
