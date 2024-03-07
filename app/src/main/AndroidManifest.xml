@@ -11,7 +11,7 @@
         android:theme="@style/Base.Theme.Apps_Magang"
         tools:targetApi="31">
         <activity
-            android:name=".profile.presentation.ProfileActivity"
+            android:name=".auth.presentation.ProfileActivity"
             android:exported="false"
             android:label="@string/title_activity_profile"
             android:theme="@style/Base.Theme.Apps_Magang" />

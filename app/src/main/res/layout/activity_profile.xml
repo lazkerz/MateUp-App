@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:clipToPadding="false"
     android:paddingHorizontal="16dp"
-    tools:context=".profile.presentation.ProfileActivity">
+    tools:context=".auth.presentation.ProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

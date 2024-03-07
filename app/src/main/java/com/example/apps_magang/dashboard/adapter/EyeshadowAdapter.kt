@@ -57,7 +57,6 @@ class EyeshadowAdapter (
     }
 
     fun addData(product: Product) {
-        list.clear()
         list.add(product)
         notifyDataSetChanged()
     }
