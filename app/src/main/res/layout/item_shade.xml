@@ -23,14 +23,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <View
                 android:id="@+id/imgShade"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/name_product"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/image_loading_placeholder"
+                android:background="@drawable/background_circlecolor"
                 tools:ignore="ImageContrastCheck" />
 
         </com.google.android.material.card.MaterialCardView>

@@ -1,10 +1,10 @@
 package com.example.apps_magang.core.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,7 +19,7 @@ class ShadeAdapter (
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvHex: TextView = itemView.findViewById(R.id.tvHex)
-        var imgShade: ImageView = itemView.findViewById(R.id.imgShade)
+        var imgShade: View = itemView.findViewById(R.id.imgShade)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,12 +40,10 @@ class ShadeAdapter (
 
         holder.tvHex.text = item?.colourName ?: ""
 
-
-        Glide.with(context)
-            .load(item.hexValue)
-            .placeholder(R.drawable.image_loading_placeholder)
-            .error(R.drawable.image_load_error)
-            .into(holder.imgShade)
+        val defaultColor: Int = Color.parseColor("#808080")/* Default color code jika hexValue null atau tidak valid */
+        // Jika item tidak null dan hexValue tidak null atau kosong, konversi hexValue ke integer
+        val color: Int = item?.hexValue?.let { Color.parseColor(it) } ?: defaultColor
+        holder.imgShade.setBackgroundColor(color)
     }
 
     fun updateData(newList: List<ProductColor>) {
