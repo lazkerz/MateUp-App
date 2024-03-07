@@ -2,6 +2,7 @@ package com.example.apps_magang.core.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
+import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
 import io.realm.Realm
@@ -26,7 +28,7 @@ class DetailActivity : AppCompatActivity(), ProductView {
 
     private lateinit var shadeAdapter: ShadeAdapter
     private lateinit var rvShade: RecyclerView
-    private lateinit var domain: Product
+    private lateinit var presenter: PersonalizedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +37,13 @@ class DetailActivity : AppCompatActivity(), ProductView {
         Realm.init(this )
         RealmManager.initRealm()
 
-        val apiService = ApiConfig.getApiService(this)
+        val apiServicePersonalized =
+            ApiConfig.getApiService(this , "productBy") as? ApiServicePersonalized
+        Log.d("ApiServicePersonalized", "ApiServicePersonalized is not null: $apiServicePersonalized")
 
-        domain = Product(
-            apiService,
-            this
-        )
+        apiServicePersonalized != null{
+            presenter = PersonalizedPresenter(apiServicePersonalized, this)
+        }
 
         // Inisialisasi adapter dan set ke RecyclerView
         shadeAdapter = ShadeAdapter(this)
