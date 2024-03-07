@@ -8,7 +8,7 @@
     <string name="eyeshadow_product">Eyeshadow Product</string>
     <string name="foundation_product">Foundation Product</string>
     <string name="lipstik_product">Lipstick Product</string>
-    <string name="mascara_product">Mascara Product</string>
+    <string name="blush_product">Blush On Product</string>
     <string name="name_product">Name Product</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Introduce Yourself</string>
@@ -19,6 +19,15 @@
     <string name="title_ingredients">Ingredients</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_product">product</string>
+    <string name="by_ingedients">Product by Tags</string>
+    <string name="by_category">Product by Category</string>
+    <string name="desc_product">Desc product</string>
+    <string name="name_brand">Brand Product</string>
+    <string name="todo">TODO</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vegan">Vegan</string>
+    <string name="natural">Natural</string>
+    <string name="canadian">Canadian</string>
+    <string name="organic">Organic</string>
 </resources>

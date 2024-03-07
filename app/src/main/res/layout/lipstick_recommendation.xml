@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             style="@style/MonaRegular14"
-            android:text="@string/eyeshadow_product"
+            android:text="@string/lipstik_product"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"

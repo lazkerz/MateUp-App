@@ -17,6 +17,7 @@ import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
+import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
 import com.example.apps_magang.dashboard.adapter.BlushAdapter
 import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
@@ -31,6 +32,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
     private lateinit var presenter: PersonalizedPresenter
     private lateinit var presenterUser: UserPresenter
+
     private lateinit var eyeshadowAdapter: EyeshadowAdapter
     private lateinit var foundationAdapter: FoundationAdapter
     private lateinit var lipstickAdapter: LipstickAdapter
@@ -40,7 +42,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private lateinit var rvLipstick: RecyclerView
     private lateinit var rvFoundation: RecyclerView
     private lateinit var rvBlush: RecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -71,7 +72,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                     }
                     "Normal" -> {
                         presenter.getProductPersonalized("Natural",   "foundation")
-                        presenter.getProductPersonalized("Natural",  "eyeshadow")
+                        presenter.getProductPersonalized("Vegan",  "eyeshadow")
                         presenter.getProductPersonalized("Natural",   "lipstick")
                         presenter.getProductPersonalized("Natural",   "blush")
                     }
@@ -114,7 +115,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         rvEyeshadow = view.findViewById(R.id.rv_eyeshadow)
         rvLipstick = view.findViewById(R.id.rv_lipstick)
         rvFoundation = view.findViewById(R.id.rv_foundation)
-        rvBlush = view.findViewById(R.id.rv_mascara)
+        rvBlush = view.findViewById(R.id.rv_blush)
 
         initRecyclerView(eyeshadowAdapter, rvEyeshadow)
         initRecyclerView(lipstickAdapter, rvLipstick)
@@ -125,8 +126,9 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     }
 
     private fun initRecyclerView(adapter: RecyclerView.Adapter<*>, recyclerView: RecyclerView) {
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(SpacesItemDecoration(6))
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
@@ -154,9 +156,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
-
-
-
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
             is ResultState.Success -> {

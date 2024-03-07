@@ -1,4 +1,4 @@
-package com.example.apps_magang.dashboard.adapter
+package com.example.apps_magang.ingredients.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,25 +10,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
-import com.example.apps_magang.core.utils.fromJson
-import com.example.apps_magang.core.utils.setImageFromUrl
-import io.realm.RealmList
 
-class LipstickAdapter (
+class IngredientsAdapter (
     private val context: Context
-) : RecyclerView.Adapter<LipstickAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
 
     private val list: MutableList<Product> = mutableListOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
-        var tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
-        var imgRecommendation: ImageView = itemView.findViewById(R.id.imgRecommendation)
+        var tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
+        var tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+        val tvProductDesc: TextView = itemView.findViewById(R.id.tvProductDesc)
+        val tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
+        var ivProduct: ImageView = itemView.findViewById(R.id.ivProduct)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(
-            R.layout.eyeshadow_recommendation,
+            R.layout.item_product,
             parent,
             false
         )
@@ -42,15 +41,17 @@ class LipstickAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvProduct.text = item?.name ?: ""
-        holder.tvBrand.text = item?.name ?: ""
+        holder.tvCategory.text = item?.category ?: ""
+        holder.tvProductName.text = item?.name ?: ""
+        holder.tvProductDesc.text = item?.description ?: ""
+        holder.tvBrand.text = item?.brand ?: ""
 
 
         Glide.with(context)
             .load(item.imageLink)
             .placeholder(R.drawable.image_loading_placeholder)
             .error(R.drawable.image_load_error)
-            .into(holder.imgRecommendation)
+            .into(holder.ivProduct)
     }
 
     fun updateData(newList: List<Product>) {

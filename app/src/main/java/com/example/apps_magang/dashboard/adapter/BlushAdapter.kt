@@ -22,12 +22,13 @@ class BlushAdapter (
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
+        var tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
         var imgRecommendation: ImageView = itemView.findViewById(R.id.imgRecommendation)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(
-            R.layout.item_recommendation,
+            R.layout.eyeshadow_recommendation,
             parent,
             false
         )
@@ -42,6 +43,7 @@ class BlushAdapter (
         val item = list[position]
 
         holder.tvProduct.text = item?.name ?: ""
+        holder.tvBrand.text = item?.name ?: ""
 
 
         Glide.with(context)

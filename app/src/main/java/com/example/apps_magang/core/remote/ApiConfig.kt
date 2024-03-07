@@ -37,7 +37,7 @@ class ApiConfig private constructor() {
                 "productBy" -> {
                     retrofit.newBuilder().client(client).build().create(ApiServicePersonalized::class.java)
                 }
-                "productTag" -> {
+                "productType" -> {
                     retrofit.newBuilder().client(client).build().create(ApiServiceProductType::class.java)
                 }
                 else -> throw IllegalArgumentException("Unknown API type: $apiType")
