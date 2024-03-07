@@ -83,7 +83,7 @@ class PersonalizedPresenter (
             }
             view.displayProduct(ResultState.Success(items))
         } else {
-            view.displayProduct(ResultState.Error("No data in Realm"))
+            view.displayProduct(ResultState.Error(""))
         }
 
         realm.close()

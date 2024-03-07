@@ -15,8 +15,6 @@ import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
-import com.example.apps_magang.ingredients.adapter.IngredientsAdapter
-import com.example.apps_magang.ingredients.presentation.presenter.ProductTagPresenter
 import com.example.apps_magang.product.adapter.ProductAdapter
 import com.example.apps_magang.product.presenter.ProductTypePresenter
 import com.example.mateup.data.remote.ApiConfig
@@ -83,6 +81,5 @@ class BaseFragment : Fragment(), ProductView {
     }
 
     companion object {
-
     }
 }

@@ -1,10 +1,12 @@
 package com.example.apps_magang.dashboard.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
+import com.example.apps_magang.auth.presentation.ProfileActivity
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
@@ -53,6 +56,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         lipstickAdapter = LipstickAdapter(requireContext())
         foundationAdapter = FoundationAdapter(requireContext())
         blushAdapter = BlushAdapter(requireContext())
+
 
         val apiServicePersonalized =
             ApiConfig.getApiService(requireContext(), "productBy") as? ApiServicePersonalized
@@ -116,6 +120,12 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         rvLipstick = view.findViewById(R.id.rv_lipstick)
         rvFoundation = view.findViewById(R.id.rv_foundation)
         rvBlush = view.findViewById(R.id.rv_blush)
+
+        val profile = view.findViewById<ImageView>(R.id.profile)
+        profile.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         initRecyclerView(eyeshadowAdapter, rvEyeshadow)
         initRecyclerView(lipstickAdapter, rvLipstick)

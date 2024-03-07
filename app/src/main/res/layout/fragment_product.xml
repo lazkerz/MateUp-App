@@ -23,13 +23,14 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_sign_in"
+                android:id="@+id/tv_category"
                 style="@style/MonaSemiBold20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:paddingHorizontal="16dp"
                 android:gravity="center"
-                android:text="@string/by_ingedients"
+                android:text="@string/by_category"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tl_product"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
@@ -45,18 +46,20 @@
             app:tabIndicatorColor="@color/Primary_50"
             app:tabIndicatorFullWidth="true"
             app:tabSelectedTextColor="@color/Primary_50"
-            app:tabTextAppearance="@style/MonaSemiBold14"
+            app:tabTextAppearance="@style/MonaSemiBold12"
             app:tabTextColor="@color/light_grey" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+            android:id="@+id/vp_product"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

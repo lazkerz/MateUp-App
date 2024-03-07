@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/MonaMedium14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mona_sans_medium"
+        android:text="Name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/authNameTextView"
+        style="@style/MonaMedium14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_input_field"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:paddingVertical="16dp"
+        android:paddingStart="14dp"
+        android:layout_marginTop="6dp"
+        android:paddingEnd="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"/>
+
+    <TextView
+        android:id="@+id/tv_label"
+        style="@style/MonaMedium14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/mona_sans_medium"
+        android:text="Username"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authNameTextView" />
+
+    <TextView
+        android:id="@+id/authUsernameTextView"
+        style="@style/MonaMedium14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_input_field"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:paddingVertical="16dp"
+        android:paddingStart="14dp"
+        android:layout_marginTop="6dp"
+        android:paddingEnd="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_label"/>
+
+    <TextView
+        android:id="@+id/tv_password"
+        style="@style/MonaMedium14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/mona_sans_medium"
+        android:text="Password"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authUsernameTextView" />
+
+    <TextView
+        android:id="@+id/authPasswordTextView"
+        style="@style/MonaMedium14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_input_field"
+        android:text="Password"
+        android:textColor="@color/black"
+        android:paddingVertical="16dp"
+        android:paddingStart="14dp"
+        android:layout_marginTop="6dp"
+        android:paddingEnd="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_password"/>
+
+    <TextView
+        android:id="@+id/tv_skinType"
+        style="@style/MonaMedium14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/mona_sans_medium"
+        android:text="Skin Type"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authPasswordTextView" />
+
+    <Spinner
+        android:id="@+id/spActivity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        style="@style/MonaRegular12"
+        android:popupBackground="@color/Primary10"
+        android:background="@drawable/stroke_input_field"
+        android:entries="@array/collection_activity"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_skinType"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

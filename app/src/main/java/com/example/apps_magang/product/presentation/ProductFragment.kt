@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apps_magang.R
 import com.example.apps_magang.ingredients.adapter.SectionPagerAdapter
+import com.example.apps_magang.product.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -30,11 +31,11 @@ class ProductFragment : Fragment() {
 
     private fun setViewPager(view: View) {
         val viewPagerAdapter =
-            SectionPagerAdapter(childFragmentManager, lifecycle)
-        viewPager = view.findViewById(R.id.view_pager)
+            ViewPagerAdapter(childFragmentManager, lifecycle)
+        viewPager = view.findViewById(R.id.vp_product)
         viewPager.adapter = viewPagerAdapter
-        viewPager.isUserInputEnabled = false
-        tabLayout = view.findViewById(R.id.tab_layout)
+        viewPager.isUserInputEnabled = true
+        tabLayout = view.findViewById(R.id.tl_product)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLE[position])
@@ -43,7 +44,7 @@ class ProductFragment : Fragment() {
 
     companion object {
         private val TAB_TITLE = intArrayOf(
-            R.string.lipstcik,
+            R.string.lipstick,
             R.string.base,
             R.string.eyeshadow,
             R.string.blush,

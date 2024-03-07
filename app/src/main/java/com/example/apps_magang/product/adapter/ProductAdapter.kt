@@ -61,6 +61,7 @@ class ProductAdapter (
     }
 
     fun addData(product: Product) {
+        list.clear()
         list.add(product)
         notifyDataSetChanged()
     }
