@@ -15,13 +15,15 @@ import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
+import com.example.apps_magang.ingredients.adapter.IngredientsAdapter
+import com.example.apps_magang.ingredients.presentation.presenter.ProductTagPresenter
 import com.example.apps_magang.product.adapter.ProductAdapter
 import com.example.apps_magang.product.presenter.ProductTypePresenter
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServiceProductType
 import io.realm.Realm
 
-class LipstickFragment : Fragment(), ProductView {
+class BaseFragment : Fragment(), ProductView {
 
     private lateinit var presenter: ProductTypePresenter
     private lateinit var adapter: ProductAdapter
@@ -40,9 +42,9 @@ class LipstickFragment : Fragment(), ProductView {
 
         apiServiceProduct?.let {
             presenter = ProductTypePresenter(it, this)
-            presenter.getProductType("lipstick")
+            presenter.getProductType("foundation")
             presenter.retrieveProductTypeFromRealm()
-        } ?: Log.e("LipstickFragment", "Failed to initialize ApiServiceProduct")
+        } ?: Log.e("BaseFragment", "Failed to initialize ApiServiceProduct")
     }
 
     override fun onCreateView(
@@ -50,9 +52,9 @@ class LipstickFragment : Fragment(), ProductView {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_lipstick, container, false)
+        val view = inflater.inflate(R.layout.fragment_base, container, false)
 
-        var recyclerView = view.findViewById<RecyclerView>(R.id.rv_lipstick)
+        var recyclerView = view.findViewById<RecyclerView>(R.id.rv_base)
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(SpacesItemDecoration(3))
 
