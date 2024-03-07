@@ -10,7 +10,7 @@ import io.realm.RealmList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Collections
+
 
 class PersonalizedPresenter (
     private val apiPersonalized : ApiServicePersonalized,
@@ -18,11 +18,10 @@ class PersonalizedPresenter (
 ){
     fun getProductPersonalized(
         tags: String,
-        productCategory: String,
         productType: String,
     ) {
         try {
-            val call = apiPersonalized.getPersonalized(tags, productCategory, productType)
+            val call = apiPersonalized.getPersonalized(tags, productType)
 
             call.enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
@@ -89,6 +88,5 @@ class PersonalizedPresenter (
 
         realm.close()
     }
-
 
 }

@@ -1,33 +1,50 @@
 package com.example.apps_magang.ingredients.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.apps_magang.R
+import com.example.apps_magang.core.domain.Product
+import com.example.apps_magang.core.utils.RealmManager
+import com.example.apps_magang.core.utils.ResultState
+import com.example.apps_magang.core.utils.SpacesItemDecoration
+import com.example.apps_magang.core.view.ProductView
+import com.example.apps_magang.ingredients.adapter.IngredientsAdapter
+import com.example.apps_magang.ingredients.presentation.presenter.ProductTagPresenter
+import com.example.apps_magang.product.presenter.ProductTypePresenter
+import com.example.mateup.data.remote.ApiConfig
+import com.example.mateup.data.remote.ApiServiceProductTags
+import io.realm.Realm
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NaturalFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NaturalFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class NaturalFragment : Fragment(), ProductView {
 
+    private lateinit var presenter: ProductTagPresenter
+    private lateinit var adapter: IngredientsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        Realm.init(requireContext())
+        RealmManager.initRealm()
+
+        adapter = IngredientsAdapter(requireContext())
+
+        val apiServiceProduct =
+            ApiConfig.getApiService(requireContext(), "product") as? ApiServiceProductTags
+        Log.d("ApiServiceProduct", "ApiServiceProduct is not null: $apiServiceProduct")
+
+        apiServiceProduct?.let {
+            presenter = ProductTagPresenter(it, this)
+            presenter.getProductIngredient("Natural")
+            presenter.retrieveProductTagFromRealm()
+        } ?: Log.e("CanadianFragment", "Failed to initialize ApiServiceProduct")
+
     }
 
     override fun onCreateView(
@@ -35,26 +52,37 @@ class NaturalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_natural, container, false)
+        val view = inflater.inflate(R.layout.fragment_natural, container, false)
+
+        var recyclerView = view.findViewById<RecyclerView>(R.id.rv_natural)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.addItemDecoration(SpacesItemDecoration(3))
+
+        recyclerView.adapter = adapter
+
+        return view
+    }
+
+    override fun displayProduct(result: ResultState<List<Product>>) {
+        when (result) {
+            is ResultState.Success -> {
+                // Handle data berhasil diterima
+                val productData = result.data
+                adapter.updateData(productData)
+            }
+            is ResultState.Error -> {
+                // Handle jika terjadi error
+                val errorMessage = result.error
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+            is ResultState.Loading -> {
+                // Handle loading state
+                Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NaturalFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NaturalFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
     }
 }
