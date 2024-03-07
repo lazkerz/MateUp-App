@@ -123,16 +123,16 @@
         <item name="android:fontFamily">@font/mona_sans_bold</item>
     </style>
 
-<!--    <style name="bottomNavbar">-->
-<!--        <item name="android:textSize">12sp</item>-->
-<!--        <item name="fontFamily">@font/mona_sans_medium</item>-->
-<!--    </style>-->
+    <!--    <style name="bottomNavbar">-->
+    <!--        <item name="android:textSize">12sp</item>-->
+    <!--        <item name="fontFamily">@font/mona_sans_medium</item>-->
+    <!--    </style>-->
 
-<!--    <style name="TabStyle" parent="TextAppearance.Design.Tab">-->
-<!--        <item name="android:fontFamily">@font/mona_sans_semibold</item>-->
-<!--        <item name="android:textSize">14sp</item>-->
-<!--        <item name="textAllCaps">false</item>-->
-<!--    </style>-->
+    <!--    <style name="TabStyle" parent="TextAppearance.Design.Tab">-->
+    <!--        <item name="android:fontFamily">@font/mona_sans_semibold</item>-->
+    <!--        <item name="android:textSize">14sp</item>-->
+    <!--        <item name="textAllCaps">false</item>-->
+    <!--    </style>-->
 
     <style name="circleImg">
         <item name="cornerSize">50%</item>
@@ -154,4 +154,9 @@
     </style>
 
     <style name="Theme.Apps_Magang" parent="Base.Theme.Apps_Magang" />
+    <!-- Base application theme. -->
+    <style name="Base.Base.Theme.Apps_Magang" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 </resources>
