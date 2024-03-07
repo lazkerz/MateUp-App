@@ -64,28 +64,28 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             if (data != null){
                 when (data.skinType) {
                     "Sensitive" -> {
-                        presenter.getProductPersonalized("alcohol free", "liquid", "foundation")
-                        presenter.getProductPersonalized("alcohol free",  "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("alcohol free",  "lipstick", "lipstick")
-                        presenter.getProductPersonalized("alcohol free",  "powder", "blush")
+                        presenter.getProductPersonalized("Canadian",  "foundation")
+                        presenter.getProductPersonalized("Canadian",   "eyeshadow")
+                        presenter.getProductPersonalized("Gluten free",   "lipstick")
+                        presenter.getProductPersonalized("Canadian",   "blush")
                     }
                     "Normal" -> {
-                        presenter.getProductPersonalized("Normal",  "liquid", "foundation")
-                        presenter.getProductPersonalized("Normal",  "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("Normal",  "lipstick", "lipstick")
-                        presenter.getProductPersonalized("Normal",  "powder", "blush")
+                        presenter.getProductPersonalized("Natural",   "foundation")
+                        presenter.getProductPersonalized("Natural",  "eyeshadow")
+                        presenter.getProductPersonalized("Natural",   "lipstick")
+                        presenter.getProductPersonalized("Natural",   "blush")
                     }
                     "Oily" -> {
-                        presenter.getProductPersonalized("Oil free",  "liquid", "foundation")
-                        presenter.getProductPersonalized("Oil free",  "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("Oil free", "lipstick", "lipstick")
-                        presenter.getProductPersonalized("Oil free",  "powder", "blush")
+                        presenter.getProductPersonalized("Oil free",   "foundation")
+                        presenter.getProductPersonalized("Vegan",   "eyeshadow")
+                        presenter.getProductPersonalized("Natural",  "lipstick")
+                        presenter.getProductPersonalized("Organic",   "blush")
                     }
                     "Dry" -> {
-                        presenter.getProductPersonalized("certclean", "liquid", "foundation")
-                        presenter.getProductPersonalized("certcleam",  "pallete", "eyeshadow")
-                        presenter.getProductPersonalized("certcleam",  "lipstick", "lipstick")
-                        presenter.getProductPersonalized("certcleam", "powder", "blush")
+                        presenter.getProductPersonalized("Cruelty Free",  "foundation")
+                        presenter.getProductPersonalized("EWG Verified",   "eyeshadow")
+                        presenter.getProductPersonalized("Certclean",   "lipstick")
+                        presenter.getProductPersonalized("Purpicks",  "blush")
                     }
                     else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
                 }
@@ -165,31 +165,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
-                val errorMessage = result.error
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-            }
-            is ResultState.Loading -> {
-                // Handle loading state
-                Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-    override fun displayProductFromRealm(result: ResultState<List<Product>>) {
-        when (result) {
-            is ResultState.Success -> {
-                // Tampilkan data dari Realm
-                val productRealm = result.data
-                for (products in productRealm) {
-                    when (products.productType) {
-                        "eyeshadow" -> eyeshadowAdapter.addData(products)
-                        "foundation" -> foundationAdapter.addData(products)
-                        "lipstick" -> lipstickAdapter.addData(products)
-                        "blush" -> blushAdapter.addData(products)
-                    }
-                }
-            }
-            is ResultState.Error -> {
-                // Handle jika terjadi error saat mengambil data dari Realm
                 val errorMessage = result.error
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }
