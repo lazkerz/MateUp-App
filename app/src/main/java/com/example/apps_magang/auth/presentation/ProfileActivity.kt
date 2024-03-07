@@ -3,12 +3,14 @@ package com.example.apps_magang.auth.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
@@ -38,6 +40,7 @@ class ProfileActivity : AppCompatActivity(), user_view {
         val SkinType = findViewById<Spinner>(R.id.spActivity)
         val buttonSubmit = findViewById<FrameLayout>(R.id.btn_submit)
         val back = findViewById<ImageView>(R.id.ic_back)
+        val out = findViewById<Button>(R.id.btn_signOut)
 
         val userModel = presenter.getUser()
 
@@ -90,11 +93,13 @@ class ProfileActivity : AppCompatActivity(), user_view {
             }
         }
 
-
         back.setOnClickListener {
             onBackPressed()
         }
-
+        out.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getIndexOfSkinType(skinType: String): Int {

@@ -99,4 +99,18 @@
             android:visibility="gone" />
     </FrameLayout>
 
+    <Button
+        android:id="@+id/btn_signOut"
+        style="@style/MonaSemiBold16"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:text="Sign Out"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_submit"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
