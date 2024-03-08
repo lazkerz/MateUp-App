@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.apps_magang.product.presentation.BaseFragment
 import com.example.apps_magang.product.presentation.BlushFragment
 import com.example.apps_magang.product.presentation.EyeshadowFragment
-import com.example.apps_magang.product.presentation.BaseFragment
 import com.example.apps_magang.product.presentation.LipstickFragment
 
 class ViewPagerAdapter (

@@ -41,7 +41,7 @@ class IngredientsAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvCategory.text = item?.category ?: ""
+        holder.tvCategory.text = item?.productType ?: ""
         holder.tvProductName.text = item?.name ?: ""
         holder.tvProductDesc.text = item?.description ?: ""
         holder.tvBrand.text = item?.brand ?: ""
