@@ -46,18 +46,36 @@ class SignUpActivity : AppCompatActivity(), user_view {
             val skinType = SkinType.selectedItem.toString()
 
             val userModel = UserModel()
-            if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Harap isi semua kolom", Toast.LENGTH_SHORT).show()
-            } else if (!userModel.isPasswordValid(password)) {
-                Toast.makeText(this, "Password minimal 6 karakter dengan setidaknya satu huruf dan angka", Toast.LENGTH_SHORT).show()
-            } else {
-                presenter.addUser(name, username, password, skinType) { isSuccess ->
-                    if (isSuccess) {
-                        Toast.makeText(this, "Berhasil mendaftar. Silakan login.", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, SignInActivity::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(this, "Gagal mendaftar. Silakan coba lagi.", Toast.LENGTH_SHORT).show()
+
+            when {
+                name.isEmpty() -> {
+                    // Tampilkan pesan jika nama kosong
+                    Toast.makeText(this, "Nama harus diisi", Toast.LENGTH_SHORT).show()
+                }
+                username.isEmpty() -> {
+                    // Tampilkan pesan jika username kosong
+                    Toast.makeText(this, "Username harus diisi", Toast.LENGTH_SHORT).show()
+                }
+                password.isEmpty() -> {
+                    // Tampilkan pesan jika password kosong
+                    Toast.makeText(this, "Password harus diisi", Toast.LENGTH_SHORT).show()
+                }
+                !userModel.isPasswordValid(password) -> {
+                    // Tampilkan pesan jika password tidak memenuhi kriteria
+                    Toast.makeText(this, "Password minimal 6 karakter dengan setidaknya satu huruf dan angka", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    // Panggil fungsi addUser jika semua kondisi terpenuhi
+                    presenter.addUser(name, username, password, skinType) { isSuccess ->
+                        if (isSuccess) {
+                            // Tampilkan pesan jika pendaftaran berhasil
+                            Toast.makeText(this, "Berhasil mendaftar. Silakan login.", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, SignInActivity::class.java))
+                            finish()
+                        } else {
+                            // Tampilkan pesan jika pendaftaran gagal
+                            Toast.makeText(this, "Gagal mendaftar. Silakan coba lagi.", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

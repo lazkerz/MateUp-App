@@ -55,7 +55,8 @@ class EyeshadowAdapter(
         val item = list[position]
 
         holder.tvProduct.text = item.name ?: ""
-        holder.tvBrand.text = item.brand ?: ""
+        holder.tvBrand.text = item.brand?.toUpperCase() ?: ""
+
 
         Glide.with(context)
             .load(item.imageLink)

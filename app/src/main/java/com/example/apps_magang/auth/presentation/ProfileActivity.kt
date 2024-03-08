@@ -15,6 +15,7 @@ import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
+import com.example.apps_magang.core.utils.LoginManager
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import io.realm.Realm
@@ -98,8 +99,15 @@ class ProfileActivity : AppCompatActivity(), user_view {
         }
         out.setOnClickListener {
             presenter.logout()
+            checkLoginStatus()
             navigateToLogin()
         }
+    }
+
+    private fun checkLoginStatus() {
+        val isLoggedIn = LoginManager.isLoggedIn()
+        Log.d("LoginStatus", "Is user logged in after logout: $isLoggedIn")
+        Toast.makeText(this, "Is user logged in after logout: $isLoggedIn", Toast.LENGTH_SHORT).show()
     }
 
     private fun getIndexOfSkinType(skinType: String): Int {

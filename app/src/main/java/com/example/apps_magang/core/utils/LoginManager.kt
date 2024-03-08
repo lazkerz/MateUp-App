@@ -31,11 +31,17 @@ object LoginManager {
     fun saveLogin(isLoggedIn: Boolean) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
-            val loginStatus = realm.createObject(LoginStatus::class.java)
-            loginStatus.isLoggedIn = isLoggedIn
+            val loginStatus = realm.where(LoginStatus::class.java).findFirst()
+            if (loginStatus == null) {
+                val newLoginStatus = realm.createObject(LoginStatus::class.java)
+                newLoginStatus.isLoggedIn = isLoggedIn
+            } else {
+                loginStatus.isLoggedIn = isLoggedIn
+            }
         }
         realm.close()
     }
+
 
     fun isLoggedIn(): Boolean {
         val realm = Realm.getDefaultInstance()
