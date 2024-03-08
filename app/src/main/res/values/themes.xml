@@ -10,7 +10,7 @@
 
     <style name="MonaLight12">
         <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">@font/mona_sans_light</item>
+        <item name="android:fontFamily"></item>
     </style>
 
     <style name="MonaRegular12">

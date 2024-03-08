@@ -132,15 +132,15 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 }
                 "Oily" -> {
                     presenter.getProductPersonalized("Oil free",   "foundation")
-                    presenter.getProductPersonalized("Vegan",   "eyeshadow")
+                    presenter.getProductPersonalized("Natural",   "eyeshadow")
                     presenter.getProductPersonalized("Natural",  "lipstick")
-                    presenter.getProductPersonalized("Organic",   "blush")
+                    presenter.getProductPersonalized("Natural",   "blush")
                 }
                 "Dry" -> {
-                    presenter.getProductPersonalized("Cruelty Free",  "foundation")
-                    presenter.getProductPersonalized("EWG Verified",   "eyeshadow")
-                    presenter.getProductPersonalized("Certclean",   "lipstick")
-                    presenter.getProductPersonalized("Purpicks",  "blush")
+                    presenter.getProductPersonalized("Canadian",  "foundation")
+                    presenter.getProductPersonalized("Gluten Free",   "eyeshadow")
+                    presenter.getProductPersonalized("Canadian",   "lipstick")
+                    presenter.getProductPersonalized("Gluten Free",  "blush")
                 }
                 else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
             }
