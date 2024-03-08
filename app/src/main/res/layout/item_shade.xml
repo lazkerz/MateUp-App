@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="110dp"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true">
@@ -25,8 +25,8 @@
 
             <View
                 android:id="@+id/imgShade"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:contentDescription="@string/name_product"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"
@@ -40,7 +40,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            style="@style/MonaRegular14"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_semi_bold"
             android:text="Hex Code"
             android:textColor="@color/black"
             android:gravity="center_horizontal"

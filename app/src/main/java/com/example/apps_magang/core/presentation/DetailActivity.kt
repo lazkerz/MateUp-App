@@ -46,6 +46,8 @@ class DetailActivity : AppCompatActivity(), ProductView {
         adapter = ShadeAdapter(this)
         initRecyclerView(adapter, rvShade)
 
+        val btnBack = findViewById<ImageView>(R.id.ic_back)
+
         presenter = DetailPresenter()
         val uniqueId = intent.getIntExtra("id", 0)
         val dataItem = presenter.getDataByIdFromRealm(uniqueId)
@@ -85,6 +87,10 @@ class DetailActivity : AppCompatActivity(), ProductView {
             .placeholder(R.drawable.image_loading_placeholder)
             .error(R.drawable.image_load_error)
             .into(imgProduct)
+
+        btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun openLink(url: String) {

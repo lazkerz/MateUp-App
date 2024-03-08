@@ -35,7 +35,8 @@
             android:layout_marginTop="10dp"
             android:text="@string/by_category"
             android:textColor="@color/Primary_50"
-            style="@style/MonaSemiBold12"
+            android:textSize="12dp"
+            android:fontFamily="@font/lora_semi_bold"
             app:layout_constraintBottom_toTopOf="@id/tvProductName"
             app:layout_constraintStart_toEndOf="@id/ivProduct"
             app:layout_constraintTop_toTopOf="@id/ivProduct" />
@@ -48,13 +49,15 @@
             android:maxLength="16"
             android:text="@string/name_product"
             android:textColor="@color/black"
-            style="@style/MonaSemiBold14"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_semi_bold"
             app:layout_constraintStart_toStartOf="@id/tvCategory"
             app:layout_constraintTop_toBottomOf="@id/tvCategory" />
 
         <TextView
             android:id="@+id/tvProductDesc"
-            style="@style/MonaRegular12"
+            android:textSize="12dp"
+            android:fontFamily="@font/lora_regular"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -70,7 +73,8 @@
 
         <TextView
             android:id="@+id/tvSign"
-            style="@style/MonaSemiBold12"
+            android:textSize="12dp"
+            android:fontFamily="@font/lora_semi_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -81,7 +85,8 @@
 
         <TextView
             android:id="@+id/tvPrice"
-            style="@style/MonaSemiBold12"
+            android:textSize="12dp"
+            android:fontFamily="@font/lora_semi_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

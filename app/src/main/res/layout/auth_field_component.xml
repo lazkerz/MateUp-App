@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/MonaMedium14"
+        android:textSize="14dp"
+        android:fontFamily="@font/lora_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/mona_sans_medium"
         android:text="Name"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/authNameEditText"
-            style="@style/MonaMedium14"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_input_field"
@@ -45,11 +46,11 @@
 
     <TextView
         android:id="@+id/tv_label"
-        style="@style/MonaMedium14"
+        android:textSize="14dp"
+        android:fontFamily="@font/lora_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/mona_sans_medium"
         android:text="Username"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/authUserNameEditText"
-            style="@style/MonaMedium14"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_input_field"
@@ -83,11 +85,11 @@
 
     <TextView
         android:id="@+id/tv_password"
-        style="@style/MonaMedium14"
+        android:textSize="14dp"
+        android:fontFamily="@font/lora_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/mona_sans_medium"
         android:text="Password"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +108,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/authPasswordEditText"
-            style="@style/MonaMedium14"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_input_field"
@@ -121,11 +124,11 @@
 
     <TextView
         android:id="@+id/tv_skinType"
-        style="@style/MonaMedium14"
+        android:textSize="14dp"
+        android:fontFamily="@font/lora_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/mona_sans_medium"
         android:text="Skin Type"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +139,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
-        style="@style/MonaRegular12"
+        android:textSize="12dp"
+        android:fontFamily="@font/lora_regular"
         android:popupBackground="@color/Primary10"
         android:background="@drawable/stroke_input_field"
         android:entries="@array/collection_activity"

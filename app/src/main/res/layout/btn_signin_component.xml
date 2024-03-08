@@ -15,7 +15,8 @@
 
         <TextView
             android:id="@+id/tv_login"
-            style="@style/MonaSemiBold16"
+            android:textSize="16dp"
+            android:fontFamily="@font/lora_semi_bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -34,7 +35,8 @@
 
     <Button
         android:id="@+id/btn_regis"
-        style="@style/MonaSemiBold16"
+        android:textSize="16dp"
+        android:fontFamily="@font/lora_semi_bold"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:layout_marginTop="8dp"

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/primary"/>
+    <item android:drawable="@color/white"/>
 
     <item
-        android:width="120dp"
+        android:width="180dp"
         android:height="50dp"
-        android:right="10dp"
-        android:left="10dp"
-        android:top="10dp"
-        android:bottom="10dp"
+        android:right="3dp"
+        android:left="3dp"
+        android:top="3dp"
+        android:bottom="3dp"
         android:gravity="center">
 
-        <bitmap android:src="@drawable/launch"/>
+        <bitmap android:src="@drawable/splashscreen"/>
     </item>
 
 </layer-list>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -122,11 +123,11 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
         rvEyeshadow = view.findViewById(R.id.rv_eyeshadow)
         rvLipstick = view.findViewById(R.id.rv_lipstick)
         rvFoundation = view.findViewById(R.id.rv_foundation)
         rvBlush = view.findViewById(R.id.rv_blush)
+        val skinType = view.findViewById<TextView>(R.id.tv_skin_type)
 
         val profile = view.findViewById<ImageView>(R.id.profile)
         profile.setOnClickListener {
@@ -138,6 +139,13 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         initRecyclerView(lipstickAdapter, rvLipstick)
         initRecyclerView(foundationAdapter, rvFoundation)
         initRecyclerView(blushAdapter, rvBlush)
+
+        val userModel = presenterUser.getUser()
+        Log.d("Profile", "Data User: ${userModel?.skinType}")
+
+        if (userModel != null) {
+            skinType.text = userModel.skinType
+        }
 
         getContent()
 
@@ -155,6 +163,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         // Panggil fungsi presenter untuk mendapatkan data dari API
         // Fungsi ini hanya dipanggil saat pembukaan pertama kali
         presenterUser = UserPresenter(this)
+
         val data = presenterUser.getUser()
         if (data != null){
             when (data.skinType) {

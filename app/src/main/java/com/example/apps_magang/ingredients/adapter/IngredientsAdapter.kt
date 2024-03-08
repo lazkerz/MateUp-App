@@ -10,19 +10,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
+import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
 
 class IngredientsAdapter (
-    private val context: Context
+    private val context: Context,
+    private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(data: Product)
+    }
 
     private val list: MutableList<Product> = mutableListOf()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
         var tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
         val tvProductDesc: TextView = itemView.findViewById(R.id.tvProductDesc)
         val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
         var ivProduct: ImageView = itemView.findViewById(R.id.ivProduct)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(list[position])
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

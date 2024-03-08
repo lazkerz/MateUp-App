@@ -35,7 +35,8 @@
 
             <TextView
                 android:id="@+id/tv_brand_detail"
-                style="@style/MonaSemiBold16"
+                android:textSize="16dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_brand"
@@ -70,7 +71,8 @@
 
             <TextView
                 android:id="@+id/tv_category"
-                style="@style/MonaSemiBold14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -81,7 +83,8 @@
 
             <TextView
                 android:id="@+id/tv_name_product"
-                style="@style/MonaRegular16"
+                android:textSize="16dp"
+                android:fontFamily="@font/lora_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -93,7 +96,8 @@
 
             <TextView
                 android:id="@+id/tv_shade"
-                style="@style/MonaSemiBold14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -111,7 +115,8 @@
 
             <TextView
                 android:id="@+id/tv_price"
-                style="@style/MonaSemiBold14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -127,7 +132,8 @@
                 android:layout_marginTop="5dp"
                 android:text="$"
                 android:textColor="@color/black"
-                style="@style/MonaRegular14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_regular"
                 android:maxLines="5"
                 app:layout_constraintTop_toBottomOf="@id/tv_price"/>
 
@@ -139,14 +145,16 @@
                 android:layout_marginStart="3dp"
                 android:text="Price"
                 android:textColor="@color/black"
-                style="@style/MonaRegular14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_regular"
                 android:maxLines="5"
                 app:layout_constraintStart_toEndOf="@id/tv_dollar"
                 app:layout_constraintTop_toBottomOf="@id/tv_price"/>
 
             <TextView
                 android:id="@+id/tv_desc_product"
-                style="@style/MonaSemiBold14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -162,13 +170,15 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/desc_product"
                 android:textColor="@color/black"
-                style="@style/MonaRegular14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_regular"
                 android:maxLines="5"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc_product"/>
 
             <TextView
                 android:id="@+id/tv_link"
-                style="@style/MonaSemiBold14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -184,7 +194,8 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/desc_product"
                 android:textColor="@color/black"
-                style="@style/MonaRegular14"
+                android:textSize="14dp"
+                android:fontFamily="@font/lora_regular"
                 android:maxLines="5"
                 app:layout_constraintTop_toBottomOf="@id/tv_link"/>
 

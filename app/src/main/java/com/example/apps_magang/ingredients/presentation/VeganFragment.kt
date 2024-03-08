@@ -1,5 +1,6 @@
 package com.example.apps_magang.ingredients.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
+import com.example.apps_magang.core.presentation.DetailActivity
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
@@ -34,7 +36,16 @@ class VeganFragment : Fragment(), ProductView {
         Realm.init(requireContext())
         RealmManager.initRealm()
 
-        adapter = IngredientsAdapter(requireContext())
+        adapter = IngredientsAdapter(requireContext(), object : IngredientsAdapter.OnItemClickListener{
+            override fun onItemClick(data: Product) {
+                val productId = data.id ?: ""
+                Log.d("MainActivity", "Product ID clicked: $productId")
+
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("id", productId)
+                startActivity(intent)
+            }
+        })
 
         val apiServiceProduct =
             ApiConfig.getApiService(requireContext(), "product") as? ApiServiceProductTags

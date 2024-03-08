@@ -23,7 +23,8 @@
 
             <TextView
                 android:id="@+id/tv_sign_in"
-                style="@style/MonaSemiBold16"
+                android:textSize="16dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -52,6 +53,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
