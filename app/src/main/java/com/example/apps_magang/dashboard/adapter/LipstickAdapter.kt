@@ -15,15 +15,29 @@ import com.example.apps_magang.core.utils.setImageFromUrl
 import io.realm.RealmList
 
 class LipstickAdapter (
-    private val context: Context
+    private val context: Context,
+    private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<LipstickAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(data: Product)
+    }
 
     private val list: MutableList<Product> = mutableListOf()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
         var tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
         var imgRecommendation: ImageView = itemView.findViewById(R.id.imgRecommendation)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(list[position])
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

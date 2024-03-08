@@ -70,7 +70,7 @@ class PersonalizedPresenter (
 
     fun getDataByIdFromRealm(uniqueId: Int): Product? {
         val realm = Realm.getDefaultInstance()
-        return realm.where(Product::class.java).equalTo("product.id", uniqueId).findFirst()
+        return realm.where(Product::class.java).equalTo("id", uniqueId).findFirst()
     }
 
     fun getProductFromRealm() {

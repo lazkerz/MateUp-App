@@ -19,6 +19,7 @@ import com.example.apps_magang.auth.presentation.ProfileActivity
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
+import com.example.apps_magang.core.presentation.DetailActivity
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
@@ -53,10 +54,49 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         RealmManager.initRealm()
 
         // Inisialisasi adapter dan set ke RecyclerView
-        eyeshadowAdapter = EyeshadowAdapter(requireContext())
-        lipstickAdapter = LipstickAdapter(requireContext())
-        foundationAdapter = FoundationAdapter(requireContext())
-        blushAdapter = BlushAdapter(requireContext())
+        eyeshadowAdapter = EyeshadowAdapter(requireContext(), object : EyeshadowAdapter.OnItemClickListener {
+            override fun onItemClick(data: Product) {
+                val productId = data.id ?: ""
+                Log.d("MainActivity", "Product ID clicked: $productId")
+
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("id", productId)
+                startActivity(intent)
+            }
+        })
+
+        foundationAdapter = FoundationAdapter (requireContext(), object : FoundationAdapter.OnItemClickListener {
+            override fun onItemClick(data: Product) {
+                val productId = data.id ?: ""
+                Log.d("MainActivity", "Product ID clicked: $productId")
+
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("id", productId)
+                startActivity(intent)
+            }
+        })
+
+        lipstickAdapter = LipstickAdapter (requireContext(), object : LipstickAdapter.OnItemClickListener {
+            override fun onItemClick(data: Product) {
+                val productId = data.id ?: ""
+                Log.d("MainActivity", "Product ID clicked: $productId")
+
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("id", productId)
+                startActivity(intent)
+            }
+        })
+
+        blushAdapter = BlushAdapter (requireContext(), object : BlushAdapter.OnItemClickListener {
+            override fun onItemClick(data: Product) {
+                val productId = data.id ?: ""
+                Log.d("MainActivity", "Product ID clicked: $productId")
+
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("id", productId)
+                startActivity(intent)
+            }
+        })
 
 
         val apiServicePersonalized =

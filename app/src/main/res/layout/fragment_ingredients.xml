@@ -61,5 +61,4 @@
             android:layout_height="match_parent" />
 
     </ScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
