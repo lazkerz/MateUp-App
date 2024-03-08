@@ -64,6 +64,8 @@
             android:fontFamily="@font/lora_regular"
             android:text="@string/eyeshadow_product"
             android:textAlignment="center"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

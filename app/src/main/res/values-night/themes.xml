@@ -150,7 +150,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
     <!-- Base application theme. -->
     <style name="Base.Base.Theme.Apps_Magang" parent="Theme.Material3.DayNight.NoActionBar">
