@@ -3,7 +3,7 @@
     <string name="signIn_greeting">Hi! Welcome back, you’ve been missed</string>
     <string name="signUp_greeting">Fill your information and your skin type</string>
     <string name="dashboard_greeting">Welcome Beauty</string>
-    <string name="dashboard_info">Let’s choose your best product for your skin type\nRemember your skin type is</string>
+    <string name="dashboard_info">Let’s choose your best product for your skin type\nRemember your skin type beauty</string>
     <string name="recommendation">Recommendation For You</string>
     <string name="eyeshadow_product">Eyeshadow Product</string>
     <string name="foundation_product">Foundation Product</string>

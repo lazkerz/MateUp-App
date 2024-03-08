@@ -54,12 +54,25 @@
         android:fontFamily="@font/lora_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="15dp"
         android:text="@string/dashboard_info"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_greeting_dashboard" />
+
+    <TextView
+        android:id="@+id/tv_skin_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lora_semi_bold"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:text="skin type"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_info_dashboard"
+        app:layout_constraintEnd_toEndOf="@+id/tv_info_dashboard"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
