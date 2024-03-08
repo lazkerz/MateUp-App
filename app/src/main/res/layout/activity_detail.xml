@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/tv_brand_detail"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,15 +51,16 @@
     <ScrollView
         android:id="@+id/sv_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:layout_editor_absoluteX="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_img_product"
@@ -84,7 +85,7 @@
             <TextView
                 android:id="@+id/tv_name_product"
                 android:textSize="16dp"
-                android:fontFamily="@font/lora_regular"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -95,35 +96,16 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_category" />
 
             <TextView
-                android:id="@+id/tv_shade"
-                android:textSize="14dp"
-                android:fontFamily="@font/lora_semi_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/shade"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/tv_name_product"
-                app:layout_constraintTop_toBottomOf="@id/tv_name_product" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_shade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_shade"
-                app:layout_constraintTop_toBottomOf="@+id/tv_shade" />
-
-            <TextView
                 android:id="@+id/tv_price"
                 android:textSize="14dp"
                 android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Price Product"
+                android:text="Price"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_shade"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_name_product"/>
 
             <TextView
                 android:id="@+id/tv_dollar"
@@ -158,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/desc_product"
+                android:text="Description"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_dollar"/>
@@ -171,8 +153,8 @@
                 android:text="@string/desc_product"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:textAlignment="gravity"
                 android:fontFamily="@font/lora_regular"
-                android:maxLines="5"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc_product"/>
 
             <TextView
@@ -182,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Link Product"
+                android:text="Link"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc"/>
