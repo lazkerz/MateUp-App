@@ -61,7 +61,6 @@ class IngredientsAdapter (
     }
 
     fun addData(product: Product) {
-        list.clear()
         list.add(product)
         notifyDataSetChanged()
     }

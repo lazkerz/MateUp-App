@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ic_back"
+                android:id="@+id/profile"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="6dp"

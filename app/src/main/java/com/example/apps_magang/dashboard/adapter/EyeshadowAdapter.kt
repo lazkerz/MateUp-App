@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,16 +12,30 @@ import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
 
-class EyeshadowAdapter (
-    private val context: Context
+class EyeshadowAdapter(
+    private val context: Context,
+    private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<EyeshadowAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(data: Product)
+    }
 
     private val list: MutableList<Product> = mutableListOf()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvProduct: TextView = itemView.findViewById(R.id.tvProduct)
         var tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
         var imgRecommendation: ImageView = itemView.findViewById(R.id.imgRecommendation)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(list[position])
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,9 +54,8 @@ class EyeshadowAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvProduct.text = item?.name ?: ""
-        holder.tvBrand.text = item?.brand ?: ""
-
+        holder.tvProduct.text = item.name ?: ""
+        holder.tvBrand.text = item.brand ?: ""
 
         Glide.with(context)
             .load(item.imageLink)
@@ -57,9 +71,7 @@ class EyeshadowAdapter (
     }
 
     fun addData(product: Product) {
-        list.clear()
         list.add(product)
         notifyDataSetChanged()
     }
-
 }

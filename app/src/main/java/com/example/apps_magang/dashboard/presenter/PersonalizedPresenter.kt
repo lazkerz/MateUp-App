@@ -10,7 +10,7 @@ import io.realm.RealmList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Collections
+
 
 class PersonalizedPresenter (
     private val apiPersonalized : ApiServicePersonalized,
@@ -18,11 +18,10 @@ class PersonalizedPresenter (
 ){
     fun getProductPersonalized(
         tags: String,
-        productCategory: String,
         productType: String,
     ) {
         try {
-            val call = apiPersonalized.getPersonalized(tags, productCategory, productType)
+            val call = apiPersonalized.getPersonalized(tags, productType)
 
             call.enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
@@ -68,10 +67,9 @@ class PersonalizedPresenter (
             }
         )
     }
-
-    fun getDataByIdFromRealm(uniqueId: String): Product? {
+    fun getDataByIdFromRealm(uniqueId: Int): Product? {
         val realm = Realm.getDefaultInstance()
-        return realm.where(Product::class.java).equalTo("product.id", uniqueId).findFirst()
+        return realm.where(Product::class.java).equalTo("id", uniqueId).findFirst()
     }
 
     fun getProductFromRealm() {
@@ -84,11 +82,10 @@ class PersonalizedPresenter (
             }
             view.displayProduct(ResultState.Success(items))
         } else {
-            view.displayProduct(ResultState.Error("No data in Realm"))
+            view.displayProduct(ResultState.Error(""))
         }
 
         realm.close()
     }
-
 
 }

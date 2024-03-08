@@ -1,87 +1,111 @@
 package com.example.apps_magang.core.presentation
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.apps_magang.R
 import com.example.apps_magang.core.adapter.ShadeAdapter
 import com.example.apps_magang.core.domain.Product
+import com.example.apps_magang.core.domain.ProductColor
+import com.example.apps_magang.core.presenter.DetailPresenter
 import com.example.apps_magang.core.utils.RealmManager
 import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
-import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
-import com.example.mateup.data.remote.ApiConfig
-import com.example.mateup.data.remote.ApiServicePersonalized
 import io.realm.Realm
 
 class DetailActivity : AppCompatActivity(), ProductView {
 
-
-    private lateinit var shadeAdapter: ShadeAdapter
+    private lateinit var adapter: ShadeAdapter
     private lateinit var rvShade: RecyclerView
-    private lateinit var presenter: PersonalizedPresenter
+    private lateinit var presenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        Realm.init(this )
+        Realm.init(this)
         RealmManager.initRealm()
 
-        val apiServicePersonalized =
-            ApiConfig.getApiService(this , "productBy") as? ApiServicePersonalized
-        Log.d("ApiServicePersonalized", "ApiServicePersonalized is not null: $apiServicePersonalized")
+        rvShade = findViewById(R.id.rv_shade)
+        adapter = ShadeAdapter(this)
+        initRecyclerView(adapter, rvShade)
 
-        apiServicePersonalized != null{
-            presenter = PersonalizedPresenter(apiServicePersonalized, this)
-        }
+        presenter = DetailPresenter()
+        val uniqueId = intent.getIntExtra("id", 0)
+        val dataItem = presenter.getDataByIdFromRealm(uniqueId)
 
-        // Inisialisasi adapter dan set ke RecyclerView
-        shadeAdapter = ShadeAdapter(this)
+        val tvBrand = findViewById<TextView>(R.id.tv_brand_detail)
+        tvBrand.text = dataItem?.brand ?:""
 
-        val data = ApiServicePersonalized()
+        val tvCategory = findViewById<TextView>(R.id.tv_category)
+        tvCategory.text = dataItem?.productType ?:""
 
-        if (data != null){
+        val tvProduct = findViewById<TextView>(R.id.tv_name_product)
+        tvProduct.text = dataItem?.name ?: ""
 
-            val  tvNama = findViewById<TextView>(R.id.tvNama)
-            tvNama.text = dataItem.coinInfo?.name ?: ""
+        val tvPrice = findViewById<TextView>(R.id.tv_price_product)
+        tvPrice.text = dataItem?.price ?:""
 
-            val  tvFullname = findViewById<TextView>(R.id.tvFullnama)
-            tvFullname.text = dataItem.coinInfo?.fullName ?: ""
+        val tvDesc = findViewById<TextView>(R.id.tv_desc)
+        tvDesc.text = dataItem?.description ?: ""
 
-            val  tvPrice = findViewById<TextView>(R.id.tvPrice)
-            tvPrice.text = dataItem.dISPLAY?.uSD?.pRICE ?: ""
-    }
+        val tvLink = findViewById<TextView>(R.id.tv_link_product)
+        tvLink.text = dataItem?.productLink ?: ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.activity_detail, container, false)
+        var imgProduct = findViewById<ImageView>(R.id.iv_img_product)
 
-        rvShade = view.findViewById(R.id.rv_shade)
-
-        initRecyclerView(ShadeAdapter, rvShade)
-
-        return view
+        Glide.with(this)
+            .load(dataItem?.imageLink)
+            .placeholder(R.drawable.image_loading_placeholder)
+            .error(R.drawable.image_load_error)
+            .into(imgProduct)
     }
 
     private fun initRecyclerView(adapter: RecyclerView.Adapter<*>, recyclerView: RecyclerView) {
-        recyclerView.layoutManager = GridLayoutManager(this , GridLayoutManager.HORIZONTAL, false)
+        val spanCount = 5
+        recyclerView.layoutManager = GridLayoutManager(this, spanCount, GridLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(SpacesItemDecoration(6))
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
-        TODO("Not yet implemented")
+        when (result) {
+            is ResultState.Success -> {
+                // Handle data berhasil diterima
+                val productData = result.data
+                val colorList = mutableListOf<ProductColor>()
+
+                // Ambil semua warna dari setiap produk
+                for (product in productData) {
+                    val colors = product.productColors
+                    Log.d("DetailActivity", "Product ID: ${product.id}, Number of Colors: ${colors?.size}")
+                    if (colors != null && colors.isNotEmpty()) {
+                        colorList.addAll(colors)
+                    }
+                }
+
+                // Tambahkan log untuk memeriksa apakah ProductColor berhasil diambil
+                Log.d("DetailActivity", "Number of ProductColor items: ${colorList.size}")
+
+                adapter.updateData(colorList)
+            }
+            is ResultState.Error -> {
+                // Handle jika terjadi error
+                val errorMessage = result.error
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+            is ResultState.Loading -> {
+                // Handle loading state
+                Toast.makeText(this, "Loading..", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.apps_magang.core.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,13 +39,23 @@ class ShadeAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvHex.text = item?.colourName ?: ""
+        holder.tvHex.text = item.colourName ?: "Unknown"
 
-        val defaultColor: Int = Color.parseColor("#808080")/* Default color code jika hexValue null atau tidak valid */
-        // Jika item tidak null dan hexValue tidak null atau kosong, konversi hexValue ke integer
-        val color: Int = item?.hexValue?.let { Color.parseColor(it) } ?: defaultColor
-        holder.imgShade.setBackgroundColor(color)
+        val backgroundValue = item.hexValue ?: ""
+        holder.imgShade.background = ColorDrawable(Color.parseColor(backgroundValue))
     }
+
+
+    fun getColorFromHex(hexValue: String): Int {
+        return try {
+            Color.parseColor(hexValue)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            // Handle jika terjadi kesalahan dalam parsing warna
+            Color.LTGRAY // Ganti dengan warna default jika parsing gagal
+        }
+    }
+
 
     fun updateData(newList: List<ProductColor>) {
         list.clear()
@@ -52,10 +63,9 @@ class ShadeAdapter (
         notifyDataSetChanged()
     }
 
+    // Tambahkan satu data ke adapter
     fun addData(product: ProductColor) {
-        list.clear()
         list.add(product)
-        notifyDataSetChanged()
+        notifyItemInserted(list.size - 1)
     }
-
 }

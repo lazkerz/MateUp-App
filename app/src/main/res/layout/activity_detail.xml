@@ -35,10 +35,11 @@
 
             <TextView
                 android:id="@+id/tv_brand_detail"
-                style="@style/MonaSemiBold18"
+                style="@style/MonaSemiBold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_brand"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/by_category"
-                android:textColor="@color/Primary_50"
+                android:textColor="@color/light_grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_img_product" />
 
@@ -85,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/name_product"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/Primary30"
                 android:maxLines="3"
                 app:layout_constraintStart_toStartOf="@+id/tv_category"
                 app:layout_constraintTop_toBottomOf="@id/tv_category" />
@@ -101,22 +102,46 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_name_product"
                 app:layout_constraintTop_toBottomOf="@id/tv_name_product" />
 
-            <ScrollView
-                android:id="@+id/sv_shade"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_shade"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:fillViewport="true"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shade" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                style="@style/MonaSemiBold14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Price Product"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_shade">
+                app:layout_constraintTop_toBottomOf="@id/rv_shade"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_shade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="$"
+                android:textColor="@color/black"
+                style="@style/MonaRegular14"
+                android:maxLines="5"
+                app:layout_constraintTop_toBottomOf="@id/tv_price"/>
 
-            </ScrollView>
+            <TextView
+                android:id="@+id/tv_price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="3dp"
+                android:text="Price"
+                android:textColor="@color/black"
+                style="@style/MonaRegular14"
+                android:maxLines="5"
+                app:layout_constraintStart_toEndOf="@id/tv_dollar"
+                app:layout_constraintTop_toBottomOf="@id/tv_price"/>
 
             <TextView
                 android:id="@+id/tv_desc_product"
@@ -127,7 +152,7 @@
                 android:text="@string/desc_product"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sv_shade"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_dollar"/>
 
             <TextView
                 android:id="@+id/tv_desc"
@@ -141,18 +166,18 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_desc_product"/>
 
             <TextView
-                android:id="@+id/tv_ingre_product"
+                android:id="@+id/tv_link"
                 style="@style/MonaSemiBold14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/desc_product"
+                android:text="Link Product"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc"/>
 
             <TextView
-                android:id="@+id/tv_ingredients"
+                android:id="@+id/tv_link_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -160,7 +185,7 @@
                 android:textColor="@color/black"
                 style="@style/MonaRegular14"
                 android:maxLines="5"
-                app:layout_constraintTop_toBottomOf="@id/tv_ingre_product"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_link"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

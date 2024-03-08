@@ -30,7 +30,7 @@
                 android:contentDescription="@string/name_product"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/background_circlecolor"
+                android:background="#E8B49B"
                 tools:ignore="ImageContrastCheck" />
 
         </com.google.android.material.card.MaterialCardView>
