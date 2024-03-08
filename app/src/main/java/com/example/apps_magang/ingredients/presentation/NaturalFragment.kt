@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apps_magang.R
@@ -60,7 +62,25 @@ class NaturalFragment : Fragment(), ProductView {
 
         recyclerView.adapter = adapter
 
+        setLoading(adapter.itemCount == 0)
+
         return view
+    }
+
+
+    private fun setLoading(isLoading: Boolean) {
+        val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
+
+        if (isLoading) {
+            // Tampilkan tampilan loading
+            viewLoading?.visibility = View.VISIBLE
+            recyclerView?.visibility = View.GONE
+        } else {
+            // Sembunyikan tampilan loading
+            viewLoading?.visibility = View.GONE
+            recyclerView?.visibility = View.VISIBLE
+        }
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
@@ -69,6 +89,7 @@ class NaturalFragment : Fragment(), ProductView {
                 // Handle data berhasil diterima
                 val productData = result.data
                 adapter.updateData(productData)
+                setLoading(productData.isEmpty())
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
@@ -77,6 +98,7 @@ class NaturalFragment : Fragment(), ProductView {
             }
             is ResultState.Loading -> {
                 // Handle loading state
+                setLoading(true)
                 Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
             }
         }

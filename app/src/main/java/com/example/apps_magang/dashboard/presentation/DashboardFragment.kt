@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
@@ -65,38 +66,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         if (apiServicePersonalized != null) {
             presenter = PersonalizedPresenter(apiServicePersonalized, this)
             presenterUser = UserPresenter(this)
-            val data = presenterUser.getUser()
-            if (data != null){
-                when (data.skinType) {
-                    "Sensitive" -> {
-                        presenter.getProductPersonalized("Canadian",  "foundation")
-                        presenter.getProductPersonalized("Canadian",   "eyeshadow")
-                        presenter.getProductPersonalized("Gluten free",   "lipstick")
-                        presenter.getProductPersonalized("Canadian",   "blush")
-                    }
-                    "Normal" -> {
-                        presenter.getProductPersonalized("Natural",   "foundation")
-                        presenter.getProductPersonalized("Vegan",  "eyeshadow")
-                        presenter.getProductPersonalized("Natural",   "lipstick")
-                        presenter.getProductPersonalized("Natural",   "blush")
-                    }
-                    "Oily" -> {
-                        presenter.getProductPersonalized("Oil free",   "foundation")
-                        presenter.getProductPersonalized("Vegan",   "eyeshadow")
-                        presenter.getProductPersonalized("Natural",  "lipstick")
-                        presenter.getProductPersonalized("Organic",   "blush")
-                    }
-                    "Dry" -> {
-                        presenter.getProductPersonalized("Cruelty Free",  "foundation")
-                        presenter.getProductPersonalized("EWG Verified",   "eyeshadow")
-                        presenter.getProductPersonalized("Certclean",   "lipstick")
-                        presenter.getProductPersonalized("Purpicks",  "blush")
-                    }
-                    else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
-                }
-            } else{
-                Log.e("Dashboard", "user model null")
-            }
         } else {
             Log.e("Dashboard", "Failed to initialize ApiServicePersonalized")
             Toast.makeText(
@@ -105,8 +74,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 Toast.LENGTH_SHORT
             ).show()
         }
-
-        presenter.getProductFromRealm()
     }
 
     override fun onCreateView(
@@ -132,7 +99,54 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         initRecyclerView(foundationAdapter, rvFoundation)
         initRecyclerView(blushAdapter, rvBlush)
 
+        getContent()
+
+        val refresh =  view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+        refresh.setOnRefreshListener{
+            getContent()
+            if (refresh.isRefreshing) {
+                refresh.isRefreshing = false
+            }
+        }
         return view
+    }
+
+    private fun getContent() {
+        // Panggil fungsi presenter untuk mendapatkan data dari API
+        // Fungsi ini hanya dipanggil saat pembukaan pertama kali
+        presenterUser = UserPresenter(this)
+        val data = presenterUser.getUser()
+        if (data != null){
+            when (data.skinType) {
+                "Sensitive" -> {
+                    presenter.getProductPersonalized("Canadian",  "foundation")
+                    presenter.getProductPersonalized("Canadian",   "eyeshadow")
+                    presenter.getProductPersonalized("Gluten free",   "lipstick")
+                    presenter.getProductPersonalized("Canadian",   "blush")
+                }
+                "Normal" -> {
+                    presenter.getProductPersonalized("Natural",   "foundation")
+                    presenter.getProductPersonalized("Vegan",  "eyeshadow")
+                    presenter.getProductPersonalized("Natural",   "lipstick")
+                    presenter.getProductPersonalized("Natural",   "blush")
+                }
+                "Oily" -> {
+                    presenter.getProductPersonalized("Oil free",   "foundation")
+                    presenter.getProductPersonalized("Vegan",   "eyeshadow")
+                    presenter.getProductPersonalized("Natural",  "lipstick")
+                    presenter.getProductPersonalized("Organic",   "blush")
+                }
+                "Dry" -> {
+                    presenter.getProductPersonalized("Cruelty Free",  "foundation")
+                    presenter.getProductPersonalized("EWG Verified",   "eyeshadow")
+                    presenter.getProductPersonalized("Certclean",   "lipstick")
+                    presenter.getProductPersonalized("Purpicks",  "blush")
+                }
+                else -> Log.e("Presenter", "Unexpected skinType: ${data.skinType}")
+            }
+        } else {
+            presenter.getProductFromRealm()
+        }
     }
 
     private fun initRecyclerView(adapter: RecyclerView.Adapter<*>, recyclerView: RecyclerView) {

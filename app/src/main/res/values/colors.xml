@@ -9,4 +9,5 @@
     <color name="Primary30">#FFED8889</color>
     <color name="Primary10">#FFF4B1B1</color>
     <color name="gray">#FFEFEFEF</color>
+    <color name="black_50">#80000000</color>
 </resources>
