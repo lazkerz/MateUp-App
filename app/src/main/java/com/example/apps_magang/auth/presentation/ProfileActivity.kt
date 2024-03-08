@@ -97,8 +97,8 @@ class ProfileActivity : AppCompatActivity(), user_view {
             onBackPressed()
         }
         out.setOnClickListener {
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
+            presenter.logout()
+            navigateToLogin()
         }
     }
 

@@ -68,9 +68,6 @@ class SignUpActivity : AppCompatActivity(), user_view {
             startActivity(intent)
         }
 
-        back.setOnClickListener {
-          onBackPressed()
-        }
     }
 
     override fun displayUser(result: ResultState<UserModel>) {
