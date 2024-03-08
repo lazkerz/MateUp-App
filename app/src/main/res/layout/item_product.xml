@@ -69,15 +69,27 @@
             app:layout_constraintTop_toBottomOf="@id/tvProductName" />
 
         <TextView
-            android:id="@+id/tvBrand"
+            android:id="@+id/tvSign"
             style="@style/MonaSemiBold12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="@string/name_brand"
+            android:layout_marginBottom="10dp"
+            android:text="$"
             android:textColor="@color/Primary_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvProductDesc"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            style="@style/MonaSemiBold12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="3dp"
+            android:text="Price"
+            android:textColor="@color/Primary_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSign" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
