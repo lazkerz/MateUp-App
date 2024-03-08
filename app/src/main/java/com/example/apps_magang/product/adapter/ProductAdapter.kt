@@ -21,7 +21,7 @@ class ProductAdapter (
         var tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
         var tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
         val tvProductDesc: TextView = itemView.findViewById(R.id.tvProductDesc)
-        val tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
+        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
         var ivProduct: ImageView = itemView.findViewById(R.id.ivProduct)
     }
 
@@ -41,10 +41,10 @@ class ProductAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvCategory.text = item?.category ?: ""
+        holder.tvCategory.text = item?.productType ?: ""
         holder.tvProductName.text = item?.name ?: ""
         holder.tvProductDesc.text = item?.description ?: ""
-        holder.tvBrand.text = item?.brand ?: ""
+        holder.tvPrice.text = item?.price ?: ""
 
 
         Glide.with(context)

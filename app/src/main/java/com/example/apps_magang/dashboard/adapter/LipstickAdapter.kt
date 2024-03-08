@@ -57,7 +57,7 @@ class LipstickAdapter (
         val item = list[position]
 
         holder.tvProduct.text = item?.name ?: ""
-        holder.tvBrand.text = item?.name ?: ""
+        holder.tvBrand.text = item?.brand ?: ""
 
 
         Glide.with(context)

@@ -8,7 +8,6 @@
     android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true"
-    app:strokeColor="@color/Primary10"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +30,9 @@
 
             <ImageView
                 android:id="@+id/imgRecommendation"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
                 android:contentDescription="@string/name_product"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"
@@ -45,7 +45,7 @@
             android:id="@+id/tvBrand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             style="@style/MonaSemiBold12"
             android:text="Brand Name"
             android:textColor="@color/black"

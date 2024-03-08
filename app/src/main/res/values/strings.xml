@@ -22,7 +22,7 @@
     <string name="title_ingredients">Ingredients</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_product">product</string>
-    <string name="by_ingedients">Product by Tags</string>
+    <string name="by_ingedients">Product by Ingredients</string>
     <string name="by_category">Product by Category</string>
     <string name="desc_product">Desc product</string>
     <string name="name_brand">Brand Product</string>
@@ -80,4 +80,5 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+>>>>>>> d761fbac2dfe5f115ca82ee412c3850d589d9914
 </resources>

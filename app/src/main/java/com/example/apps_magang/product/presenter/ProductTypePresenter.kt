@@ -18,10 +18,10 @@ class ProductTypePresenter (
 ){
     fun getProductType(
         productType: String,
-        productCategory: String
+        category: String,
     ) {
         try {
-            val call = apiTypeProduct.getProductType(productType, productCategory)
+            val call = apiTypeProduct.getProductType(productType, category)
 
             call.enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
@@ -29,7 +29,7 @@ class ProductTypePresenter (
                         val products = response.body()
                         products?.let {
                             for (product in products) {
-                                saveProductTypeToRealm(product)
+                                (product)
                             }
                         }
                         view.displayProduct(ResultState.Success(products as List<Product>))
@@ -50,7 +50,7 @@ class ProductTypePresenter (
             view.displayProduct(ResultState.Error(e.message.toString()))
         }
     }
-    fun saveProductTypeToRealm(dataItem: Product) {
+    fun saveProductToRealm(dataItem: Product) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransactionAsync(
             { backgroundRealm ->
