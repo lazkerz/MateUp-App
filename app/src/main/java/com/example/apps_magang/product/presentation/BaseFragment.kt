@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +59,24 @@ class BaseFragment : Fragment(), ProductView {
 
         recyclerView.adapter = adapter
 
+        setLoading(adapter?.itemCount == 0)
+
         return view
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_base)
+
+        if (isLoading) {
+            // Tampilkan tampilan loading
+            viewLoading?.visibility = View.VISIBLE
+            recyclerView?.visibility = View.GONE
+        } else {
+            // Sembunyikan tampilan loading
+            viewLoading?.visibility = View.GONE
+            recyclerView?.visibility = View.VISIBLE
+        }
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {

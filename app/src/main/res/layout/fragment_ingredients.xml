@@ -23,7 +23,8 @@
 
             <TextView
                 android:id="@+id/tv_sign_in"
-                style="@style/MonaSemiBold16"
+                android:textSize="16dp"
+                android:fontFamily="@font/lora_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -49,15 +50,11 @@
             app:tabTextColor="@color/light_grey" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -67,5 +64,4 @@
             android:layout_height="match_parent" />
 
     </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

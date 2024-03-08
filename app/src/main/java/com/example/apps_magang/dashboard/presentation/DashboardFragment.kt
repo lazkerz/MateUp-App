@@ -122,7 +122,6 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
         rvEyeshadow = view.findViewById(R.id.rv_eyeshadow)
         rvLipstick = view.findViewById(R.id.rv_lipstick)
         rvFoundation = view.findViewById(R.id.rv_foundation)

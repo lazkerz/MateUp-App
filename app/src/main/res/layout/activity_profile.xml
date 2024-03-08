@@ -37,7 +37,8 @@
 
     <TextView
         android:id="@+id/tv_sign_in"
-        style="@style/MonaSemiBold20"
+        android:textSize="20dp"
+        android:fontFamily="@font/lora_semi_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -50,7 +51,8 @@
 
     <TextView
         android:id="@+id/tv_greeting_sign_in"
-        style="@style/MonaRegular14"
+        android:textSize="14dp"
+        android:fontFamily="@font/lora_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
@@ -82,7 +84,8 @@
 
         <TextView
             android:id="@+id/tv_submit"
-            style="@style/MonaSemiBold16"
+            android:textSize="16dp"
+            android:fontFamily="@font/lora_semi_bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -101,7 +104,8 @@
 
     <Button
         android:id="@+id/btn_signOut"
-        style="@style/MonaSemiBold16"
+        android:textSize="16dp"
+        android:fontFamily="@font/lora_semi_bold"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:layout_marginTop="8dp"
