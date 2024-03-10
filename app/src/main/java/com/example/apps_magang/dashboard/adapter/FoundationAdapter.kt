@@ -58,6 +58,7 @@ class FoundationAdapter (
         holder.tvBrand.text = item?.brand?.toUpperCase() ?: ""
 
 
+
         Glide.with(context)
             .load(item.imageLink)
             .placeholder(R.drawable.image_loading_placeholder)

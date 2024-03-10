@@ -32,7 +32,6 @@ import io.realm.Realm
 class DetailActivity : AppCompatActivity(), ProductView {
 
     private lateinit var adapter: ShadeAdapter
-    private lateinit var rvShade: RecyclerView
     private lateinit var presenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +41,7 @@ class DetailActivity : AppCompatActivity(), ProductView {
         Realm.init(this)
         RealmManager.initRealm()
 
-        rvShade = findViewById(R.id.rv_shade)
         adapter = ShadeAdapter(this)
-        initRecyclerView(adapter, rvShade)
 
         val btnBack = findViewById<ImageView>(R.id.ic_back)
 

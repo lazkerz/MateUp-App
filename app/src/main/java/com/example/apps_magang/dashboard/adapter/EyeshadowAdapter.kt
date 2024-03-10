@@ -57,7 +57,6 @@ class EyeshadowAdapter(
         holder.tvProduct.text = item.name ?: ""
         holder.tvBrand.text = item.brand?.toUpperCase() ?: ""
 
-
         Glide.with(context)
             .load(item.imageLink)
             .placeholder(R.drawable.image_loading_placeholder)
