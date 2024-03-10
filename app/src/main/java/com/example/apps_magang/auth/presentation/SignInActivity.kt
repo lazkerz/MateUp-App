@@ -44,8 +44,13 @@ class SignInActivity : AppCompatActivity(), user_view {
 
         findViewById<TextView>(R.id.tv_name).visibility = View.GONE
         findViewById<EditText>(R.id.authNameEditText).visibility = View.GONE
+        findViewById<TextView>(R.id.tvNotifName).visibility = View.GONE
         findViewById<Spinner>(R.id.spActivity).visibility = View.GONE
         findViewById<TextView>(R.id.tv_skinType).visibility = View.GONE
+        findViewById<TextView>(R.id.tvNotifSpinner).visibility = View.GONE
+        findViewById<TextView>(R.id.tv_confirm_password).visibility = View.GONE
+        findViewById<TextView>(R.id.authConfirmPasswordEditText).visibility = View.GONE
+        findViewById<TextView>(R.id.tvNotifConfirmPass).visibility = View.GONE
 
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
 
