@@ -45,16 +45,25 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_label"
-        android:textSize="14dp"
-        android:fontFamily="@font/lora_medium"
+        android:id="@+id/tvNotifName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lora_regular"
+        android:text="notification"
+        android:textSize="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/authNameTextLayout" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lora_medium"
         android:text="Username"
         android:textColor="@color/black"
+        android:textSize="14dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authNameTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/authUsernameTextLayout"
@@ -84,16 +93,25 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_password"
-        android:textSize="14dp"
-        android:fontFamily="@font/lora_medium"
+        android:id="@+id/tvNotifUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lora_regular"
+        android:text="notification"
+        android:textSize="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/authUsernameTextLayout" />
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/lora_medium"
         android:text="Password"
         android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authUsernameTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifUser" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/authPasswordTextLayout"
@@ -123,16 +141,73 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_skinType"
-        android:textSize="14dp"
-        android:fontFamily="@font/lora_medium"
+        android:id="@+id/tvNotifPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lora_regular"
+        android:text="notification"
+        android:textSize="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/authPasswordTextLayout" />
+
+    <TextView
+        android:id="@+id/tv_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/lora_medium"
+        android:text="Confirm Password"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifPass" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/authConfirmPasswordTextLayout"
+        style="@style/Custom.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_confirm_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/authConfirmPasswordEditText"
+            android:textSize="14dp"
+            android:fontFamily="@font/lora_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_input_field"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingVertical="16dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_grey" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvNotifConfirmPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lora_regular"
+        android:text="notification"
+        android:textSize="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/authConfirmPasswordTextLayout" />
+
+    <TextView
+        android:id="@+id/tv_skinType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/lora_medium"
         android:text="Skin Type"
         android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authPasswordTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifConfirmPass" />
 
     <Spinner
         android:id="@+id/spActivity"
@@ -148,5 +223,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_skinType"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvNotifSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lora_regular"
+        android:text="notification"
+        android:textSize="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/spActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
