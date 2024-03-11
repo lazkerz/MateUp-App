@@ -20,18 +20,28 @@
         android:id="@+id/view_loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/black_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/mateup" />
+
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminateTint="@color/Primary_50" />
+            android:text="Please wait"
+            android:textColor="@color/Primary_50"
+            android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

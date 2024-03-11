@@ -45,15 +45,11 @@ class SignUpActivity : AppCompatActivity(), user_view {
         val Usn = findViewById<EditText>(R.id.authUserNameEditText)
         val Password = findViewById<EditText>(R.id.authPasswordEditText)
         val ConfirmPassword = findViewById<EditText>(R.id.authConfirmPasswordEditText)
-        val skinType = findViewById<Spinner>(R.id.spActivity).selectedItem.toString()
 
 
         val buttonRegis = findViewById<FrameLayout>(R.id.btn_regis)
         val buttonLogin = findViewById<Button>(R.id.btn_login)
 
-        val name = Name.text.toString()
-        val username = Usn.text.toString()
-        val password = Password.text.toString()
 
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
         val editpassword = authPasswordTextLayout.editText
@@ -146,6 +142,7 @@ class SignUpActivity : AppCompatActivity(), user_view {
                 val passwordLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
 
                 if (password.isBlank()) {
+                    passwordLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
                     passwordLayout.helperText = "Required*"
                     passwordLayout.error = null // Menghapus pesan kesalahan jika ada
                 } else if (!userModel.isPasswordValid(password)) {
@@ -186,15 +183,15 @@ class SignUpActivity : AppCompatActivity(), user_view {
 
 
         buttonRegis.setOnClickListener {
+            val name = Name.text.toString()
+            val username = Usn.text.toString()
+            val password = Password.text.toString()
+            val skinType = findViewById<Spinner>(R.id.spActivity).selectedItem.toString()
 
             when {
-                name.isEmpty() || username.isEmpty() || password.isEmpty() -> {
+                name.isBlank() || username.isBlank() || password.isBlank() -> {
                     // Tampilkan pesan jika ada input yang kosong
                     Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-                }
-                !userModel.isPasswordValid(password) -> {
-                    // Tampilkan pesan jika kata sandi tidak valid
-                    Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
                     // Panggil fungsi addUser jika semua kondisi terpenuhi
@@ -212,6 +209,7 @@ class SignUpActivity : AppCompatActivity(), user_view {
                 }
             }
         }
+
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)

@@ -128,6 +128,9 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         rvBlush = view.findViewById(R.id.rv_blush)
         val skinType = view.findViewById<TextView>(R.id.tv_skin_type)
 
+        val user = view.findViewById<TextView>(R.id.user)
+
+
 //        val profile = view.findViewById<ImageView>(R.id.profile)
 //        profile.setOnClickListener {
 //            val intent = Intent(requireContext(), ProfileActivity::class.java)
@@ -144,6 +147,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
         if (userModel != null) {
             skinType.text = userModel.skinType
+            user.text = userModel.username
         }
 
         getContent()
