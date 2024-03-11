@@ -15,7 +15,8 @@
     <string name="sign_Up">Sign Up</string>
     <string name="profile">Profile</string>
     <string name="submit">Submit</string>
-    <string name="profile_greeting">Fiks your skin type\nLet\'s choose our best product for your skin</string>
+    <string name="edit_profile_greeting">Fix your profile\nTo let us know your update</string>
+    <string name="profile_greeting">hallo dear!!\nWe\'re happy you join with us</string>
     <string name="title_Fragment_dashboard">DashboardFragment</string>
     <string name="title_Fragment_inrgedients">IngredientsFragment</string>
     <string name="title_Fragment_Product">ProductFragment</string>

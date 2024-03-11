@@ -41,9 +41,9 @@
         android:fontFamily="@font/lora_semi_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="@string/profile"
+        android:text="Edit profile"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
         android:fontFamily="@font/lora_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="@string/profile_greeting"
+        android:layout_marginTop="65dp"
+        android:text="@string/edit_profile_greeting"
         android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
         layout="@layout/auth_field_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_greeting_sign_in" />
 
@@ -76,7 +76,7 @@
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,20 +101,5 @@
             android:indeterminateTint="@color/white"
             android:visibility="gone" />
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btn_signOut"
-        android:textSize="16dp"
-        android:fontFamily="@font/lora_semi_bold"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
-        android:text="Sign Out"
-        android:textColor="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_submit"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

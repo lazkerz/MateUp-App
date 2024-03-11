@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:clipToPadding="false"
     android:paddingHorizontal="16dp"
-    tools:context=".auth.presentation.ProfileActivity">
+    tools:context=".auth.presentation.ViewProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -32,6 +32,15 @@
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ic_logout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -41,9 +50,9 @@
         android:fontFamily="@font/lora_semi_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="@string/profile"
+        android:text="My Profile"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +60,11 @@
 
     <TextView
         android:id="@+id/tv_greeting_sign_in"
-        android:textSize="14dp"
+        android:textSize="16dp"
         android:fontFamily="@font/lora_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="70dp"
         android:text="@string/profile_greeting"
         android:textColor="@color/black"
         android:gravity="center"
@@ -63,34 +72,120 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/field_auth"
-        layout="@layout/auth_field_component"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+    <ImageView
+        android:id="@+id/ic_icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_mirror"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_greeting_sign_in" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/box_pink"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_icon">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lora_semi_bold"
+            android:text="Name         :"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/lora_regular"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
+            app:layout_constraintStart_toEndOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lora_semi_bold"
+            android:text="Username :"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/lora_regular"
+            android:text="username"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/username"
+            app:layout_constraintStart_toEndOf="@+id/username" />
+
+        <TextView
+            android:id="@+id/skin_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lora_semi_bold"
+            android:text="Skin Type  :"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+
+        <TextView
+            android:id="@+id/tv_skin_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/lora_regular"
+            android:text="skin type"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/skin_type"
+            app:layout_constraintStart_toEndOf="@+id/skin_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/btn_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field_auth">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TextView
             android:id="@+id/tv_submit"
-            android:textSize="16dp"
-            android:fontFamily="@font/lora_semi_bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/lora_semi_bold"
             android:gravity="center"
-            android:text="@string/submit"
-            android:textColor="@color/white" />
+            android:text="Edit Profile"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
 
         <ProgressBar
             android:id="@+id/progress_submit"
@@ -101,20 +196,5 @@
             android:indeterminateTint="@color/white"
             android:visibility="gone" />
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btn_signOut"
-        android:textSize="16dp"
-        android:fontFamily="@font/lora_semi_bold"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
-        android:text="Sign Out"
-        android:textColor="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_submit"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
