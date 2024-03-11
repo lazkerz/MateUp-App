@@ -77,19 +77,11 @@ class BlushFragment : Fragment(), ProductView {
 
     private fun setLoading(isLoading: Boolean) {
         val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_blush)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
 
-        if (isLoading) {
-            // Tampilkan tampilan loading
-            viewLoading?.visibility = View.VISIBLE
-            recyclerView?.visibility = View.GONE
-        } else {
-            // Sembunyikan tampilan loading
-            viewLoading?.visibility = View.GONE
-            recyclerView?.visibility = View.VISIBLE
-        }
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        recyclerView?.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
-
     override fun displayProduct(result: ResultState<List<Product>>) {
         when (result) {
             is ResultState.Success -> {

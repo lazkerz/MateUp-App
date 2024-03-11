@@ -29,9 +29,6 @@ import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
 import com.example.mateup.data.remote.ApiServiceProductTags
 import io.realm.Realm
-import android.view.animation.AnimationUtils
-import android.view.animation.AlphaAnimation
-import android.widget.ImageView
 
 class CanadianFragment : Fragment(), ProductView {
 
@@ -85,33 +82,12 @@ class CanadianFragment : Fragment(), ProductView {
         return view
     }
 
-
-//    private fun setLoading(isLoading: Boolean) {
-//        val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
-//        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
-//
-//        if (isLoading) {
-//            // Tampilkan tampilan loading
-//            viewLoading?.visibility = View.VISIBLE
-//            recyclerView?.visibility = View.GONE
-//        } else {
-//            // Sembunyikan tampilan loading
-//            viewLoading?.visibility = View.GONE
-//            recyclerView?.visibility = View.VISIBLE
-//        }
-//    }
-
     private fun setLoading(isLoading: Boolean) {
         val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
 
-        if (isLoading) {
-            viewLoading?.visibility = View.VISIBLE
-            recyclerView?.visibility = View.GONE
-        } else {
-            viewLoading?.visibility = View.GONE
-            recyclerView?.visibility = View.VISIBLE
-        }
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        recyclerView?.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
