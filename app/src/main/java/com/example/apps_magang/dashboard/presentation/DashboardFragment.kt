@@ -16,7 +16,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
-import com.example.apps_magang.auth.presentation.ProfileActivity
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
@@ -129,11 +128,11 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         rvBlush = view.findViewById(R.id.rv_blush)
         val skinType = view.findViewById<TextView>(R.id.tv_skin_type)
 
-        val profile = view.findViewById<ImageView>(R.id.profile)
-        profile.setOnClickListener {
-            val intent = Intent(requireContext(), ProfileActivity::class.java)
-            startActivity(intent)
-        }
+//        val profile = view.findViewById<ImageView>(R.id.profile)
+//        profile.setOnClickListener {
+//            val intent = Intent(requireContext(), ProfileActivity::class.java)
+//            startActivity(intent)
+//        }
 
         initRecyclerView(eyeshadowAdapter, rvEyeshadow)
         initRecyclerView(lipstickAdapter, rvLipstick)

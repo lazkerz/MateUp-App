@@ -1,8 +1,11 @@
 package com.example.apps_magang.auth.presentation
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
@@ -26,6 +29,7 @@ import io.realm.Realm
 
 class SignInActivity : AppCompatActivity(), user_view {
     private lateinit var presenter: UserPresenter
+    private lateinit var userModel: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +41,19 @@ class SignInActivity : AppCompatActivity(), user_view {
         presenter = UserPresenter(
             this)
 
-        val Usn= findViewById<EditText>(R.id.authUserNameEditText)
+        val Usn = findViewById<EditText>(R.id.authUserNameEditText)
         val Password = findViewById<EditText>(R.id.authPasswordEditText)
         val buttonLogin = findViewById<FrameLayout>(R.id.btn_login)
         val buttonRegis = findViewById<Button>(R.id.btn_regis)
 
         findViewById<TextView>(R.id.tv_name).visibility = View.GONE
         findViewById<EditText>(R.id.authNameEditText).visibility = View.GONE
-        findViewById<TextView>(R.id.tvNotifName).visibility = View.GONE
         findViewById<Spinner>(R.id.spActivity).visibility = View.GONE
         findViewById<TextView>(R.id.tv_skinType).visibility = View.GONE
-        findViewById<TextView>(R.id.tvNotifSpinner).visibility = View.GONE
         findViewById<TextView>(R.id.tv_confirm_password).visibility = View.GONE
         findViewById<TextView>(R.id.authConfirmPasswordEditText).visibility = View.GONE
-        findViewById<TextView>(R.id.tvNotifConfirmPass).visibility = View.GONE
+        findViewById<TextInputLayout>(R.id.authConfirmPasswordTextLayout).visibility = View.GONE
+        findViewById<TextInputLayout>(R.id.authNameTextLayout).visibility = View.GONE
 
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
 
@@ -70,6 +73,42 @@ class SignInActivity : AppCompatActivity(), user_view {
             }
         }
 
+
+        Usn.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val username = s.toString()
+                if (username.isBlank()) {
+                    findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = "Required*"
+                } else {
+                    findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = ""
+                }
+            }
+        })
+
+        Password.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val password = s.toString()
+
+                val passwordLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+
+                if (password.isBlank()) {
+                    passwordLayout.helperText = "Required*"
+                } else {
+                    passwordLayout.helperText = null
+                }
+
+            }
+        })
+
+
         buttonLogin.setOnClickListener {
             val username = Usn.text.toString()
             val password = Password.text.toString()
@@ -83,7 +122,7 @@ class SignInActivity : AppCompatActivity(), user_view {
                     finish()
                 } else {
                     // Jika login gagal, tampilkan pesan kesalahan
-                    Toast.makeText(this, "Username atau password salah", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Username or password wrong", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -94,6 +133,32 @@ class SignInActivity : AppCompatActivity(), user_view {
 
     }
 
+    private fun watcher(verificationView: TextView,  Usn: EditText, Password: EditText): TextWatcher {
+        return object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val usernameText = Usn.text.toString()
+                val passwordText = Password.text.toString()
+
+                when {
+                    usernameText.isEmpty() -> {
+                        verificationView.visibility = View.VISIBLE
+                        verificationView.setTextColor(Color.RED)
+                        verificationView.text = "Please enter your username"
+                    }
+                    passwordText.isEmpty() -> {
+                        verificationView.visibility = View.VISIBLE
+                        verificationView.setTextColor(Color.RED)
+                        verificationView.text = "Please enter your password"
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+    }
 
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
