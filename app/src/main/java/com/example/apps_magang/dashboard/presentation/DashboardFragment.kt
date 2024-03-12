@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.util.Log
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,12 +29,15 @@ import com.example.apps_magang.core.utils.ResultState
 import com.example.apps_magang.core.utils.SpacesItemDecoration
 import com.example.apps_magang.core.view.ProductView
 import com.example.apps_magang.dashboard.adapter.BlushAdapter
+import com.example.apps_magang.dashboard.adapter.CarouselAdapter
 import com.example.apps_magang.dashboard.adapter.EyeshadowAdapter
 import com.example.apps_magang.dashboard.adapter.FoundationAdapter
 import com.example.apps_magang.dashboard.adapter.LipstickAdapter
 import com.example.apps_magang.dashboard.presentation.presenter.PersonalizedPresenter
+import com.example.apps_magang.dashboard.presenter.slider
 import com.example.mateup.data.remote.ApiConfig
 import com.example.mateup.data.remote.ApiServicePersonalized
+import com.google.android.material.slider.Slider
 import io.realm.Realm
 
 class DashboardFragment : Fragment(), ProductView, user_view {
@@ -47,6 +54,15 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private lateinit var rvLipstick: RecyclerView
     private lateinit var rvFoundation: RecyclerView
     private lateinit var rvBlush: RecyclerView
+    private lateinit var indicatorsContainer: LinearLayout
+
+    private val carouselAdapter = CarouselAdapter(
+        listOf(
+            slider(R.drawable.image_carousel1),
+            slider(R.drawable.image_carousel2),
+            slider(R.drawable.image_carousel3)
+        )
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -130,6 +146,22 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
         val user = view.findViewById<TextView>(R.id.user)
 
+        val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
+        indicatorsContainer = view.findViewById(R.id.indicatorsContainer)
+
+        // Set adapter to ViewPager
+        viewPager.adapter = carouselAdapter
+
+        // Set up indicators
+        setupIndicators(indicatorsContainer)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                setCurrentIndicator(position)
+            }
+        })
+
 
 //        val profile = view.findViewById<ImageView>(R.id.profile)
 //        profile.setOnClickListener {
@@ -160,6 +192,49 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
         return view
+    }
+
+    private fun setupIndicators(indicatorsContainer: LinearLayout) {
+        val indicators = arrayOfNulls<ImageView>(carouselAdapter.itemCount)
+        val layoutParams: LinearLayout.LayoutParams =
+            LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        layoutParams.setMargins(8, 0, 8, 0)
+
+        for (i in indicators.indices) {
+            indicators[i] = ImageView(requireContext())
+            indicators[i]?.apply {
+                setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.unselected_dot
+                    )
+                )
+                this.layoutParams = layoutParams
+            }
+            indicatorsContainer.addView(indicators[i])
+        }
+    }
+
+    private fun setCurrentIndicator(index: Int) {
+        val childCount = indicatorsContainer.childCount
+        for (i in 0 until childCount) {
+            val imageView = indicatorsContainer[i] as ImageView
+            if (i == index) {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.selected_dot
+                    )
+                )
+            } else {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.unselected_dot
+                    )
+                )
+            }
+        }
     }
 
     private fun getContent() {
