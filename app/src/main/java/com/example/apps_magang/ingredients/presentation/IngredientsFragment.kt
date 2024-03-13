@@ -51,7 +51,7 @@ class IngredientsFragment : Fragment(){
             SectionPagerAdapter(childFragmentManager, lifecycle)
         viewPager = view.findViewById(R.id.view_pager)
         viewPager.adapter = viewPagerAdapter
-        viewPager.isUserInputEnabled = false
+        viewPager.isUserInputEnabled = true
         tabLayout = view.findViewById(R.id.tab_layout)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

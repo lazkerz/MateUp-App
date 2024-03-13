@@ -25,18 +25,25 @@ class SplashActivity : AppCompatActivity() {
 
         splashScope = CoroutineScope(Dispatchers.Main)
         splashScope.launch {
-            delay(1000) // Tampilkan splash screen selama 1 detik
-
-            val isLoggedIn = LoginManager.isLoggedIn()
-            val user = if (isLoggedIn) {
-                MainActivity::class.java
-            } else {
-                SignInActivity::class.java
-            }
-            val intent = Intent(this@SplashActivity, user)
-            startActivity(intent)
-            finish()
+            delaySplashScreen()
         }
+    }
+
+    private suspend fun delaySplashScreen() {
+        delay(1000) // Tampilkan splash screen selama 1 detik
+        navigateToAppropriateScreen()
+    }
+
+    private fun navigateToAppropriateScreen() {
+        val isLoggedIn = LoginManager.isLoggedIn(this)
+        val destination = if (isLoggedIn) {
+            MainActivity::class.java
+        } else {
+            SignInActivity::class.java
+        }
+        val intent = Intent(this, destination)
+        startActivity(intent)
+        finish()
     }
 
     override fun onDestroy() {

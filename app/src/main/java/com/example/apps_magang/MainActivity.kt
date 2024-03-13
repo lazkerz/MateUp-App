@@ -26,18 +26,10 @@ class MainActivity : AppCompatActivity(), user_view {
         RealmManager.initRealm()
 
         presenter = UserPresenter(
+            this,
             this)
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
-//
-//        val logout = findViewById<ImageView>(R.id.ic_out)
-//
-//        logout.setOnClickListener {
-//            presenter.logout()
-//            val intent = Intent(this, SignInActivity::class.java)
-//            startActivity(intent)
-//            finish() // Optional: Menutup aktivitas saat ini setelah logout
-//        }
 
         val navController =
             supportFragmentManager.findFragmentById(R.id.navHost)!!
@@ -51,6 +43,20 @@ class MainActivity : AppCompatActivity(), user_view {
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onBackPressed() {
+        // Cek apakah pengguna berada di halaman dashboard
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHost)
+        val currentDestination = navHostFragment?.findNavController()?.currentDestination?.id
+
+        if (currentDestination == R.id.navigation_dashboard) {
+            // Jika berada di halaman dashboard, biarkan pengguna kembali ke halaman sebelumnya atau keluar dari aplikasi
+            super.onBackPressed()
+        } else {
+            // Jika tidak berada di halaman dashboard, biarkan perilaku kembali standar
+            super.onBackPressed()
+        }
     }
 
     override fun displayUser(result: ResultState<UserModel>) {

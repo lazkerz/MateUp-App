@@ -12,6 +12,7 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 
 class UserPresenter(
+    private val context: Context,
     private val view : user_view,
 ) {
     private val userDataLiveData = MutableLiveData<ResultState<UserModel>>()
@@ -36,42 +37,31 @@ class UserPresenter(
         })
     }
 
-    fun getUserById(userId: Int) {
-        val realm = Realm.getDefaultInstance()
-        val user = realm.where(UserModel::class.java).equalTo("id", userId).findFirst()
-        if (user != null) {
-            userDataLiveData.postValue(ResultState.Success(user))
-        } else {
-            userDataLiveData.postValue(ResultState.Error("User not found"))
-        }
-        realm.close()
-    }
-
     fun getUser(): UserModel? {
         val realm = Realm.getDefaultInstance()
-        val result = realm.where(UserModel::class.java).findAll()
+        val result = realm.where(UserModel::class.java).findFirst()
 
-        val userModel: UserModel? = if (result.isNotEmpty()) {
-            realm.copyFromRealm(result)[0]
+        val userModel: UserModel? = if (result != null) {
+            realm.copyFromRealm(result)
         } else {
             null
-        }
-        if (userModel != null) {
-            Log.d("UserModel", "User skinType: ${userModel.skinType}")
-            userDataLiveData.postValue(ResultState.Success(userModel))
-        } else {
-            userDataLiveData.postValue(ResultState.Error("No data in Realm"))
         }
 
         realm.close()
         return userModel
     }
 
-    fun editUser(id: Int, skinType: String, callback: (Boolean) -> Unit) {
+
+    fun editUser(id: Int, name: String?, usn: String?, password: String?, skinType: String?, callback: (Boolean) -> Unit) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransactionAsync({ backgroundRealm ->
             val user = backgroundRealm.where(UserModel::class.java).equalTo("id", id).findFirst()
-            user?.skinType = skinType
+            user?.apply {
+                name?.let { this.name = it }
+                usn?.let { this.username = it }
+                password?.let { this.password = it }
+                skinType?.let { this.skinType = it }
+            }
         }, {
             realm.close()
             callback(true)
@@ -82,6 +72,7 @@ class UserPresenter(
         })
     }
 
+
     fun login(username: String, password: String, callback: (Boolean) -> Unit) {
         val realm = Realm.getDefaultInstance()
         val userModel = realm.where(UserModel::class.java)
@@ -91,13 +82,26 @@ class UserPresenter(
 
         val isSuccess = userModel != null
 
+        if (isSuccess) {
+            // Simpan data pengguna ke Realm jika login berhasil
+            saveUserToRealm(realm, userModel!!)
+        }
+
         realm.close()
 
         callback(isSuccess)
     }
 
+    fun saveUserToRealm(realm: Realm, userModel: UserModel) {
+        realm.executeTransaction { realm ->
+            realm.insertOrUpdate(userModel)
+        }
+    }
+
+
+
     fun logout() {
-        LoginManager.saveLogin(false)
+        LoginManager.saveLoginStatus(context, false)
     }
 
     fun getUserLiveData(): LiveData<ResultState<UserModel>> {

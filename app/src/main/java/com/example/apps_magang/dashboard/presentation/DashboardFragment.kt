@@ -2,6 +2,7 @@ package com.example.apps_magang.dashboard.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
+import com.example.apps_magang.auth.presentation.ViewProfileActivity
 import com.example.apps_magang.auth.presenter.UserPresenter
 import com.example.apps_magang.auth.view.user_view
 import com.example.apps_magang.core.domain.Product
@@ -55,6 +57,9 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private lateinit var rvFoundation: RecyclerView
     private lateinit var rvBlush: RecyclerView
     private lateinit var indicatorsContainer: LinearLayout
+
+    private lateinit var user: TextView
+    private lateinit var skinType: TextView
 
     private val carouselAdapter = CarouselAdapter(
         listOf(
@@ -121,7 +126,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
         if (apiServicePersonalized != null) {
             presenter = PersonalizedPresenter(apiServicePersonalized, this)
-            presenterUser = UserPresenter(this)
+            presenterUser = UserPresenter(requireContext(),this)
         } else {
             Log.e("Dashboard", "Failed to initialize ApiServicePersonalized")
             Toast.makeText(
@@ -162,12 +167,23 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         })
 
+        val handler = Handler()
+        val runnable = object : Runnable {
+            override fun run() {
+                val currentPosition = viewPager.currentItem
+                val newPosition = if (currentPosition == carouselAdapter.itemCount - 1) 0 else currentPosition + 1
+                viewPager.setCurrentItem(newPosition, true)
+                handler.postDelayed(this, 5000) // 5000 milliseconds = 5 seconds
+            }
+        }
+        handler.postDelayed(runnable, 5000)
 
-//        val profile = view.findViewById<ImageView>(R.id.profile)
-//        profile.setOnClickListener {
-//            val intent = Intent(requireContext(), ProfileActivity::class.java)
-//            startActivity(intent)
-//        }
+
+        val profile = view.findViewById<ImageView>(R.id.profile)
+        profile.setOnClickListener {
+            val intent = Intent(requireContext(), ViewProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         initRecyclerView(eyeshadowAdapter, rvEyeshadow)
         initRecyclerView(lipstickAdapter, rvLipstick)
@@ -175,7 +191,8 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         initRecyclerView(blushAdapter, rvBlush)
 
         val userModel = presenterUser.getUser()
-        Log.d("Profile", "Data User: ${userModel?.skinType}")
+        Log.d("Profile", "Data User: ${userModel?.username}")
+        Toast.makeText(context, "user: ${userModel?.username}", Toast.LENGTH_SHORT).show()
 
         if (userModel != null) {
             skinType.text = userModel.skinType
@@ -240,7 +257,7 @@ class DashboardFragment : Fragment(), ProductView, user_view {
     private fun getContent() {
         // Panggil fungsi presenter untuk mendapatkan data dari API
         // Fungsi ini hanya dipanggil saat pembukaan pertama kali
-        presenterUser = UserPresenter(this)
+        presenterUser = UserPresenter(requireContext(), this)
 
         val data = presenterUser.getUser()
         if (data != null){
@@ -307,11 +324,25 @@ class DashboardFragment : Fragment(), ProductView, user_view {
             }
         }
     }
+
+    private fun updateUIWithUserData(userData: UserModel?) {
+        if (userData != null) {
+            skinType?.text = userData.skinType
+            user?.text = userData.username
+        } else {
+            // Penanganan jika data pengguna null atau tidak valid
+            // Misalnya, set nilai teks ke default atau tampilkan pesan kesalahan
+            skinType.text = "Default Skin Type"
+            user.text = "Default User"
+            Toast.makeText(requireContext(), "User data is null", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
                 val userData = result.data
+                updateUIWithUserData(userData)
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error

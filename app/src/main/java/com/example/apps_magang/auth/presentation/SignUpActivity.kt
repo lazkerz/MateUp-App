@@ -14,9 +14,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.example.apps_magang.R
 import com.example.apps_magang.auth.model.database.UserModel
 import com.example.apps_magang.auth.presenter.UserPresenter
@@ -38,8 +40,8 @@ class SignUpActivity : AppCompatActivity(), user_view {
         Realm.init(this)
         RealmManager.initRealm()
 
-        presenter = UserPresenter(this)
-        val userModel = UserModel()
+        presenter = UserPresenter(this, this)
+
 
         val Name = findViewById<EditText>(R.id.authNameEditText)
         val Usn = findViewById<EditText>(R.id.authUserNameEditText)
@@ -183,6 +185,8 @@ class SignUpActivity : AppCompatActivity(), user_view {
 
 
         buttonRegis.setOnClickListener {
+            setLoading(true)
+
             val name = Name.text.toString()
             val username = Usn.text.toString()
             val password = Password.text.toString()
@@ -216,6 +220,12 @@ class SignUpActivity : AppCompatActivity(), user_view {
             startActivity(intent)
         }
 
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        val viewLoading = findViewById<RelativeLayout>(R.id.view_loading)
+
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun displayUser(result: ResultState<UserModel>) {

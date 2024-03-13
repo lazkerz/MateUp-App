@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +40,7 @@ class SignInActivity : AppCompatActivity(), user_view {
         RealmManager.initRealm()
 
         presenter = UserPresenter(
+            this,
             this)
 
         val Usn = findViewById<EditText>(R.id.authUserNameEditText)
@@ -110,22 +112,26 @@ class SignInActivity : AppCompatActivity(), user_view {
 
 
         buttonLogin.setOnClickListener {
+            setLoading(true)
             val username = Usn.text.toString()
             val password = Password.text.toString()
 
             presenter.login(username, password) { isSuccess ->
                 if (isSuccess) {
                     // Jika login berhasil, arahkan ke MainActivity
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                     // Simpan status login
-                    LoginManager.saveLogin(true)
+                    LoginManager.saveLoginStatus(this, true)
                     finish()
                 } else {
                     // Jika login gagal, tampilkan pesan kesalahan
-                    Toast.makeText(this, "Username or password wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                    setLoading(false)
                 }
             }
         }
+
         buttonRegis.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
@@ -133,31 +139,10 @@ class SignInActivity : AppCompatActivity(), user_view {
 
     }
 
-    private fun watcher(verificationView: TextView,  Usn: EditText, Password: EditText): TextWatcher {
-        return object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    private fun setLoading(isLoading: Boolean) {
+        val viewLoading = findViewById<RelativeLayout>(R.id.view_loading)
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val usernameText = Usn.text.toString()
-                val passwordText = Password.text.toString()
-
-                when {
-                    usernameText.isEmpty() -> {
-                        verificationView.visibility = View.VISIBLE
-                        verificationView.setTextColor(Color.RED)
-                        verificationView.text = "Please enter your username"
-                    }
-                    passwordText.isEmpty() -> {
-                        verificationView.visibility = View.VISIBLE
-                        verificationView.setTextColor(Color.RED)
-                        verificationView.text = "Please enter your password"
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        }
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun displayUser(result: ResultState<UserModel>) {

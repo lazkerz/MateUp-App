@@ -23,33 +23,22 @@ import io.realm.RealmObject
 //        return getSharedPreferences(context).getBoolean(KEY_IS_LOGGED_IN, false)
 //    }
 //
-//}
+////}
+
 
 object LoginManager {
-    private const val REALM_NAME = "login.realm"
+    private const val PREF_NAME = "login_pref"
+    private const val KEY_IS_LOGGED_IN = "is_logged_in"
 
-    fun saveLogin(isLoggedIn: Boolean) {
-        val realm = Realm.getDefaultInstance()
-        realm.executeTransaction { realm ->
-            val loginStatus = realm.where(LoginStatus::class.java).findFirst()
-            if (loginStatus == null) {
-                val newLoginStatus = realm.createObject(LoginStatus::class.java)
-                newLoginStatus.isLoggedIn = isLoggedIn
-            } else {
-                loginStatus.isLoggedIn = isLoggedIn
-            }
-        }
-        realm.close()
+    fun saveLoginStatus(context: Context, isLoggedIn: Boolean) {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn)
+        editor.apply()
     }
 
-
-    fun isLoggedIn(): Boolean {
-        val realm = Realm.getDefaultInstance()
-        val loginStatus = realm.where(LoginStatus::class.java).findFirst()
-        val isLoggedIn = loginStatus?.isLoggedIn ?: false
-        realm.close()
-        return isLoggedIn
+    fun isLoggedIn(context: Context): Boolean {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
     }
 }
-
-open class LoginStatus(var isLoggedIn: Boolean = false) : RealmObject()
