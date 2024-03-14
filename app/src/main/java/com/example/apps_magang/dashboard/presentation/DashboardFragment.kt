@@ -152,6 +152,11 @@ class DashboardFragment : Fragment(), ProductView, user_view {
 
         val user = view.findViewById<TextView>(R.id.user)
 
+        view.findViewById<TextView>(R.id.tv_eyeshadow).visibility = View.GONE
+        view.findViewById<TextView>(R.id.tv_foundation).visibility = View.GONE
+        view.findViewById<TextView>(R.id.tv_lipstick).visibility = View.GONE
+        view.findViewById<TextView>(R.id.tv_mascara).visibility = View.GONE
+
         val viewPager = view.findViewById<ViewPager2>(R.id.vp_carousel)
         indicatorsContainer = view.findViewById(R.id.indicatorsContainer)
 
