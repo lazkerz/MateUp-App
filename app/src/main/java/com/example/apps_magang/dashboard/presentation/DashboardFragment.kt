@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -178,6 +179,30 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         }
         handler.postDelayed(runnable, 5000)
 
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == carouselAdapter.itemCount - 1) {
+                    // Jika sampai ke page terakhir, kembali ke page pertama setelah sedikit jeda
+                    Handler().postDelayed({
+                        viewPager.setCurrentItem(0, false) // Set animasi menjadi false
+                    }, 2000) // Ganti 2000 dengan jeda yang diinginkan sebelum kembali ke page pertama (dalam milidetik)
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                if (state == ViewPager2.SCROLL_STATE_DRAGGING) {
+                    // Jika pengguna mencoba untuk menggeser halaman dari terakhir, langsung kembali ke halaman pertama
+                    val currentItem = viewPager.currentItem
+                    val lastItem = carouselAdapter.itemCount - 1
+                    if (currentItem == lastItem) {
+                        viewPager.setCurrentItem(0, false)
+                    }
+                }
+            }
+        })
+
 
         val profile = view.findViewById<ImageView>(R.id.profile)
         profile.setOnClickListener {
@@ -299,6 +324,28 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         recyclerView.addItemDecoration(SpacesItemDecoration(6))
     }
 
+    private fun setLoading(isLoading: Boolean) {
+        val viewLoading: RelativeLayout? = view?.findViewById(R.id.view_loading)
+        val eyeshadow = view?.findViewById<TextView>(R.id.tv_eyeshadow)
+        val foundation = view?.findViewById<TextView>(R.id.tv_foundation)
+        val lipstick = view?.findViewById<TextView>(R.id.tv_lipstick)
+        val blush = view?.findViewById<TextView>(R.id.tv_mascara)
+
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        rvEyeshadow.visibility = if (isLoading) View.GONE else View.VISIBLE
+        rvFoundation.visibility = if (isLoading) View.GONE else View.VISIBLE
+        rvLipstick.visibility = if (isLoading) View.GONE else View.VISIBLE
+        rvBlush.visibility = if (isLoading) View.GONE else View.VISIBLE
+
+        // Menyembunyikan TextView saat isLoading true
+        eyeshadow?.visibility = if (isLoading) View.GONE else View.VISIBLE
+        foundation?.visibility = if (isLoading) View.GONE else View.VISIBLE
+        lipstick?.visibility = if (isLoading) View.GONE else View.VISIBLE
+        blush?.visibility = if (isLoading) View.GONE else View.VISIBLE
+    }
+
+
+
     override fun displayProduct(result: ResultState<List<Product>>) {
         when (result) {
             is ResultState.Success -> {
@@ -306,10 +353,22 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                 val productData = result.data
                 for (product in productData) {
                     when (product.productType) {
-                        "eyeshadow" -> eyeshadowAdapter.addData(product)
-                        "foundation" -> foundationAdapter.addData(product)
-                        "lipstick" -> lipstickAdapter.addData(product)
-                        "blush" -> blushAdapter.addData(product)
+                        "eyeshadow" -> {
+                            eyeshadowAdapter.addData(product)
+                            setLoading(false)
+                        }
+                        "foundation" -> {
+                            foundationAdapter.addData(product)
+                            setLoading(false)
+                        }
+                        "lipstick" -> {
+                            lipstickAdapter.addData(product)
+                            setLoading(false)
+                        }
+                        "blush" -> {
+                            blushAdapter.addData(product)
+                            setLoading(false)
+                        }
                     }
                 }
             }

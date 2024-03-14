@@ -58,6 +58,16 @@ class ProfileActivity : AppCompatActivity(), user_view {
         findViewById<EditText>(R.id.authConfirmPasswordEditText).visibility = View.GONE
         findViewById<TextView>(R.id.tv_confirm_password).visibility = View.GONE
 
+
+        val authNameTextLayout = findViewById<TextInputLayout>(R.id.authNameTextLayout)
+        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
+        val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+
+
+        authNameTextLayout.helperText = ""
+        authUsernameTextLayout.helperText = ""
+        authPasswordTextLayout.helperText = ""
+
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -102,21 +112,109 @@ class ProfileActivity : AppCompatActivity(), user_view {
     }
 
     private fun updateUserProfile() {
-        val name = findViewById<EditText>(R.id.authNameEditText).text.toString()
-        val username = findViewById<EditText>(R.id.authUserNameEditText).text.toString()
-        val password = findViewById<EditText>(R.id.authPasswordEditText).text.toString()
+
+        val name = findViewById<EditText>(R.id.authNameEditText)
+        val username = findViewById<EditText>(R.id.authUserNameEditText)
+        val password = findViewById<EditText>(R.id.authPasswordEditText)
         val skinType = findViewById<Spinner>(R.id.spActivity).selectedItem.toString()
+        val Password = password.text.toString()
+        val Usn = username.text.toString()
+        val Name = name.text.toString()
+
+        val authNameTextLayout = findViewById<TextInputLayout>(R.id.authNameTextLayout)
+        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
+        val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+
+        if (Name.isBlank()) {
+            authNameTextLayout.helperText = "Required*"
+        }
+        if (Usn.isBlank()) {
+            authUsernameTextLayout.helperText = "Required*"
+        }
+        if (Password.isBlank()) {
+            authPasswordTextLayout.helperText = "Required*"
+        }
+
+        val nameWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val name = s.toString()
+
+                if (name.isBlank()) {
+                    authNameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                    authNameTextLayout.helperText = "Required*"
+                    authNameTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                } else {
+                    authNameTextLayout.helperText = null
+                    authNameTextLayout.error = null
+                }
+            }
+        }
+
+        name.addTextChangedListener(nameWatcher)
+
+        val usnWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val username = s.toString()
+
+                if (username.isBlank()) {
+                    authUsernameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                    authUsernameTextLayout.helperText = "Required*"
+                    authUsernameTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                } else {
+                    authUsernameTextLayout.helperText = null
+                    authUsernameTextLayout.error = null
+                }
+            }
+        }
+
+        username.addTextChangedListener(usnWatcher)
+
+
+        // Menambahkan TextWatcher untuk Password dan ConfirmPassword
+        val passwordWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val password = s.toString()
+                val userModel = UserModel()
+
+                if (password.isBlank()) {
+                    authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                    authPasswordTextLayout.helperText = "Required*"
+                    authPasswordTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                } else if (!userModel.isPasswordValid(password)) {
+                    authPasswordTextLayout.error = "Password must be at least 6 characters with at least 1 number"
+                    authPasswordTextLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
+                } else {
+                    authPasswordTextLayout.error = null
+                    authPasswordTextLayout.helperText = "Good Password"
+                    authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.GREEN))
+                }
+            }
+        }
+
+        password.addTextChangedListener(passwordWatcher)
 
         if (validateName() || validateUsername() || validatePassword() || validateSkinType()) {
             userModel.id?.let { userId ->
-                presenter.editUser(userId, name.takeIf { validateName() }, username.takeIf { validateUsername() },
-                    password.takeIf { validatePassword() }, skinType.takeIf { validateSkinType() }) { isSuccess ->
+                presenter.editUser(userId, Name.takeIf { validateName() }, Usn.takeIf { validateUsername() },
+                    Password.takeIf { validatePassword() }, skinType.takeIf { validateSkinType() }) { isSuccess ->
                     if (isSuccess) {
                         Toast.makeText(this, "User profile updated successfully. Please login again", Toast.LENGTH_SHORT).show()
                         userModel.apply {
-                            name?.let { this.name = it }
-                            username?.let { this.username = it }
-                            password?.let { this.password = it }
+                            Name?.let { this.name = it }
+                            Usn?.let { this.username = it }
+                            Password?.let { this.password = it }
                             skinType?.let { this.skinType = it }
                         }
                         updateUserUI(userModel)

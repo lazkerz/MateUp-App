@@ -32,7 +32,6 @@ class SignUpActivity : AppCompatActivity(), user_view {
 
     private lateinit var presenter: UserPresenter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -42,147 +41,24 @@ class SignUpActivity : AppCompatActivity(), user_view {
 
         presenter = UserPresenter(this, this)
 
-
         val Name = findViewById<EditText>(R.id.authNameEditText)
         val Usn = findViewById<EditText>(R.id.authUserNameEditText)
         val Password = findViewById<EditText>(R.id.authPasswordEditText)
         val ConfirmPassword = findViewById<EditText>(R.id.authConfirmPasswordEditText)
 
-
         val buttonRegis = findViewById<FrameLayout>(R.id.btn_regis)
         val buttonLogin = findViewById<Button>(R.id.btn_login)
 
-
+        val authNameTextLayout = findViewById<TextInputLayout>(R.id.authNameTextLayout)
+        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
-        val editpassword = authPasswordTextLayout.editText
-        editpassword?.transformationMethod = null // Teks password ditampilkan sebagai teks biasa
-
-        authPasswordTextLayout.setEndIconOnClickListener {
-            // Mengubah visibilitas teks password sesuai status saat ini
-            val editpassword = authPasswordTextLayout.editText
-            editpassword?.let {
-                if (editpassword.transformationMethod == null) {
-                    // Jika teks password ditampilkan, sembunyikan
-                    editpassword.transformationMethod = PasswordTransformationMethod.getInstance()
-                } else {
-                    // Jika teks password disembunyikan, tampilkan
-                    editpassword.transformationMethod = null
-                }
-                // Memastikan teks kembali ke posisi terakhir
-                editpassword.setSelection(editpassword.text.length)
-            }
-        }
-
-
         val authConfirmPasswordTextLayout = findViewById<TextInputLayout>(R.id.authConfirmPasswordTextLayout)
-        val editText = authConfirmPasswordTextLayout.editText
-        editText?.transformationMethod = null // Teks password ditampilkan sebagai teks biasa
 
-        authConfirmPasswordTextLayout.setEndIconOnClickListener {
-            // Mengubah visibilitas teks password sesuai status saat ini
-            val editText = authConfirmPasswordTextLayout.editText
-            editText?.let {
-                if (editText.transformationMethod == null) {
-                    // Jika teks password ditampilkan, sembunyikan
-                    editText.transformationMethod = PasswordTransformationMethod.getInstance()
-                } else {
-                    // Jika teks password disembunyikan, tampilkan
-                    editText.transformationMethod = null
-                }
-                // Memastikan teks kembali ke posisi terakhir
-                editText.setSelection(editText.text.length)
-            }
-        }
-
-
-
-
-        Name.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val name = s.toString()
-                if (name.isBlank()) {
-                    findViewById<TextInputLayout>(R.id.authNameTextLayout).helperText = "Required*"
-                } else {
-                    findViewById<TextInputLayout>(R.id.authNameTextLayout).helperText = ""
-                }
-            }
-        })
-
-        Usn.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val username = s.toString()
-                val userModel = UserModel()
-
-                val usnLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
-                if (username.isBlank()) {
-                    usnLayout.helperText= "Required*"
-                } else if (username == userModel.username) {
-                    usnLayout.error = "Use another username"
-                }else {
-                    usnLayout.helperText = null
-                }
-            }
-        })
-
-        Password.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val password = s.toString()
-                val userModel = UserModel()
-
-                val passwordLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
-
-                if (password.isBlank()) {
-                    passwordLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
-                    passwordLayout.helperText = "Required*"
-                    passwordLayout.error = null // Menghapus pesan kesalahan jika ada
-                } else if (!userModel.isPasswordValid(password)) {
-                    passwordLayout.error = "Password must be at least 6 characters with at least 1 number"
-                    passwordLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
-                } else {
-                    passwordLayout.error = null
-                    passwordLayout.helperText = "Good Password"
-                    passwordLayout.setHelperTextColor(ColorStateList.valueOf(Color.GREEN))
-                }
-            }
-        })
-
-
-        ConfirmPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val confirmPassword = s.toString()
-                val password = Password.text.toString()
-
-                val confirmPasswordLayout = findViewById<TextInputLayout>(R.id.authConfirmPasswordTextLayout)
-
-                if (confirmPassword.isBlank()) {
-                    confirmPasswordLayout.helperText = "Required*"
-                    confirmPasswordLayout.error = null // Menghapus pesan kesalahan jika ada
-                } else if (confirmPassword != password) {
-                    confirmPasswordLayout.error = "Password do not match"
-                    confirmPasswordLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
-                } else {
-                    confirmPasswordLayout.error = null
-                    confirmPasswordLayout.helperText = null // Menghapus pesan bantuan jika password valid
-                }
-            }
-        })
-
+        // Menyembunyikan pesan helper untuk Name dan Username saat awal
+        authNameTextLayout.helperText = ""
+        authUsernameTextLayout.helperText = ""
+        authPasswordTextLayout.helperText = ""
+        authConfirmPasswordTextLayout.helperText = ""
 
         buttonRegis.setOnClickListener {
             setLoading(true)
@@ -190,30 +66,128 @@ class SignUpActivity : AppCompatActivity(), user_view {
             val name = Name.text.toString()
             val username = Usn.text.toString()
             val password = Password.text.toString()
+            val confirm = ConfirmPassword.text.toString()
             val skinType = findViewById<Spinner>(R.id.spActivity).selectedItem.toString()
 
-            when {
-                name.isBlank() || username.isBlank() || password.isBlank() -> {
-                    // Tampilkan pesan jika ada input yang kosong
-                    Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            if (name.isBlank()) {
+                authNameTextLayout.helperText = "Required*"
+            }
+            if (username.isBlank()) {
+                authUsernameTextLayout.helperText = "Required*"
+            }
+            if (password.isBlank()) {
+                authPasswordTextLayout.helperText = "Required*"
+            }
+            if (confirm.isBlank()) {
+                authConfirmPasswordTextLayout.helperText = "Required*"
+            }
+
+            val nameWatcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val name = s.toString()
+
+                    if (name.isBlank()) {
+                        authNameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                        authNameTextLayout.helperText = "Required*"
+                        authNameTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else {
+                        authNameTextLayout.helperText = null
+                        authNameTextLayout.error = null
+                    }
                 }
-                else -> {
-                    // Panggil fungsi addUser jika semua kondisi terpenuhi
-                    presenter.addUser(name, username, password, skinType) { isSuccess ->
-                        if (isSuccess) {
-                            // Tampilkan pesan jika pendaftaran berhasil
-                            Toast.makeText(this, "Registration successful. Please proceed to login.", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, SignInActivity::class.java))
-                            finish()
-                        } else {
-                            // Tampilkan pesan jika pendaftaran gagal
-                            Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show()
-                        }
+            }
+
+            Name.addTextChangedListener(nameWatcher)
+
+            val usnWatcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val username = s.toString()
+
+                    if (username.isBlank()) {
+                        authUsernameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                        authUsernameTextLayout.helperText = "Required*"
+                        authUsernameTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else {
+                        authUsernameTextLayout.helperText = null
+                        authUsernameTextLayout.error = null
+                    }
+                }
+            }
+
+            Usn.addTextChangedListener(usnWatcher)
+
+            // Menambahkan TextWatcher untuk Password dan ConfirmPassword
+            val passwordWatcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val password = s.toString()
+                    val userModel = UserModel()
+
+                    if (password.isBlank()) {
+                        authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                        authPasswordTextLayout.helperText = "Required*"
+                        authPasswordTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else if (!userModel.isPasswordValid(password)) {
+                        authPasswordTextLayout.error = "Password must be at least 6 characters with at least 1 number"
+                        authPasswordTextLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
+                    } else {
+                        authPasswordTextLayout.error = null
+                        authPasswordTextLayout.helperText = "Good Password"
+                        authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.GREEN))
+                    }
+                }
+            }
+
+            Password.addTextChangedListener(passwordWatcher)
+
+            ConfirmPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val confirmPassword = s.toString()
+                    val password = Password.text.toString()
+
+                    if (confirmPassword.isBlank()) {
+                        authConfirmPasswordTextLayout.helperText = "Required*"
+                        authConfirmPasswordTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else if (confirmPassword != password) {
+                        authConfirmPasswordTextLayout.error = "Password do not match"
+                        authConfirmPasswordTextLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
+                    } else {
+                        authConfirmPasswordTextLayout.error = null
+                        authConfirmPasswordTextLayout.helperText = null // Menghapus pesan bantuan jika password valid
+                    }
+                }
+            })
+
+            // Panggil fungsi addUser jika semua kondisi terpenuhi
+            if (name.isNotBlank() && username.isNotBlank() && password.isNotBlank()) {
+                presenter.addUser(name, username, password, skinType) { isSuccess ->
+                    if (isSuccess) {
+                        // Tampilkan pesan jika pendaftaran berhasil
+                        Toast.makeText(this, "Registration successful. Please proceed to login.", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, SignInActivity::class.java))
+                        finish()
+                    } else {
+                        // Tampilkan pesan jika pendaftaran gagal
+                        Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
@@ -224,7 +198,6 @@ class SignUpActivity : AppCompatActivity(), user_view {
 
     private fun setLoading(isLoading: Boolean) {
         val viewLoading = findViewById<RelativeLayout>(R.id.view_loading)
-
         viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 

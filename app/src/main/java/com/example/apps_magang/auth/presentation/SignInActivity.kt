@@ -1,6 +1,7 @@
 package com.example.apps_magang.auth.presentation
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -48,6 +49,7 @@ class SignInActivity : AppCompatActivity(), user_view {
         val buttonLogin = findViewById<FrameLayout>(R.id.btn_login)
         val buttonRegis = findViewById<Button>(R.id.btn_regis)
 
+
         findViewById<TextView>(R.id.tv_name).visibility = View.GONE
         findViewById<EditText>(R.id.authNameEditText).visibility = View.GONE
         findViewById<Spinner>(R.id.spActivity).visibility = View.GONE
@@ -57,7 +59,11 @@ class SignInActivity : AppCompatActivity(), user_view {
         findViewById<TextInputLayout>(R.id.authConfirmPasswordTextLayout).visibility = View.GONE
         findViewById<TextInputLayout>(R.id.authNameTextLayout).visibility = View.GONE
 
+        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
         val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+
+        authUsernameTextLayout.helperText = ""
+        authPasswordTextLayout.helperText = ""
 
         authPasswordTextLayout.setEndIconOnClickListener {
             // Mengubah visibilitas teks password sesuai status saat ini
@@ -76,45 +82,60 @@ class SignInActivity : AppCompatActivity(), user_view {
         }
 
 
-        Usn.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val username = s.toString()
-                if (username.isBlank()) {
-                    findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = "Required*"
-                } else {
-                    findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = ""
-                }
-            }
-        })
-
-        Password.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val password = s.toString()
-
-                val passwordLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
-
-                if (password.isBlank()) {
-                    passwordLayout.helperText = "Required*"
-                } else {
-                    passwordLayout.helperText = null
-                }
-
-            }
-        })
-
-
         buttonLogin.setOnClickListener {
             setLoading(true)
             val username = Usn.text.toString()
             val password = Password.text.toString()
+
+            if (username.isBlank()) {
+                authUsernameTextLayout.helperText = "Required*"
+            }
+            if (password.isBlank()) {
+                authPasswordTextLayout.helperText = "Required*"
+            }
+
+            val usnWatcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val username = s.toString()
+
+                    if (username.isBlank()) {
+                        authUsernameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                        authUsernameTextLayout.helperText = "Required*"
+                        authUsernameTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else {
+                        authUsernameTextLayout.helperText = null
+                        authUsernameTextLayout.error = null
+                    }
+                }
+            }
+
+            Usn.addTextChangedListener(usnWatcher)
+
+            val passwordwatcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    val password = s.toString()
+
+                    if (password.isBlank()) {
+                        authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
+                        authPasswordTextLayout.helperText = "Required*"
+                        authPasswordTextLayout.error = null // Menghapus pesan kesalahan jika ada
+                    } else {
+                        authPasswordTextLayout.helperText = null
+                        authPasswordTextLayout.error = null
+                    }
+                }
+            }
+
+            Password.addTextChangedListener(passwordwatcher)
+
 
             presenter.login(username, password) { isSuccess ->
                 if (isSuccess) {

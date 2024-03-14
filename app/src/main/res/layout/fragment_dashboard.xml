@@ -156,6 +156,30 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/indicatorsContainer" />
 
+                <RelativeLayout
+                    android:id="@+id/view_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_eyeshadow">
+
+                    <ImageView
+                        android:id="@+id/icon_eyeshadow"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/mateup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_eyeshadow"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Please wait"
+                        android:textColor="@color/Primary_50"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_eyeshadow"
                     android:textSize="12dp"
@@ -263,6 +287,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
+
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

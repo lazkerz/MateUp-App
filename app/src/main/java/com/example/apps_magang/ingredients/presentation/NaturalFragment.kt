@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.presentation.DetailActivity
@@ -54,8 +55,7 @@ class NaturalFragment : Fragment(), ProductView {
 
         apiServiceProduct?.let {
             presenter = ProductTagPresenter(it, this)
-            presenter.getProductIngredient("Natural")
-            presenter.retrieveProductTagFromRealm()
+            getContent()
         } ?: Log.e("CanadianFragment", "Failed to initialize ApiServiceProduct")
 
     }
@@ -75,16 +75,35 @@ class NaturalFragment : Fragment(), ProductView {
 
         setLoading(adapter.itemCount == 0)
 
+        val refresh =  view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+        refresh.setOnRefreshListener{
+            getContent()
+            if (refresh.isRefreshing) {
+                refresh.isRefreshing = false
+            }
+        }
+
         return view
     }
 
+    private fun getContent(){
+        presenter.getProductIngredient("Natural")
+        presenter.retrieveProductTagFromRealm()
+    }
 
     private fun setLoading(isLoading: Boolean) {
         val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_natural)
 
-        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
-        recyclerView?.visibility = if (isLoading) View.GONE else View.VISIBLE
+        if (isLoading) {
+            recyclerView?.postDelayed({
+                viewLoading?.visibility = View.VISIBLE
+                recyclerView.visibility = View.INVISIBLE
+            }, 200)
+        } else {
+            viewLoading?.visibility = View.GONE
+            recyclerView?.visibility = View.VISIBLE
+        }
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {

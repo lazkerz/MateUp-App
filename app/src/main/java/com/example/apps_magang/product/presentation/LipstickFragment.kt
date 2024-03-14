@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.apps_magang.R
 import com.example.apps_magang.core.domain.Product
 import com.example.apps_magang.core.presentation.DetailActivity
@@ -52,8 +53,7 @@ class LipstickFragment : Fragment(), ProductView {
 
         apiServiceProduct?.let {
             presenter = ProductTypePresenter(it, this)
-            presenter.getProductType("lipstick", "lip_gloss")
-            presenter.retrieveProductTypeFromRealm()
+            getContent()
         } ?: Log.e("LipstickFragment", "Failed to initialize ApiServiceProduct")
     }
 
@@ -72,15 +72,33 @@ class LipstickFragment : Fragment(), ProductView {
 
         setLoading(adapter?.itemCount == 0)
 
+        val refresh =  view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+        refresh.setOnRefreshListener{
+            getContent()
+            if (refresh.isRefreshing) {
+                refresh.isRefreshing = false
+            }
+        }
+
         return view
+    }
+
+    private fun getContent(){
+        presenter.getProductType("lipstick", "lip_gloss")
+        presenter.retrieveProductTypeFromRealm()
     }
 
     private fun setLoading(isLoading: Boolean) {
         val viewLoading = view?.findViewById<RelativeLayout>(R.id.view_loading)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_canadian)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_lipstick)
 
-        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
-        recyclerView?.visibility = if (isLoading) View.GONE else View.VISIBLE
+        if (isLoading) {
+            viewLoading?.visibility = View.VISIBLE
+            recyclerView?.visibility = View.INVISIBLE
+        } else {
+            viewLoading?.visibility = View.INVISIBLE
+            recyclerView?.visibility = View.VISIBLE
+        }
     }
 
     override fun displayProduct(result: ResultState<List<Product>>) {
