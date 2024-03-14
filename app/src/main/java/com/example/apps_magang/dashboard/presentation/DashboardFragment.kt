@@ -329,24 +329,46 @@ class DashboardFragment : Fragment(), ProductView, user_view {
         recyclerView.addItemDecoration(SpacesItemDecoration(6))
     }
 
-    private fun setLoading(isLoading: Boolean) {
-        val viewLoading: RelativeLayout? = view?.findViewById(R.id.view_loading)
+    private fun setLoading(isLoading: Boolean, recyclerViewType: String) {
+        val viewLoading: RelativeLayout?
+        val recyclerView: RecyclerView?
+
         val eyeshadow = view?.findViewById<TextView>(R.id.tv_eyeshadow)
         val foundation = view?.findViewById<TextView>(R.id.tv_foundation)
         val lipstick = view?.findViewById<TextView>(R.id.tv_lipstick)
         val blush = view?.findViewById<TextView>(R.id.tv_mascara)
-
-        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
-        rvEyeshadow.visibility = if (isLoading) View.GONE else View.VISIBLE
-        rvFoundation.visibility = if (isLoading) View.GONE else View.VISIBLE
-        rvLipstick.visibility = if (isLoading) View.GONE else View.VISIBLE
-        rvBlush.visibility = if (isLoading) View.GONE else View.VISIBLE
 
         // Menyembunyikan TextView saat isLoading true
         eyeshadow?.visibility = if (isLoading) View.GONE else View.VISIBLE
         foundation?.visibility = if (isLoading) View.GONE else View.VISIBLE
         lipstick?.visibility = if (isLoading) View.GONE else View.VISIBLE
         blush?.visibility = if (isLoading) View.GONE else View.VISIBLE
+
+        when (recyclerViewType) {
+            "eyeshadow" -> {
+                viewLoading = view?.findViewById(R.id.view_loading_eyeshadow)
+                recyclerView = rvEyeshadow
+            }
+            "foundation" -> {
+                viewLoading = view?.findViewById(R.id.view_loading_foundation)
+                recyclerView = rvFoundation
+            }
+            "lipstick" -> {
+                viewLoading = view?.findViewById(R.id.view_loading_lipstick)
+                recyclerView = rvLipstick
+            }
+            "blush" -> {
+                viewLoading = view?.findViewById(R.id.view_loading_blush)
+                recyclerView = rvBlush
+            }
+            else -> {
+                viewLoading = null
+                recyclerView = null
+            }
+        }
+
+        viewLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        recyclerView?.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
 
@@ -360,19 +382,19 @@ class DashboardFragment : Fragment(), ProductView, user_view {
                     when (product.productType) {
                         "eyeshadow" -> {
                             eyeshadowAdapter.addData(product)
-                            setLoading(false)
+                            setLoading(false, "eyeshadow")
                         }
                         "foundation" -> {
                             foundationAdapter.addData(product)
-                            setLoading(false)
+                            setLoading(false, "foundation")
                         }
                         "lipstick" -> {
                             lipstickAdapter.addData(product)
-                            setLoading(false)
+                            setLoading(false, "lipstick")
                         }
                         "blush" -> {
                             blushAdapter.addData(product)
-                            setLoading(false)
+                            setLoading(false, "blush")
                         }
                     }
                 }

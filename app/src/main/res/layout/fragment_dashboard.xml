@@ -35,7 +35,7 @@
                 android:id="@+id/user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/lora_semi_bold"
                 android:text="user"
                 android:textColor="@color/Primary30"
@@ -156,30 +156,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/indicatorsContainer" />
 
-                <RelativeLayout
-                    android:id="@+id/view_loading"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_eyeshadow">
-
-                    <ImageView
-                        android:id="@+id/icon_eyeshadow"
-                        android:layout_width="150dp"
-                        android:layout_height="80dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/mateup" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/icon_eyeshadow"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="6dp"
-                        android:text="Please wait"
-                        android:textColor="@color/Primary_50"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
                 <TextView
                     android:id="@+id/tv_eyeshadow"
                     android:textSize="12dp"
@@ -196,7 +172,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_eyeshadow"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="210dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
@@ -205,6 +181,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_eyeshadow"
                     tools:listitem="@layout/eyeshadow_recommendation" />
+
+                <RelativeLayout
+                    android:id="@+id/view_loading_eyeshadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white50"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommendation">
+
+                    <ImageView
+                        android:id="@+id/icon_eyeshadow"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/mateup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_eyeshadow"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Please wait"
+                        android:textColor="@color/Primary_50"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tv_foundation"
@@ -222,7 +224,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_foundation"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="210dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
@@ -231,6 +233,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_foundation"
                     tools:listitem="@layout/eyeshadow_recommendation" />
+
+                <RelativeLayout
+                    android:id="@+id/view_loading_foundation"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:background="@color/white50"
+                    app:layout_constraintTop_toBottomOf="@id/rv_eyeshadow">
+
+                    <ImageView
+                        android:id="@+id/icon_foundation"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/mateup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_foundation"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Please wait"
+                        android:textColor="@color/Primary_50"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tv_lipstick"
@@ -248,7 +275,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_lipstick"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="210dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
@@ -257,6 +284,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_lipstick"
                     tools:listitem="@layout/eyeshadow_recommendation" />
+
+                <RelativeLayout
+                    android:id="@+id/view_loading_lipstick"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:background="@color/white50"
+                    app:layout_constraintTop_toBottomOf="@id/rv_foundation">
+
+                    <ImageView
+                        android:id="@+id/icon_lipstick"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/mateup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_lipstick"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Please wait"
+                        android:textColor="@color/Primary_50"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tv_mascara"
@@ -274,7 +326,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_blush"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="210dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
@@ -283,6 +335,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_mascara"
                     tools:listitem="@layout/eyeshadow_recommendation" />
+
+                <RelativeLayout
+                    android:id="@+id/view_loading_blush"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:background="@color/white50"
+                    app:layout_constraintTop_toBottomOf="@id/rv_lipstick">
+
+                    <ImageView
+                        android:id="@+id/icon_blush"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/mateup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_blush"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Please wait"
+                        android:textColor="@color/Primary_50"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

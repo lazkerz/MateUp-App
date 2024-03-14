@@ -34,6 +34,8 @@ class ProfileActivity : AppCompatActivity(), user_view {
     private lateinit var presenter: UserPresenter
     private lateinit var userModel: UserModel
 
+    private var isSpinnerSelected = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +44,10 @@ class ProfileActivity : AppCompatActivity(), user_view {
         Realm.init(this)
         RealmManager.initRealm()
 
-        presenter = UserPresenter(this, this)
+        // Perbarui UI dengan data pengguna
 
-        userModel = UserModel()
+
+        presenter = UserPresenter(this, this)
 
         val nameEditText = findViewById<EditText>(R.id.authNameEditText)
         val usernameEditText = findViewById<EditText>(R.id.authUserNameEditText)
@@ -59,15 +62,6 @@ class ProfileActivity : AppCompatActivity(), user_view {
         findViewById<TextView>(R.id.tv_confirm_password).visibility = View.GONE
 
 
-        val authNameTextLayout = findViewById<TextInputLayout>(R.id.authNameTextLayout)
-        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
-        val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
-
-
-        authNameTextLayout.helperText = ""
-        authUsernameTextLayout.helperText = ""
-        authPasswordTextLayout.helperText = ""
-
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -78,6 +72,7 @@ class ProfileActivity : AppCompatActivity(), user_view {
         Log.d("Profile", "Data User: ${user?.skinType}")
 
         if (user != null) {
+            userModel = user
             nameEditText.setText(user.name)
             usernameEditText.setText(user.username)
             passwordEditText.setText(user.password)
@@ -87,7 +82,35 @@ class ProfileActivity : AppCompatActivity(), user_view {
                 skinTypeSpinner.setSelection(skinTypeIndex, false) // Set skinType di Spinner dengan menggunakan indeks, animate=false
                 // Set skinType di Spinner dengan menggunakan indeks
             }
+        } else{
+            userModel =  UserModel()
         }
+
+        updateUserUI(userModel)
+
+        // Listener untuk spinner
+        skinTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Set isSpinnerSelected ke true saat ada item yang dipilih di spinner
+                isSpinnerSelected = position != 0
+                // Panggil validateAndEnableSubmitButton() setiap kali ada perubahan di spinner
+                validateAndEnableSubmitButton()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Set isSpinnerSelected ke false jika tidak ada item yang dipilih di spinner
+                isSpinnerSelected = false
+                // Panggil validateAndEnableSubmitButton() setiap kali ada perubahan di spinner
+                validateAndEnableSubmitButton()
+            }
+        }
+
+        validateAndEnableSubmitButton()
     }
 
     private fun setupUI() {
@@ -96,15 +119,29 @@ class ProfileActivity : AppCompatActivity(), user_view {
         val passwordEditText = findViewById<EditText>(R.id.authPasswordEditText)
         val submitButton = findViewById<FrameLayout>(R.id.btn_submit)
 
-        arrayOf(nameEditText, usernameEditText, passwordEditText).forEach { editText ->
-            editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                override fun afterTextChanged(s: Editable?) {
-                    validateAndEnableSubmitButton()
-                }
-            })
+        // Hapus pesan kesalahan di awal
+        findViewById<TextInputLayout>(R.id.authNameTextLayout).error = null
+        findViewById<TextInputLayout>(R.id.authUsernameTextLayout).error = null
+        findViewById<TextInputLayout>(R.id.authPasswordTextLayout).error = null
+
+        // Hapus pesan bantuan di awal
+        findViewById<TextInputLayout>(R.id.authNameTextLayout).helperText = null
+        findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = null
+        findViewById<TextInputLayout>(R.id.authPasswordTextLayout).helperText = null
+
+        // TextWatcher untuk memantau perubahan di EditText
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                validateAndEnableSubmitButton()
+            }
         }
+
+        // Tambahkan TextWatcher ke EditText
+        nameEditText.addTextChangedListener(textWatcher)
+        usernameEditText.addTextChangedListener(textWatcher)
+        passwordEditText.addTextChangedListener(textWatcher)
 
         submitButton.setOnClickListener {
             updateUserProfile()
@@ -113,73 +150,45 @@ class ProfileActivity : AppCompatActivity(), user_view {
 
     private fun updateUserProfile() {
 
-        val name = findViewById<EditText>(R.id.authNameEditText)
-        val username = findViewById<EditText>(R.id.authUserNameEditText)
-        val password = findViewById<EditText>(R.id.authPasswordEditText)
+        val name = findViewById<EditText>(R.id.authNameEditText).text.toString()
+        val username = findViewById<EditText>(R.id.authUserNameEditText).text.toString()
+        val Password = findViewById<EditText>(R.id.authPasswordEditText)
         val skinType = findViewById<Spinner>(R.id.spActivity).selectedItem.toString()
-        val Password = password.text.toString()
-        val Usn = username.text.toString()
-        val Name = name.text.toString()
 
-        val authNameTextLayout = findViewById<TextInputLayout>(R.id.authNameTextLayout)
-        val authUsernameTextLayout = findViewById<TextInputLayout>(R.id.authUsernameTextLayout)
-        val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+        val password = Password.text.toString()
 
-        if (Name.isBlank()) {
-            authNameTextLayout.helperText = "Required*"
-        }
-        if (Usn.isBlank()) {
-            authUsernameTextLayout.helperText = "Required*"
-        }
-        if (Password.isBlank()) {
-            authPasswordTextLayout.helperText = "Required*"
-        }
-
-        val nameWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val name = s.toString()
-
-                if (name.isBlank()) {
-                    authNameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
-                    authNameTextLayout.helperText = "Required*"
-                    authNameTextLayout.error = null // Menghapus pesan kesalahan jika ada
-                } else {
-                    authNameTextLayout.helperText = null
-                    authNameTextLayout.error = null
+        if (name.isNotBlank() && username.isNotBlank() && password.isNotBlank() && skinType.isNotBlank()) {
+            // Cek apakah ada perubahan dibuat
+            if (name != userModel.name || username != userModel.username || password != userModel.password || skinType != userModel.skinType) {
+                // Lakukan pembaruan data pengguna jika ada perubahan
+                userModel.apply {
+                    this.name = name
+                    this.username = username
+                    this.password = password
+                    this.skinType = skinType
                 }
-            }
-        }
-
-        name.addTextChangedListener(nameWatcher)
-
-        val usnWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val username = s.toString()
-
-                if (username.isBlank()) {
-                    authUsernameTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
-                    authUsernameTextLayout.helperText = "Required*"
-                    authUsernameTextLayout.error = null // Menghapus pesan kesalahan jika ada
-                } else {
-                    authUsernameTextLayout.helperText = null
-                    authUsernameTextLayout.error = null
+                presenter.editUser(userModel.id!!, name, username, password, skinType) { isSuccess ->
+                    if (isSuccess) {
+                        Toast.makeText(this, "User profile updated successfully. Please login again", Toast.LENGTH_SHORT).show()
+                        // Lakukan logout dan navigasi ke halaman login
+                        presenter.logout()
+                        navigateToLogin()
+                    } else {
+                        Toast.makeText(this, "Failed to update user profile. Please try again.", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            } else {
+                // Tampilkan toast jika tidak ada perubahan dibuat
+                Toast.makeText(this, "Nothing updated", Toast.LENGTH_SHORT).show()
             }
-        }
+        } else {
+            // Tampilkan pesan required jika ada bidang yang kosong
+            val authPasswordTextLayout = findViewById<TextInputLayout>(R.id.authPasswordTextLayout)
+            findViewById<TextInputLayout>(R.id.authNameTextLayout).error = if (name.isBlank()) "Required" else null
+            findViewById<TextInputLayout>(R.id.authUsernameTextLayout).error = if (username.isBlank()) "Required" else null
+            authPasswordTextLayout.error = if (password.isBlank()) "Required" else null
 
-        username.addTextChangedListener(usnWatcher)
-
-
-        // Menambahkan TextWatcher untuk Password dan ConfirmPassword
-        val passwordWatcher = object : TextWatcher {
+            val passwordWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -188,11 +197,7 @@ class ProfileActivity : AppCompatActivity(), user_view {
                 val password = s.toString()
                 val userModel = UserModel()
 
-                if (password.isBlank()) {
-                    authPasswordTextLayout.setHelperTextColor(ColorStateList.valueOf(Color.RED))
-                    authPasswordTextLayout.helperText = "Required*"
-                    authPasswordTextLayout.error = null // Menghapus pesan kesalahan jika ada
-                } else if (!userModel.isPasswordValid(password)) {
+                if (!userModel.isPasswordValid(password)) {
                     authPasswordTextLayout.error = "Password must be at least 6 characters with at least 1 number"
                     authPasswordTextLayout.helperText = null // Menghapus pesan bantuan jika password tidak valid
                 } else {
@@ -203,30 +208,8 @@ class ProfileActivity : AppCompatActivity(), user_view {
             }
         }
 
-        password.addTextChangedListener(passwordWatcher)
-
-        if (validateName() || validateUsername() || validatePassword() || validateSkinType()) {
-            userModel.id?.let { userId ->
-                presenter.editUser(userId, Name.takeIf { validateName() }, Usn.takeIf { validateUsername() },
-                    Password.takeIf { validatePassword() }, skinType.takeIf { validateSkinType() }) { isSuccess ->
-                    if (isSuccess) {
-                        Toast.makeText(this, "User profile updated successfully. Please login again", Toast.LENGTH_SHORT).show()
-                        userModel.apply {
-                            Name?.let { this.name = it }
-                            Usn?.let { this.username = it }
-                            Password?.let { this.password = it }
-                            skinType?.let { this.skinType = it }
-                        }
-                        updateUserUI(userModel)
-                        presenter.logout()
-                        navigateToLogin()
-                    } else {
-                        Toast.makeText(this, "Failed to update user profile. Please try again.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        } else {
-            Toast.makeText(this, "Please ensure at least one field is valid.", Toast.LENGTH_SHORT).show()
+        Password.addTextChangedListener(passwordWatcher)
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -239,61 +222,23 @@ class ProfileActivity : AppCompatActivity(), user_view {
         val skinTypeSpinner = findViewById<Spinner>(R.id.spActivity)
         val submitButton = findViewById<FrameLayout>(R.id.btn_submit)
 
-        val isNameValid = validateName()
-        val isUsernameValid = validateUsername()
-        val isPasswordValid = validatePassword()
-        val isSkinTypeValid = validateSkinType()
+        // Periksa apakah ada perubahan di field name, username, password, atau skinType
+        val isNameChanged = nameEditText.text.toString() != userModel.name
+        val isUsernameChanged = usernameEditText.text.toString() != userModel.username
+        val isPasswordChanged = passwordEditText.text.toString() != userModel.password
+        val isSkinTypeSelected = skinTypeSpinner.selectedItemPosition != 0
 
-        val isValid = isNameValid || isUsernameValid || isPasswordValid || isSkinTypeValid
+        // Aktifkan tombol submit jika ada perubahan di salah satu dari field name, username, password, atau skinType
+        submitButton.isEnabled = isNameChanged || isUsernameChanged || isPasswordChanged || isSkinTypeSelected
 
-        submitButton.isEnabled = isValid
-
-        // Change button color based on validation result
-        if (isValid) {
+        // Set background color of the button when disabled
+        if (submitButton.isEnabled) {
             submitButton.backgroundTintList = ColorStateList.valueOf(getColor(R.color.Primary_50))
         } else {
             submitButton.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_grey))
         }
     }
 
-
-
-    private fun validateName(): Boolean {
-        val name = findViewById<EditText>(R.id.authNameEditText).text.toString()
-        val isNameValid = name.isNotBlank()
-        if (!isNameValid) {
-            findViewById<TextInputLayout>(R.id.authNameTextLayout).helperText = "Required*"
-        }
-        return isNameValid
-    }
-
-    private fun validateUsername(): Boolean {
-        val username = findViewById<EditText>(R.id.authUserNameEditText).text.toString()
-        val isUsernameValid = username.isNotBlank()
-        if (!isUsernameValid) {
-            findViewById<TextInputLayout>(R.id.authUsernameTextLayout).helperText = "Required*"
-        }
-        return isUsernameValid
-    }
-
-    private fun validatePassword(): Boolean {
-        val password = findViewById<EditText>(R.id.authPasswordEditText).text.toString()
-        val isPasswordValid = password.isNotBlank()
-        if (!isPasswordValid) {
-            findViewById<TextInputLayout>(R.id.authPasswordTextLayout).helperText = "Required*"
-        }
-        return isPasswordValid
-    }
-
-    private fun validateSkinType(): Boolean {
-        val skinTypeSpinner = findViewById<Spinner>(R.id.spActivity)
-        val selectedSkinType = skinTypeSpinner.selectedItem.toString()
-        val isSkinTypeValid = selectedSkinType.isNotBlank()
-        if (!isSkinTypeValid) {
-            Toast.makeText(this, "Please select a skin type", Toast.LENGTH_SHORT).show()
-        }
-        return isSkinTypeValid
-    }
 
     private fun getIndexOfSkinType(skinType: String): Int {
         return when (skinType) {
@@ -315,10 +260,16 @@ class ProfileActivity : AppCompatActivity(), user_view {
         usernameEditText.setText(userModel.username)
         passwordEditText.setText(userModel.password)
 
-        val skinTypeIndex = getIndexOfSkinType(userModel.skinType ?: "")
+        // Set skinType di Spinner dengan menggunakan indeks
+        val skinTypeIndex = when (userModel.skinType) {
+            "Sensitive" -> 0
+            "Normal" -> 1
+            "Oily" -> 2
+            "Dry" -> 3
+            else -> 0 // Default to Sensitive if skin type is unknown
+        }
         skinTypeSpinner.setSelection(skinTypeIndex)
     }
-
     private fun navigateToLogin() {
         val intent = Intent(this, SignInActivity::class.java)
 
