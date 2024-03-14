@@ -85,7 +85,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/box_pink"
         android:padding="20dp"
@@ -158,12 +158,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_circlecolor"
             android:fontFamily="@font/lora_regular"
             android:text="skin type"
             android:textColor="@color/white"
             android:textSize="16dp"
+            android:gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/skin_type"
-            app:layout_constraintStart_toEndOf="@+id/skin_type" />
+            app:layout_constraintStart_toEndOf="@+id/skin_type"
+            app:layout_constraintTop_toTopOf="@+id/skin_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

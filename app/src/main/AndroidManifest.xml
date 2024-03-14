@@ -13,6 +13,9 @@
         android:theme="@style/Base.Theme.Apps_Magang"
         tools:targetApi="31">
         <activity
+            android:name=".auth.presentation.confirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.presentation.ViewProfileActivity"
             android:exported="false" />
         <activity

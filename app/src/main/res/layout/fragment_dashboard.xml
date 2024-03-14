@@ -35,7 +35,7 @@
                 android:id="@+id/user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/lora_semi_bold"
                 android:text="user"
                 android:textColor="@color/Primary30"

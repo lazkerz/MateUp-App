@@ -44,6 +44,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="shade">Shade :</string>
+    <string name="confirmation">Are you sure ?\nYou\'ll have to sign in again once you\'re back</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

@@ -50,7 +50,7 @@ class DetailActivity : AppCompatActivity(), ProductView {
         val dataItem = presenter.getDataByIdFromRealm(uniqueId)
 
         val tvBrand = findViewById<TextView>(R.id.tv_brand_detail)
-        tvBrand.text = dataItem?.brand ?:""
+        tvBrand.text = dataItem?.brand?.toUpperCase() ?:""
 
         val tvCategory = findViewById<TextView>(R.id.tv_category)
         tvCategory.text = dataItem?.productType ?:""
