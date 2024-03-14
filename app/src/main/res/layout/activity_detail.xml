@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/name_product"
-                android:textColor="@color/Primary30"
+                android:textColor="@color/black"
                 android:maxLines="3"
                 app:layout_constraintStart_toStartOf="@+id/tv_category"
                 app:layout_constraintTop_toBottomOf="@id/tv_category" />
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Price"
-                android:textColor="@color/black"
+                android:textColor="@color/Primary30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_name_product"/>
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Description"
-                android:textColor="@color/black"
+                android:textColor="@color/Primary30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_dollar"/>
 

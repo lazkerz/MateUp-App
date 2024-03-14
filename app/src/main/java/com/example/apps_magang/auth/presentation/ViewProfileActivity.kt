@@ -65,22 +65,22 @@ class ViewProfileActivity : AppCompatActivity(), user_view {
             onBackPressed()
         }
         out.setOnClickListener {
-            presenter.logout()
-            checkLoginStatus()
-            navigateToLogin()
+            val intent = Intent(this,confirmationActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
-    private fun checkLoginStatus() {
-        val isLoggedIn = LoginManager.isLoggedIn(this)
-        Log.d("LoginStatus", "Is user logged in after logout: $isLoggedIn")
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(this, SignInActivity::class.java)
-        startActivity(intent)
-        finish() // Selesaikan activity saat ini agar pengguna tidak dapat kembali ke halaman profil tanpa login ulang
-    }
+//    private fun checkLoginStatus() {
+//        val isLoggedIn = LoginManager.isLoggedIn(this)
+//        Log.d("LoginStatus", "Is user logged in after logout: $isLoggedIn")
+//    }
+//
+//    private fun navigateToLogin() {
+//        val intent = Intent(this, SignInActivity::class.java)
+//        startActivity(intent)
+//        finish() // Selesaikan activity saat ini agar pengguna tidak dapat kembali ke halaman profil tanpa login ulang
+//    }
 
     override fun displayUser(result: ResultState<UserModel>) {
         when (result) {
